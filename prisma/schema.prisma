@@ -57,6 +57,7 @@ model Company {
   address      String
   commision    Float          @default(0)
   contact      String
+  password     String
   invoiceEmail String         @unique
   isActive     Boolean        @default(false)
   phone        String

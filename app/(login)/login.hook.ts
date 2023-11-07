@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation"
 export const useLoginHook = ()=>{
 
   const [error,setError] = useState(false)
+  const [loading, setLoading]=useState(false)
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -25,6 +26,7 @@ export const useLoginHook = ()=>{
       const router = useRouter()
       async function onSubmit(values: z.infer<typeof formSchema>) {
        try {
+        setLoading(true)
    setError(false)
       const response =   await signIn('credentials',{username:values.username,password:values.password,redirect:false,callbackUrl:'/dashboard'})
       console.log(response)
@@ -37,9 +39,11 @@ export const useLoginHook = ()=>{
        } catch (error) {
         console.log(error)
       
+       }finally{
+        setLoading(false)
        }
       }
 
 
-      return {form,onSubmit,error}
+      return {form,onSubmit,error,loading}
     }

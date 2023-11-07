@@ -17,10 +17,10 @@ try {
     if(!session?.user) return new NextResponse('Unauthenticated',{status:401})
     if(!params.companyId) return new NextResponse('company ID is required',{status:400})
 
-    const {email,isActive,address,contact,invoiceEmail,phone,place,zipcode} = await req.json()
+    const {email,isActive,address,contact,invoiceEmail,phone,place,zipcode,password} = await req.json()
 
     if(!email) return new NextResponse('email is required',{status:404})
-    
+    if(!password)return new NextResponse('password is required',{status:404})
     if(!address) return new NextResponse('address is required',{status:404})
     if(!contact) return new NextResponse('contact is  required',{status:404})
     if(!invoiceEmail) return new NextResponse('invoice mail is  required',{status:404})
@@ -36,6 +36,7 @@ id:params.companyId
             email,
             address,
             isActive,
+            password,
            
             contact,
             invoiceEmail,
