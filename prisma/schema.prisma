@@ -1,0 +1,147 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Airport {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime
+  Company   Company[]
+  Service   Service[]
+}
+
+model Booking {
+  id                    String    @id @default(uuid())
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime
+  address               String?
+  arrivalDate           DateTime
+  bookingCode           String    @unique
+  carColor              String
+  carLicense            String
+  carModel              String
+  companyName           String?
+  departureDate         DateTime
+  discount              Float
+  flightNumber          Int?
+  parkingId             String    @unique
+  parkingPrice          Float
+  paymentStatus         String
+  place                 String?
+  returnFlightNumber    Int?
+  total                 Float
+  vatNumber             Int?
+  zipcode               String?
+  arrivalTime           String
+  departureTime         String
+  daysofparking         Int
+  bookingOnBusinessName String?
+  extraServiceFee       Float
+  status                String
+  paymentMethod         String
+  serviceId             String
+  Service               Service   @relation(fields: [serviceId], references: [id])
+  Payment               Payment[]
+}
+
+model Company {
+  id           String         @id @default(uuid())
+  email        String         @unique
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  address      String
+  commision    Float          @default(0)
+  contact      String
+  invoiceEmail String         @unique
+  isActive     Boolean        @default(false)
+  phone        String
+  place        String
+  zipcode      String
+
+  Notification Notification[]
+  Service      Service[]
+  Airport      Airport[]
+}
+
+model Customer {
+  id             String    @id @default(uuid())
+  email          String   @unique
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime
+  address        String?
+  carColor       String
+  carLicense     String
+  carModel       String
+  companyAddress String?
+  companyPlace   String?
+  companyZipcode String?
+  firstname      String
+  invoiceEmail   String   @unique
+  isCompany      Boolean  @default(false)
+  lastname       String
+  phone          String
+  place          String?
+  zipcode        String?
+}
+
+model Invoice {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+}
+
+model Notification {
+  id           String   @id @default(uuid())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime
+  serviceId    String
+  servicePrice Float
+  companyId    String
+  Company      Company  @relation(fields: [companyId], references: [id])
+}
+
+model Payment {
+  id        String  @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  bookingId String
+  Booking   Booking  @relation(fields: [bookingId], references: [id])
+}
+
+model Service {
+  id                String      @id @default(uuid())
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime
+  address           String
+  arrivalTodos      String?
+  city              String
+  departureTodos    String?
+  description       String
+  distanceToAirport String?
+  facilities        String[]
+  importantInfo     String?
+  latitude          String
+  logo              String
+  longitude         String
+  parkingType       ParkingType @default(shuttle)
+  timeToAirport     String?
+  title             String
+  zipcode           String
+  companyId         String
+  images            String[]
+  isActive          Boolean     @default(false)
+  spots             Int         @default(1)
+  Booking           Booking[]
+  Company           Company     @relation(fields: [companyId], references: [id])
+  Airport           Airport[]
+}
+
+enum ParkingType {
+  shuttle
+  valet
+}
