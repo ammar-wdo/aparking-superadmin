@@ -65,9 +65,9 @@ const RegisterForm = ({ company }: Props) => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input placeholder="password" {...field} />
+                  <Input placeholder="Password" {...field} />
                 </FormControl>
 
                 <FormMessage />

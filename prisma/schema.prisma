@@ -15,10 +15,17 @@ model Airport {
   Service   Service[]
 }
 
+enum PaymentMethod {
+MASTER_CARD
+VISA_CARD
+AMERICAN_EXPRESS
+PAYPALL
+}
+
 model Booking {
   id                    String    @id @default(uuid())
   createdAt             DateTime  @default(now())
-  updatedAt             DateTime
+  updatedAt             DateTime @updatedAt
   address               String?
   arrivalDate           DateTime
   bookingCode           String    @unique
@@ -29,7 +36,7 @@ model Booking {
   departureDate         DateTime
   discount              Float
   flightNumber          Int?
-  parkingId             String    @unique
+
   parkingPrice          Float
   paymentStatus         String
   place                 String?
@@ -43,10 +50,10 @@ model Booking {
   bookingOnBusinessName String?
   extraServiceFee       Float
   status                String
-  paymentMethod         String
+  paymentMethod         PaymentMethod @default(MASTER_CARD)
   serviceId             String
-  Service               Service   @relation(fields: [serviceId], references: [id])
-  Payment               Payment[]
+  service               Service   @relation(fields: [serviceId], references: [id])
+  payments              Payment[]
 }
 
 model Company {
@@ -64,16 +71,16 @@ model Company {
   place        String
   zipcode      String
 
-  Notification Notification[]
-  Service      Service[]
-  Airport      Airport[]
+  notifications Notification[]
+  services     Service[]
+  airports     Airport[]
 }
 
 model Customer {
   id             String    @id @default(uuid())
   email          String   @unique
   createdAt      DateTime @default(now())
-  updatedAt      DateTime
+  updatedAt      DateTime  @updatedAt
   address        String?
   carColor       String
   carLicense     String
@@ -93,13 +100,13 @@ model Customer {
 model Invoice {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
-  updatedAt DateTime
+  updatedAt DateTime @updatedAt
 }
 
 model Notification {
   id           String   @id @default(uuid())
   createdAt    DateTime @default(now())
-  updatedAt    DateTime
+  updatedAt    DateTime @updatedAt
   serviceId    String
   servicePrice Float
   companyId    String
@@ -109,7 +116,7 @@ model Notification {
 model Payment {
   id        String  @id @default(uuid())
   createdAt DateTime @default(now())
-  updatedAt DateTime
+  updatedAt DateTime @updatedAt
   bookingId String
   Booking   Booking  @relation(fields: [bookingId], references: [id])
 }
@@ -117,7 +124,7 @@ model Payment {
 model Service {
   id                String      @id @default(uuid())
   createdAt         DateTime    @default(now())
-  updatedAt         DateTime
+  updatedAt         DateTime @updatedAt
   address           String
   arrivalTodos      String?
   city              String
@@ -134,12 +141,14 @@ model Service {
   title             String
   zipcode           String
   companyId         String
+  pricings          Float[]
   images            String[]
   isActive          Boolean     @default(false)
   spots             Int         @default(1)
-  Booking           Booking[]
-  Company           Company     @relation(fields: [companyId], references: [id])
-  Airport           Airport[]
+  available         Boolean     @default(false)
+  bookings           Booking[]
+  company           Company     @relation(fields: [companyId], references: [id])
+  airports           Airport[]
 }
 
 enum ParkingType {
