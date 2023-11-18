@@ -53,7 +53,7 @@ const {setOpen} = useModal()
             name="timeToAirport"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Description</FormLabel>
+                <FormLabel>Time to airport</FormLabel>
                 <FormControl>
                 <Input placeholder="time to airport" {...field} />
                 </FormControl>
