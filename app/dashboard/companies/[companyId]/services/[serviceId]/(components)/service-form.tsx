@@ -82,8 +82,8 @@ const ServiceForm = ({service}: Props) => {
                   <div className="space-y-3">
                     <div className="flex items-center gap-5">
                       <Input ref={facilityRef} />
-                      <Button onClick={()=>handleFacilityAdd(facilityRef)} type="button">
-                        Add facility
+                      <Button className='flex-shrink-0' onClick={()=>handleFacilityAdd(facilityRef)} type="button">
+                        Add Facility
                       </Button>
                     </div>
                     {MyFacilities()}
@@ -104,8 +104,8 @@ const ServiceForm = ({service}: Props) => {
                   <div className="space-y-3">
                     <div className="flex items-center gap-5">
                       <Input ref={highlightRef} />
-                      <Button onClick={()=>handleHighlightAdd(highlightRef)} type="button">
-                        Add facility
+                      <Button className='flex-shrink-0' onClick={()=>handleHighlightAdd(highlightRef)} type="button">
+                        Add Highlight
                       </Button>
                     </div>
                     {MyHighlights()}
@@ -185,7 +185,7 @@ const ServiceForm = ({service}: Props) => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Add images</FormLabel>
-                <div className="space-y-4">
+                <div className="flex items-center gap-3 w-full flex-wrap">
                   <FormControl>
                     <SingleImageDropzone
                       width={200}

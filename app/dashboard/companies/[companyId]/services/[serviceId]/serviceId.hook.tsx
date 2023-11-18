@@ -168,13 +168,13 @@ export const useServiceId = ({service}:Props)=>{
   };
   const ImagesPlaceholder = () => {
     return (
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 w-full ">
       {!!form.watch("images")?.length && (
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-wrap w-full">
           {form.getValues("images")?.map((image) => (
             <div
               key={image}
-              className="w-[150px] h-[150px] overflow-hidden  relative"
+              className="w-[100px] h-[100px] overflow-hidden  relative"
             >
               {deleteImagesLoader === image ? (
                 <div className="flex items-center justify-center w-full h-full ">
