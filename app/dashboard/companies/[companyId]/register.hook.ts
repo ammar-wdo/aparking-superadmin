@@ -30,7 +30,7 @@ toast({
     title: "Success",
     description: "company is created",
   })
-router.push(`/dashboard`)
+router.push(`/dashboard/companies`)
 router.refresh()
     
   } catch (error) {

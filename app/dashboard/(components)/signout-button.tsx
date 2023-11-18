@@ -1,13 +1,13 @@
 'use client'
-
 import { Button } from '@/components/ui/button'
+import { LogOut } from 'lucide-react'
 import { signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 
 
 type Props = {}
 
-const SinoutButton = (props: Props) => {
+const SignoutButton = (props: Props) => {
     const router = useRouter()
 const signout = async()=>{
    await signOut()
@@ -17,8 +17,8 @@ const signout = async()=>{
 }
 
   return (
-    <Button onClick={signout}>Signout</Button>
+    <button  className='link' onClick={signout}><LogOut className='h-4 w-4 mr-3' />Signout</button>
   )
 }
 
-export default SinoutButton
+export default SignoutButton
