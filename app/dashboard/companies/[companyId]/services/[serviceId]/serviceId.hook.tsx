@@ -42,6 +42,7 @@ try {
   const result = await axios.patch(`/api/services/${service.id}`,values)
   toast.success("Successfully updated")
   router.push(`/dashboard/companies/${params.companyId}/services`)
+  router.refresh()
 } catch (error) {
   console.log(error)
   toast.error('Something went wrong')
