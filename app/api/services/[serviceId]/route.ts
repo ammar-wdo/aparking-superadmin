@@ -39,3 +39,32 @@ if(!params.serviceId) return new NextResponse("service ID is required",{status:4
 }
   
 }
+export async function DELETE(req:Request,{params}:{params:{serviceId:string}}) {
+
+try {
+if(!params.serviceId) return new NextResponse("service ID is required",{status:400})
+    const admin = await getServerSession(authOptions)
+
+    if(!admin)  return new NextResponse("Unauthorized",{status:401})
+
+
+
+    const updated = await prisma.service.delete({
+        where:{
+            id:params.serviceId
+        },
+      
+    })
+
+    return NextResponse.json({message:"success"},{status:201})
+
+
+
+  
+    
+} catch (error) {
+    console.log(error)
+    return new NextResponse("Internal error",{status:500})
+}
+  
+}

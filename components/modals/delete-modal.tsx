@@ -12,11 +12,12 @@ import {
   } from "@/components/ui/dialog"
 import { useModal } from "@/hooks/modal-hook"
 import { Button } from "../ui/button"
-import { toast } from "../ui/use-toast"
+
 import axios from "axios"
 import { useState } from "react"
 import { Loader } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { toast } from "sonner"
 type Props = {}
 
 const DeleteModal = (props: Props) => {
@@ -30,20 +31,14 @@ const  handleDelete = async()=>{
         console.log(data.url)
         setIsLoading(true)
 await axios.delete(data?.url as string)
-router.push('/dashboard')
-setClose()
-router
 
-        toast({
-            title: "Success",
-            description: "Successfully deleted",
-          })
+router.back()
+setClose()
+router.refresh()
+toast.success("Successfuly deleted")
+     
     } catch (error) {
-        toast({
-            title: "Error",
-            description: "Something went wrong",
-            variant:'destructive'
-          })
+     toast.error("Something went wrong")
         console.log(error)
     }finally{
         setIsLoading(false)

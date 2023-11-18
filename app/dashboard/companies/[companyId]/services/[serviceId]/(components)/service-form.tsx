@@ -9,6 +9,8 @@ import { Button } from '@/components/ui/button'
 import { useEffect, useRef } from 'react'
 import { Checkbox } from '@/components/ui/checkbox'
 import { SingleImageDropzone } from '@/components/single-image-drop-zone'
+import { useModal } from '@/hooks/modal-hook'
+import { Loader } from 'lucide-react'
 
 type Props = {
     service:Service
@@ -35,7 +37,7 @@ const ServiceForm = ({service}: Props) => {
   const facilityRef = useRef<HTMLInputElement | null>(null);
   const highlightRef = useRef<HTMLInputElement | null>(null);
 
-
+const {setOpen} = useModal()
 
 
     const {form,onSubmit,uploadImage,uploadImages,ImagePlaceholder,ImagesPlaceholder,setFile,setImagesFile,handleFacilityAdd,MyFacilities,file,imagesFile,handleHighlightAdd,MyHighlights} = useServiceId({service})
@@ -242,7 +244,9 @@ const ServiceForm = ({service}: Props) => {
 
         </div>
  
-      <Button disabled={isLoading} type="submit">{isLoading ? "Updating" :"Update"}</Button>
+      <Button disabled={isLoading} type="submit">Update {isLoading && <Loader className='w-3 h-3 ml-3 animate-spin' />}</Button> <Button variant={"destructive" } type='button'   onClick={() =>
+                setOpen("delete-modal", { url: `/api/services/${service.id}` })
+              }>Delete</Button>
     </form>
   </Form>
   )
