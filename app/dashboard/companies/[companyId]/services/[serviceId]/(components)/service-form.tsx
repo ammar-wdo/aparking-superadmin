@@ -39,6 +39,8 @@ const ServiceForm = ({service}: Props) => {
 
 
     const {form,onSubmit,uploadImage,uploadImages,ImagePlaceholder,ImagesPlaceholder,setFile,setImagesFile,handleFacilityAdd,MyFacilities,file,imagesFile,handleHighlightAdd,MyHighlights} = useServiceId({service})
+
+    const isLoading = form.formState.isSubmitting
   return (
     <Form {...form}>
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -240,7 +242,7 @@ const ServiceForm = ({service}: Props) => {
 
         </div>
  
-      <Button type="submit">Submit</Button>
+      <Button disabled={isLoading} type="submit">{isLoading ? "Updating" :"Update"}</Button>
     </form>
   </Form>
   )

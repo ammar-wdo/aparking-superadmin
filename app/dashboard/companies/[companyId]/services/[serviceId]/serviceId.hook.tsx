@@ -8,6 +8,9 @@ import { useState } from "react"
 import Image from "next/image"
 import { Loader, XIcon } from "lucide-react"
 import { uuid as uuidv4 } from 'uuidv4';
+import axios from "axios"
+import { toast } from "sonner"
+import { useParams, useRouter } from "next/navigation"
 
 type Props = {
     service:Service
@@ -30,8 +33,20 @@ export const useServiceId = ({service}:Props)=>{
         },
       })
 
+const router = useRouter()
+const params = useParams()
+    async  function onSubmit(values: z.infer<typeof serviceSchema>) {
 
-      function onSubmit(values: z.infer<typeof serviceSchema>) {
+
+try {
+  const result = await axios.patch(`/api/services/${service.id}`,values)
+  toast.success("Successfully updated")
+  router.push(`/dashboard/companies/${params.companyId}/services`)
+} catch (error) {
+  console.log(error)
+  toast.error('Something went wrong')
+}
+
 
         console.log(values)
       }
