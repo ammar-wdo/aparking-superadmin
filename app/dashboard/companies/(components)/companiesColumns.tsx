@@ -41,7 +41,7 @@ export const companiesColumns: ColumnDef<Company>[] = [
     accessorKey:"id",
     header: "Actions",
     cell:({row})=><div className="">
-       <ToolTip title="Edit company" side="left"> <Link href={`/dashboard/companies/${row.getValue('id')}`} className="p-2 rounded-sm bg-orange-500  text-white flex cursor-pointer items-center justify-center"><Edit className="w-3 h-3" /></Link></ToolTip>
+       <ToolTip title="Edit company" side="left"> <Link href={`/dashboard/companies/${row.getValue('id')}`} className="p-2 rounded-sm bg-primary text-white flex cursor-pointer items-center justify-center"><Edit className="w-3 h-3" /></Link></ToolTip>
       
   
     </div>
