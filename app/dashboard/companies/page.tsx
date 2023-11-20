@@ -9,6 +9,8 @@ import { companiesColumns } from './(components)/companiesColumns'
 
 type Props = {}
 
+const dynamic = 'force-dynamic'
+
 const page = async(props: Props) => {
 
 
