@@ -30,6 +30,10 @@ export const entitiesColumns: ColumnDef<Entity>[] = [
     header: "Place",
   },
   {
+    accessorKey: "entityName",
+    header: "Name",
+  },
+  {
     accessorKey: "company.name",
     header: "Company name",
   },
