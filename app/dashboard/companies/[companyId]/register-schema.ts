@@ -14,7 +14,7 @@ isActive:company?.isActive || false,
   name:company?.name || "",
   contact: company?.contact ||  "",
   password: company?.password ||  "",
-  invoiceEmail: company?.invoiceEmail|| "",
+
   phone: company?.phone || "",
   place: company?.place || "",
   zipcode: company?.zipcode || "",

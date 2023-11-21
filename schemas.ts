@@ -52,7 +52,7 @@ export const registerSchema = z.object({
    address: z.string().min(2).max(50),
    password:z.string().min(6),
    contact:z.string().min(2).max(50),
-   invoiceEmail:z.string().email(),
+  
    phone: z.string().refine((value) => {
      const phoneRegex =/^(?:[0-9]){1,3}(?:[ -]*[0-9]){6,14}$/;
      return phoneRegex.test(value);

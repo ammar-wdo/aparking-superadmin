@@ -47,26 +47,17 @@ const RegisterForm = ({ company }: Props) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10">
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input placeholder="email" {...field} />
-                </FormControl>
 
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <div className="space-y-4 p-6 border rounded-lg">
+            <h3>Company details</h3>
+            <div className="grid grid-cols-2 gap-4">
+
           <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Name</FormLabel>
+                <FormLabel>Company name</FormLabel>
                 <FormControl>
                   <Input placeholder="name" {...field} />
                 </FormControl>
@@ -75,20 +66,7 @@ const RegisterForm = ({ company }: Props) => {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input placeholder="Password" {...field} />
-                </FormControl>
-
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+       
 
           <FormField
             control={form.control}
@@ -118,20 +96,7 @@ const RegisterForm = ({ company }: Props) => {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="invoiceEmail"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Invoice-mail</FormLabel>
-                <FormControl>
-                  <Input placeholder="" {...field} />
-                </FormControl>
-
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+        
           <FormField
             control={form.control}
             name="phone"
@@ -189,7 +154,43 @@ const RegisterForm = ({ company }: Props) => {
               </FormItem>
             )}
           />
-          <FormField
+            </div>
+          </div>
+       
+       
+
+          <div className="p-8 border rounded-lg space-y-4">
+            <h3>Login details</h3>
+            <div className="grid grid-cols-2 gap-4">
+            <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input placeholder="email" {...field} />
+                </FormControl>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+            <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                <FormControl>
+                  <Input placeholder="Password" {...field} />
+                </FormControl>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+            <FormField
             control={form.control}
             name="isActive"
             render={({ field }) => (
@@ -209,6 +210,8 @@ const RegisterForm = ({ company }: Props) => {
               </FormItem>
             )}
           />
+            </div>
+          </div>
         </div>
         <div className="flex items-center ">
           <Button disabled={isLoading} type="submit">
