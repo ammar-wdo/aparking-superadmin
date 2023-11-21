@@ -45,7 +45,7 @@ const RegisterForm = ({ company }: Props) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8  max-w-[1200px]">
       
 
           <div className="space-y-4 p-6 border rounded-lg">
