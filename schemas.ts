@@ -28,11 +28,14 @@ export const entitySchema = z.object({
         return phoneRegex.test(value);
       }, "Invalid phone number"),
       invoiceAddress:z.string().min(1),
+      contactPerson:z.string().min(1),
+      companyName:z.string().min(1),
       invoiceEmail:z.string().email(),
       invoiceZipcode:z.string().min(1),
       invoicePlace:z.string().min(1),
       invoiceCountry:z.string().min(1),
       vatNO:z.string().optional(),
+      IBAN:z.string().optional(),
       chamberOfCommerce:z.string().min(1),
       isActive:z.boolean().default(false),
       

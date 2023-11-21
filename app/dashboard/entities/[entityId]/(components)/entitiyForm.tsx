@@ -237,20 +237,7 @@ const EntityForm = ({ entity,airports,companies }: Props) => {
                   </FormItem>
                 )}
               />
-                <FormField
-                control={form.control}
-                name="chamberOfCommerce"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Chamber of commerce*</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Entity place" {...field} />
-                    </FormControl>
-
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              
                 <FormField
                 control={form.control}
                 name="isActive"
@@ -298,10 +285,78 @@ const EntityForm = ({ entity,airports,companies }: Props) => {
                   </FormItem>
                 )}
               />
+            <FormField
+                control={form.control}
+                name="contactPerson"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Invoice e-mail*</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="contact person"
+                      
+                        {...field}
+                      />
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            <FormField
+                control={form.control}
+                name="companyName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Invoice e-mail*</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="contact person"
+                      
+                        {...field}
+                      />
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+                <FormField
+                control={form.control}
+                name="chamberOfCommerce"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Chamber of commerce*</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Entity place" {...field} />
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
          
             <FormField
                 control={form.control}
                 name="vatNO"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>VAT no.</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Name"
+                      
+                        {...field}
+                      />
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            <FormField
+                control={form.control}
+                name="IBAN"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>VAT no.</FormLabel>
