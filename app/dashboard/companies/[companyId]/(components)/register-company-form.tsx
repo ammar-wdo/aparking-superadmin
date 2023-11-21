@@ -46,10 +46,10 @@ const RegisterForm = ({ company }: Props) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10">
+      
 
           <div className="space-y-4 p-6 border rounded-lg">
-            <h3>Company details</h3>
+            <h3 className="font-bold mb-8 text-xl">Company details</h3>
             <div className="grid grid-cols-2 gap-4">
 
           <FormField
@@ -160,7 +160,7 @@ const RegisterForm = ({ company }: Props) => {
        
 
           <div className="p-8 border rounded-lg space-y-4">
-            <h3>Login details</h3>
+            <h3 className="font-bold mb-8 text-xl">Login details</h3>
             <div className="grid grid-cols-2 gap-4">
             <FormField
             control={form.control}
@@ -212,7 +212,7 @@ const RegisterForm = ({ company }: Props) => {
           />
             </div>
           </div>
-        </div>
+     
         <div className="flex items-center ">
           <Button disabled={isLoading} type="submit">
             {isLoading ? (
