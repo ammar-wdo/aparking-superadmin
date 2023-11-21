@@ -359,10 +359,11 @@ const EntityForm = ({ entity,airports,companies }: Props) => {
                 name="IBAN"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>VAT no.</FormLabel>
+                    <FormLabel>IBAN</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Name"
+
+                        placeholder="IBAN"
                       
                         {...field}
                       />
