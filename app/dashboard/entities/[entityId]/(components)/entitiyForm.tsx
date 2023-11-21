@@ -290,7 +290,7 @@ const EntityForm = ({ entity,airports,companies }: Props) => {
                 name="contactPerson"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Invoice e-mail*</FormLabel>
+                    <FormLabel>Contact person*</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="contact person"
@@ -308,10 +308,10 @@ const EntityForm = ({ entity,airports,companies }: Props) => {
                 name="companyName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Invoice e-mail*</FormLabel>
+                    <FormLabel>Company name*</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="contact person"
+                        placeholder="Company name"
                       
                         {...field}
                       />
