@@ -57,9 +57,9 @@ const RegisterForm = ({ company }: Props) => {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Company name</FormLabel>
+                <FormLabel>Company name*</FormLabel>
                 <FormControl>
-                  <Input placeholder="name" {...field} />
+                  <Input placeholder="Company name" {...field} />
                 </FormControl>
 
                 <FormMessage />
@@ -73,9 +73,9 @@ const RegisterForm = ({ company }: Props) => {
             name="address"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Address</FormLabel>
+                <FormLabel>Address*</FormLabel>
                 <FormControl>
-                  <Input placeholder="" {...field} />
+                  <Input placeholder="Address" {...field} />
                 </FormControl>
 
                 <FormMessage />
@@ -87,9 +87,9 @@ const RegisterForm = ({ company }: Props) => {
             name="contact"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Contact</FormLabel>
+                <FormLabel>Contact*</FormLabel>
                 <FormControl>
-                  <Input placeholder="" {...field} />
+                  <Input placeholder="Contact" {...field} />
                 </FormControl>
 
                 <FormMessage />
@@ -131,9 +131,9 @@ const RegisterForm = ({ company }: Props) => {
             name="place"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Place</FormLabel>
+                <FormLabel>Place*</FormLabel>
                 <FormControl>
-                  <Input placeholder="" {...field} />
+                  <Input placeholder="Place" {...field} />
                 </FormControl>
 
                 <FormMessage />
@@ -145,9 +145,9 @@ const RegisterForm = ({ company }: Props) => {
             name="zipcode"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Zipcode</FormLabel>
+                <FormLabel>Zipcode*</FormLabel>
                 <FormControl>
-                  <Input placeholder="" {...field} />
+                  <Input placeholder="Zipcode" {...field} />
                 </FormControl>
 
                 <FormMessage />
@@ -167,9 +167,9 @@ const RegisterForm = ({ company }: Props) => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>E-mail*</FormLabel>
                 <FormControl>
-                  <Input placeholder="email" {...field} />
+                  <Input placeholder="E-mail" {...field} />
                 </FormControl>
 
                 <FormMessage />
@@ -181,7 +181,7 @@ const RegisterForm = ({ company }: Props) => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>Password*</FormLabel>
                 <FormControl>
                   <Input placeholder="Password" {...field} />
                 </FormControl>
