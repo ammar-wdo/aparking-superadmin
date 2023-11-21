@@ -5,6 +5,8 @@ import { Company } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/options";
+import { registerSchema } from "@/schemas";
+
 
 
 export async function POST(req:Request){
@@ -14,29 +16,17 @@ try {
 
     if(!session?.user) return new NextResponse('Unauthenticated',{status:401})
 
-    const {email,isActive,address,contact,invoiceEmail,phone,place,zipcode,password} = await req.json()
+    const body = await req.json()
 
-    if(!email) return new NextResponse('email is required',{status:404})
-    
-    if(!address) return new NextResponse('address is required',{status:404})
-    if(!password)return new NextResponse('password is required',{status:404})
-    if(!contact) return new NextResponse('contact is  required',{status:404})
-    if(!invoiceEmail) return new NextResponse('invoice mail is  required',{status:404})
-    if(!phone) return new NextResponse('phone is  required',{status:404})
-    if(!place) return new NextResponse('place is  required',{status:404})
-    if(!zipcode) return new NextResponse('zipcode is  required',{status:404})
+    const validBody = registerSchema.safeParse(body)
+
+    if(!validBody.success)  return  NextResponse.json({error:validBody.error},{status:401})
+
+  
 
     const company = await prisma.company.create({
         data:{
-            email,
-            address,
-            isActive,
-           password,
-            contact,
-            invoiceEmail,
-            place,
-            phone,
-            zipcode
+         ...validBody.data
         }
     })
 

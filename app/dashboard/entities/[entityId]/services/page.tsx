@@ -5,14 +5,14 @@ import { ServicesDataTable } from './(components)/services-table'
 import { servicesColumns } from './(components)/services-columns'
 
 type Props = {
-    params:{companyId:string}
+    params:{entityId:string}
 }
 
 const page = async({params}: Props) => {
 
     const services = await prisma.service.findMany({
         where:{
-            companyId:params.companyId       },
+            companyId:params.entityId       },
             orderBy:{
               createdAt:'desc'
             }
@@ -21,7 +21,7 @@ const page = async({params}: Props) => {
 
   return (
     <div>
-        <Heading title='Company services' description='Manage services' />
+        <Heading title='Entity services' description='Manage services' />
 
         <ServicesDataTable columns={servicesColumns} data={services} />
         

@@ -22,10 +22,11 @@ import * as z from "zod";
 import { Loader } from "lucide-react";
 
 import { useRegister } from "../register.hook";
-import { registerDefaultValues, registerSchema } from "../register-schema";
+import { registerDefaultValues } from "../register-schema";
 import { Company } from "@prisma/client";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useModal } from "@/hooks/modal-hook";
+import { registerSchema } from "@/schemas";
 
 type Props = {
   company: Company | null;
@@ -54,6 +55,20 @@ const RegisterForm = ({ company }: Props) => {
                 <FormLabel>Email</FormLabel>
                 <FormControl>
                   <Input placeholder="email" {...field} />
+                </FormControl>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="name" {...field} />
                 </FormControl>
 
                 <FormMessage />

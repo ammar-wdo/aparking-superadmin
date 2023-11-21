@@ -9,7 +9,7 @@ const NewLink = ({id,children}: Props) => {
 
     const params = useParams()
   return (
-    <Link href={`/dashboard/companies/${params.companyId}/services/${id}`} className="bg-primary block text-white p-2 rounded-sm">{children}</Link>
+    <Link href={`/dashboard/entities/${params.entityId}/services/${id}`} className="bg-primary block text-white p-2 rounded-sm">{children}</Link>
   )
 }
 

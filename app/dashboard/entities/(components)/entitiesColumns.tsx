@@ -3,7 +3,7 @@
 import ToolTip from "@/components/tool-tip"
 import { Badge } from "@/components/ui/badge"
 import { useModal } from "@/hooks/modal-hook"
-import { Company } from "@prisma/client"
+import { Company, Entity } from "@prisma/client"
 import { ColumnDef } from "@tanstack/react-table"
 import { Edit, Trash } from "lucide-react"
 import Link from "next/link"
@@ -11,30 +11,32 @@ import Link from "next/link"
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 
-
+type Fullentity =Entity & {
+company:Company
+}
 
  
-export const companiesColumns: ColumnDef<Company>[] = [
+export const entitiesColumns: ColumnDef<Entity>[] = [
   {
     accessorKey: "email",
     header: "E-mail",
   },
   {
-    accessorKey: "name",
-    header: "Name",
-  },
-  {
-    accessorKey: "address",
+    accessorKey: "entityAddress",
     header: "Address",
   },
   {
-    accessorKey: "place",
+    accessorKey: "entityPlace",
     header: "Place",
   },
   {
+    accessorKey: "company.name",
+    header: "Company name",
+  },
+  {
     accessorKey: "id",
-    header: "Entities",
-    cell:({row})=><Link className="font-semibold underline" href={`/dashboard/entities?companyId=${row.getValue("id")}`}>Manage entities</Link>
+    header: "Services",
+    cell:({row})=><Link className="font-semibold underline" href={`/dashboard/entities/${row.getValue("id")}/services`}>Manage services</Link>
   },
   {
     accessorKey: "isActive",
@@ -45,7 +47,7 @@ export const companiesColumns: ColumnDef<Company>[] = [
     accessorKey:"id",
     header: "Actions",
     cell:({row})=><div className="">
-       <ToolTip title="Edit company" side="left"> <Link href={`/dashboard/companies/${row.getValue('id')}`} className="p-2 rounded-sm bg-primary text-white flex cursor-pointer items-center justify-center"><Edit className="w-3 h-3" /></Link></ToolTip>
+       <ToolTip title="Edit entity" side="left"> <Link href={`/dashboard/entities/${row.getValue('id')}`} className="p-2 rounded-sm bg-primary text-white flex cursor-pointer items-center justify-center"><Edit className="w-3 h-3" /></Link></ToolTip>
       
   
     </div>

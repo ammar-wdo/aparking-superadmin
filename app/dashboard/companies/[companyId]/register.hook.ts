@@ -5,8 +5,9 @@ import axios from 'axios'
 
 import * as z from "zod";
 import { Company } from "@prisma/client";
-import { registerSchema } from "./register-schema";
+
 import { useToast } from "@/components/ui/use-toast";
+import { registerSchema } from "@/schemas";
 
 
 
