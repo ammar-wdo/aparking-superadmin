@@ -12,7 +12,7 @@ const page = async({params}: Props) => {
 
     const services = await prisma.service.findMany({
         where:{
-            companyId:params.entityId       },
+            entityId:params.entityId       },
             orderBy:{
               createdAt:'desc'
             }
