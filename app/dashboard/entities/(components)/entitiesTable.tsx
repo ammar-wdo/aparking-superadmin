@@ -62,9 +62,9 @@ console.log(table.getColumn("isActive")?.getFilterValue())
     <h5>Filter by status</h5>
     <div>
     <Select
-       value={(table.getColumn("isActive")?.getFilterValue() as string) ?? ''}
+       value={table.getColumn("isActive")?.getFilterValue() === true ?"true" : table.getColumn("isActive")?.getFilterValue()===false ? "false" : "no filter"}
        onValueChange={(event) =>
-         table.getColumn("isActive")?.setFilterValue(event==='no filter' ? '' : event)
+        table.getColumn("isActive")?.setFilterValue(event==='true' ? true : event==="false" ? false : '')
        }
     >
   <SelectTrigger className="w-[180px]">
@@ -72,8 +72,8 @@ console.log(table.getColumn("isActive")?.getFilterValue())
   </SelectTrigger>
   <SelectContent>
   <SelectItem className={cn("cursor-pointer text-stone-400 hover:text-neutral-400" )}value={'no filter'}>No filter</SelectItem>
-    <SelectItem key={1} className="cursor-pointer" value={true}>Active</SelectItem>
-    <SelectItem  className="cursor-pointer" value={false}>inActive</SelectItem>
+    <SelectItem key={1} className="cursor-pointer" value={"true"}>Active</SelectItem>
+    <SelectItem  className="cursor-pointer" value={"false"}>inActive</SelectItem>
  
   </SelectContent>
 </Select>
