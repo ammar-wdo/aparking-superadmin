@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { BookmarkCheck, Boxes, Group, LayoutDashboard } from "lucide-react";
+import { BookmarkCheck, Boxes, Building, Building2, Group, LayoutDashboard } from "lucide-react";
 import SignoutButton from "./signout-button";
 import { ModeToggle } from "@/components/theme-toggle";
 
@@ -26,13 +26,19 @@ const MainLinks = (props: Props) => {
       label: "companies",
       active: pathname === "/dashboard/companies",
       link: "/dashboard/companies",
-      Icon:<Boxes className="w-5 h-5 mr-3" />
+      Icon:<Building className="w-5 h-5 mr-3" />
     },
     {
       label: "entities",
       active: pathname === "/dashboard/entities",
       link: "/dashboard/entities",
-      Icon:<Group className="w-5 h-5 mr-3" />
+      Icon:<Building2 className="w-5 h-5 mr-3" />
+    },
+    {
+      label: "services",
+      active: pathname === "/dashboard/services",
+      link: "/dashboard/services",
+      Icon:<Boxes className="w-5 h-5 mr-3" />
     },
    
   ];
