@@ -14,7 +14,7 @@ const page = async(props: Props) => {
         }
     })
   return (
-    <div>
+    <div className=''>
         <Heading title='Services' description='Manage services' />
 
         <ServicesDataTable columns={servicesColumns} data={services} />

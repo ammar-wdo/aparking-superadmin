@@ -47,10 +47,10 @@ export function ServicesDataTable<TData, TValue>({
   })
 
   return (
-    <div>
+    <div className="mt-20">
 
-<div className="space-y-1 mb-3">
-    <h5>Filter by status</h5>
+<div className="space-y-1 mb-3 flex gap-3 items-center ">
+    <h5 className="text-xs text-neutral-500">Filter by status</h5>
     <div>
     <Select
       value={table.getColumn("isActive")?.getFilterValue() === true ?"true" : table.getColumn("isActive")?.getFilterValue()===false ? "false" : "no filter"}
