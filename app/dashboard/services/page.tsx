@@ -6,11 +6,16 @@ import { servicesColumns } from './(components)/services-columns'
 
 
 
-type Props = {}
+type Props = {searchParams:{[key:string]:string | string[] | undefined}}
 
-const page = async(props: Props) => {
+const page = async({searchParams}: Props) => {
+
+    const entityId = searchParams.entityId
 
     const services = await prisma.service.findMany({
+        where:{
+            entityId:entityId as string | undefined
+        },
         orderBy:{
             createdAt:'desc'
         },include:{
