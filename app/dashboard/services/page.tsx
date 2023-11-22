@@ -4,6 +4,7 @@ import React from 'react'
 import { ServicesDataTable } from '../entities/[entityId]/services/(components)/services-table'
 import { servicesColumns } from '../entities/[entityId]/services/(components)/services-columns'
 
+
 type Props = {}
 
 const page = async(props: Props) => {
@@ -11,6 +12,13 @@ const page = async(props: Props) => {
     const services = await prisma.service.findMany({
         orderBy:{
             createdAt:'desc'
+        },include:{
+            entity:{
+                select:{
+                    id:true,
+                    entityName:true
+                }
+            }
         }
     })
   return (

@@ -6,15 +6,15 @@ import { Company, Service } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 import { Edit, Trash } from "lucide-react";
 import Link from "next/link";
-import NewLink from "./new-link";
+
 import ToolTip from "@/components/tool-tip";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 
+type FullService =Service &{entity:{id:string,entityName:string}}
 
-
-export const servicesColumns: ColumnDef<Service>[] = [
+export const servicesColumns: ColumnDef<FullService>[] = [
   {
     accessorKey: "name",
     header: "Name",
@@ -55,9 +55,9 @@ export const servicesColumns: ColumnDef<Service>[] = [
       <div className="p-1 flex items-center gap-1">
         <ToolTip 
         title="Edit service" side="left">
-        <NewLink id={row.getValue("id")}>
+        <Link    className="bg-primary block text-white p-2 rounded-sm" href={`/dashboard/entities/${row.original.entityId}/services/${row.original.id}`}>
       <Edit className="w-3 h-3" />
-      </NewLink>
+      </Link>
         </ToolTip>
     
         

@@ -15,6 +15,12 @@ const page = async({params}: Props) => {
             entityId:params.entityId       },
             orderBy:{
               createdAt:'desc'
+            },include:{
+              entity:{
+                select:{
+                  id:true,entityName:true
+                }
+              }
             }
     })
 
