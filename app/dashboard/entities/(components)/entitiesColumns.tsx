@@ -40,7 +40,7 @@ export const entitiesColumns: ColumnDef<Entity>[] = [
   {
     accessorKey: "id",
     header: "Services",
-    cell:({row})=><Link className="font-semibold underline" href={`/dashboard/entities/${row.getValue("id")}/services`}>Manage services</Link>
+    cell:({row})=><Link className="font-semibold underline" href={`/dashboard/services?entityId=${row.getValue("id")}`}>Manage services</Link>
   },
   {
     accessorKey: "isActive",

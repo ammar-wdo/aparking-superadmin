@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Service } from "@prisma/client"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { useEdgeStore } from '../../../../../../lib/edgestore';
+import { useEdgeStore } from '../../../../lib/edgestore';
 import { useState } from "react"
 import Image from "next/image"
 import { Loader, XIcon } from "lucide-react"

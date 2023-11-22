@@ -1,8 +1,9 @@
 import Heading from '@/components/heading'
 import prisma from '@/lib/prisma'
 import React from 'react'
-import { ServicesDataTable } from '../entities/[entityId]/services/(components)/services-table'
-import { servicesColumns } from '../entities/[entityId]/services/(components)/services-columns'
+import { ServicesDataTable } from './(components)/services-table'
+import { servicesColumns } from './(components)/services-columns'
+
 
 
 type Props = {}

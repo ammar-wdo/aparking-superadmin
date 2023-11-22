@@ -55,7 +55,7 @@ export const servicesColumns: ColumnDef<FullService>[] = [
       <div className="p-1 flex items-center gap-1">
         <ToolTip 
         title="Edit service" side="left">
-        <Link    className="bg-primary block text-white p-2 rounded-sm" href={`/dashboard/entities/${row.original.entityId}/services/${row.original.id}`}>
+        <Link    className="bg-primary block text-white p-2 rounded-sm" href={`/dashboard/services/${row.original.id}`}>
       <Edit className="w-3 h-3" />
       </Link>
         </ToolTip>
