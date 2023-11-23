@@ -9,6 +9,9 @@ type Props = {
 }
 
 const layout = ({children}: Props) => {
+
+
+  
   return (
     <div>
     <MainAside />

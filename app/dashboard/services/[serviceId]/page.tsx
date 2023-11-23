@@ -19,7 +19,7 @@ const page = async({params}: Props) => {
 
   return (
     <div>
-        <Heading title={service?.name!} description={'Manage ' + service?.name} />
+        <Heading title={"Services - " + service?.name!} description={'Manage ' + service?.name + ' service'} />
         <ServiceForm service={service} />
       
       

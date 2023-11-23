@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
  
-@layer base {
+html ,body {
+  height: 100%;
+}
   
 @layer base {
   :root {
@@ -52,7 +54,7 @@
   }
 }
 
-}
+
  
 @layer base {
   * {
