@@ -32,7 +32,7 @@ const entity = await prisma.entity.findUnique({
 })
   return (
     <div className=''>
-    <Heading title={entity?.entityName! || "Create entity"} description={'Manage ' + (entity?.entityName || "entities")} />
+    <Heading title={entity?.entityName ? "Entities - " + entity?.entityName! : "Create new entity"} description={'Manage ' + (entity?.entityName || "entities")} />
     <EntityForm entity={entity}  companies={companies} airports={airports}/>
   
   
