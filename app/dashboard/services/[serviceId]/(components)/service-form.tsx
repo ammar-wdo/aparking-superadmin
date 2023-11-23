@@ -57,7 +57,7 @@ const {setOpen} = useModal()
             name="timeToAirport"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Time to airport</FormLabel>
+                <FormLabel>Time to airport*</FormLabel>
                 <FormControl>
                 <Input placeholder="time to airport" {...field} />
                 </FormControl>
@@ -71,7 +71,7 @@ const {setOpen} = useModal()
             name="distanceToAirport"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Distance to airport</FormLabel>
+                <FormLabel>Distance to airport*</FormLabel>
                 <FormControl>
                   <Input placeholder="distance to airport" {...field} />
                 </FormControl>
@@ -160,7 +160,7 @@ const {setOpen} = useModal()
             render={({ field }) => (
               <div className="flex gap-4 items-center">
                 <FormItem>
-                  <FormLabel>Logo</FormLabel>
+                  <FormLabel>Logo*</FormLabel>
                   <FormControl>
                     <SingleImageDropzone
                       width={200}
