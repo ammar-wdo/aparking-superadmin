@@ -1,10 +1,10 @@
 import { serviceSchema } from "@/schemas"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Service } from "@prisma/client"
+import { ParkingType, Service } from "@prisma/client"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { useEdgeStore } from '../../../../lib/edgestore';
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Image from "next/image"
 import { Loader, XIcon } from "lucide-react"
 import { uuid as uuidv4 } from 'uuidv4';
@@ -13,9 +13,16 @@ import { toast } from "sonner"
 import { useParams, useRouter } from "next/navigation"
 
 type Props = {
-    service:Service
+  service:Service & {entity:{companyId:string}}
 }
 export const useServiceId = ({service}:Props)=>{
+
+
+  useEffect(()=>{
+   
+      form.setValue('entityId',service.entity.companyId!)
+    }
+  ,[])
 
 
     const form = useForm<z.infer<typeof serviceSchema>>({
@@ -29,7 +36,22 @@ export const useServiceId = ({service}:Props)=>{
           images:service.images || [],
           facilities:service.facilities || [],
           highlights:service.highlights || [],
-          isActive:service.isActive || false
+          isActive:service.isActive || false,
+          name: service?.name || "",
+          terms: service?.name || "",
+          bookingsEmail: service?.bookingsEmail || "",
+          parkingAddress: service?.parkingAddress || "",
+          parkingZipcode: service?.parkingZipcode || "",
+          parkingCountry: service?.parkingCountry || "",
+          parkingPlace: service?.parkingPlace || "",
+          arrivalTodos: service?.arrivalTodos || "",
+          departureTodos: service?.departureTodos || "",
+         
+          parkingType: service?.parkingType || ParkingType.shuttle,
+          spots: service?.spots || 1,
+          available: service?.available || false,
+          airportId:service?.airportId || '',
+          entityId:service?.entityId || ''
         },
       })
 

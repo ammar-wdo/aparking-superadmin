@@ -18,12 +18,14 @@ if(!params.serviceId) return new NextResponse("service ID is required",{status:4
     const validbody = serviceSchema.safeParse(body)
     if(!validbody.success) return NextResponse.json({errors:validbody.error},{status:400})
 
+    const {entityId,...rest} = validbody.data
+
     const updated = await prisma.service.update({
         where:{
             id:params.serviceId
         },
         data:{
-            ...validbody.data
+            ...rest
         }
     })
 

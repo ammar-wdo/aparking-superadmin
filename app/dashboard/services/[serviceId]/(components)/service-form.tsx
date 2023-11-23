@@ -1,6 +1,6 @@
 
 'use client'
-import { Service } from '@prisma/client'
+import { Airport, Entity, ParkingType, Service } from '@prisma/client'
 
 import { useServiceId } from '../serviceId.hook'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
@@ -11,12 +11,15 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { SingleImageDropzone } from '@/components/single-image-drop-zone'
 import { useModal } from '@/hooks/modal-hook'
 import { Loader } from 'lucide-react'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Textarea } from '@/components/ui/textarea'
 
 type Props = {
-    service:Service
+    service:Service & {entity:{companyId:string}}
+    airports:{id:string,name:string}[],entities:{id:string,entityName:string}[]
 }
 
-const ServiceForm = ({service}: Props) => {
+const ServiceForm = ({service,entities,airports}: Props) => {
 
     useEffect(()=>{
     const handleEnterPress = (e:KeyboardEvent)=>{
@@ -45,10 +48,11 @@ const {setOpen} = useModal()
     const isLoading = form.formState.isSubmitting
   return (
     <Form {...form}>
-    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className='grid grid-cols-2 gap-4 max-w-[1300px] mt-12'>
-
-      <FormField
+    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 max-w-[1200px]">
+      <div className='p-8 border rounded-lg'>
+      <h3 className="font-bold mb-8 text-xl">Super admin meta data</h3>
+      <div className="grid grid-cols-2 gap-3 ">
+        <FormField
             control={form.control}
             name="timeToAirport"
             render={({ field }) => (
@@ -241,8 +245,272 @@ const {setOpen} = useModal()
           )}
         /> 
 
-
         </div>
+      </div>
+      <div className="p-8 border rounded-lg">
+            <h3 className="font-bold mb-8 text-xl">Service details</h3>
+            <div className="grid grid-cols-2 gap-3 ">
+           {  <FormField
+                control={form.control}
+                name="airportId"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Choose your airport*</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select an airport" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {airports.map((airport)=>   <SelectItem key={airport.id} value={airport.id} className="cursor-pointer">{airport.name}</SelectItem>)}
+               
+                 
+                </SelectContent>
+              </Select>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />}
+              {<FormField
+                control={form.control}
+                name="entityId"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Choose your entity*</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select an entity" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {entities.map((entity)=>   <SelectItem key={entity.id} value={entity.id} className="cursor-pointer">{entity.entityName}</SelectItem>)}
+               
+                 
+                </SelectContent>
+              </Select>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />}
+              <FormField
+                control={form.control}
+                name="terms"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Link to the Terms*</FormLabel>
+                    <FormControl>
+                      <Input placeholder="https://" {...field} />
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Service name*</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Indoor park" {...field} />
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="bookingsEmail"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Bookings e-mail</FormLabel>
+                    <FormControl>
+                      <Input placeholder="bookings email" {...field} />
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="available"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 ">
+                    <FormControl>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                    <div className="space-y-1 leading-none">
+                      <FormLabel>Current availability</FormLabel>
+                      <FormDescription>
+                        You can enable or desable your availability{" "}
+                      </FormDescription>
+                    </div>
+                  </FormItem>
+                )}
+              />
+            </div>
+          </div>
+
+          <div className="p-8 border rounded-lg">
+            <h3 className="font-bold mb-8 text-xl">Parking details</h3>
+            <div className="grid grid-cols-2 gap-3">
+              <FormField
+                control={form.control}
+                name="parkingAddress"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Address*</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Address" {...field} />
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="parkingZipcode"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Zipcode*</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Zipcode" {...field} />
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="parkingPlace"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Place*</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Place" {...field} />
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="parkingCountry"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Country*</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Country" {...field} />
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="spots"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Total parking spots available* </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="total spots"
+                        type="number"
+                        {...field}
+                      />
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="parkingType"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Parking type</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a verified email to display" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value={ParkingType.shuttle}>
+                          {ParkingType.shuttle}
+                        </SelectItem>
+                        <SelectItem value={ParkingType.valet}>
+                          {ParkingType.valet}
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="arrivalTodos"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>What to do on arrival</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="Tell us a little bit about yourself"
+                        className="resize-none"
+                        {...field}
+                      />
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="departureTodos"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>What to do on arrival</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="Tell us a little bit about yourself"
+                        className="resize-none"
+                        {...field}
+                      />
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+          </div>
+        
+        
+
+    
+
+ 
  
       <Button disabled={isLoading} type="submit">Update {isLoading && <Loader className='w-3 h-3 ml-3 animate-spin' />}</Button> <Button variant={"destructive" } type='button'   onClick={() =>
                 setOpen("delete-modal", { url: `/api/services/${service.id}` })

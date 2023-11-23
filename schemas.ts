@@ -1,5 +1,8 @@
 import * as z from "zod"
  
+
+
+const emailSchema = z.string().email()
 export const serviceSchema = z.object({
     timeToAirport: z.string().min(2),
     distanceToAirport:z.string().min(1),
@@ -9,7 +12,23 @@ export const serviceSchema = z.object({
     images:z.array(z.string()).optional(),
     facilities:z.array(z.string()).optional(),
     highlights:z.array(z.string()).optional(),
-    isActive:z.boolean().optional()
+    isActive:z.boolean().optional(),
+    name:z.string().min(1),
+ terms:z.string().min(1),
+ bookingsEmail:z.union([z.string(), z.undefined()])
+ .refine((val) => !val || emailSchema.safeParse(val).success),
+ parkingAddress:z.string().min(1),
+ parkingZipcode:z.string().min(1),
+ parkingCountry:z.string().min(1),
+ parkingPlace:z.string().min(1),
+ spots:z.coerce.number().positive().default(1),
+ parkingType:z.enum(['shuttle','valet']).default('valet'),
+ arrivalTodos:z.string().optional(),
+ departureTodos:z.string().optional(),
+
+ available:z.boolean().default(false),
+ airportId:z.string().min(1),
+ entityId:z.string().min(1)
 
 })
 
