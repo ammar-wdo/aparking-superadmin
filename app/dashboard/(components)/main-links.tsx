@@ -23,7 +23,7 @@ type Props = {};
 
 const MainLinks = (props: Props) => {
   const { data } = useNotificationsQuery();
-  console.log(data);
+  
 
   const pathname = usePathname();
 
@@ -90,6 +90,7 @@ const MainLinks = (props: Props) => {
       <h3 className="font-semibold px-4 mt-12">Activites</h3>
       {activities.map((link) => (
         <Link
+        prefetch={link.label==="notifications" ? false : true}
           key={link.label}
           href={link.link}
           className={cn(

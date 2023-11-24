@@ -64,7 +64,7 @@ export const useEntity =({entity}:Props)=>{
       }
       
       
-              console.log(values)
+            
             }
 
 

@@ -25,7 +25,7 @@ const page = async({searchParams}: Props) => {
       }
     )
 
-    console.log(entites)
+   
   return (
     <div className=''>
         <div className='flex items-center justify-between'>

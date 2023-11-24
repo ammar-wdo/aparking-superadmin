@@ -54,7 +54,7 @@ export function EntitiesDataTable<TData, TValue>({
       columnFilters,
     },
   })
-console.log(table.getColumn("isActive")?.getFilterValue())
+
   return (
     <div className="mt-12">
 

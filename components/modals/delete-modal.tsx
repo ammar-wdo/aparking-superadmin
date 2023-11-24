@@ -28,7 +28,7 @@ const DeleteModal = (props: Props) => {
 const router = useRouter()
 const  handleDelete = async()=>{
     try {
-        console.log(data.url)
+   
         setIsLoading(true)
 await axios.delete(data?.url as string)
 

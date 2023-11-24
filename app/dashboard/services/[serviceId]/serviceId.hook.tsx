@@ -71,7 +71,7 @@ try {
 }
 
 
-        console.log(values)
+      
       }
 
  const [file, setFile] = useState<File>();

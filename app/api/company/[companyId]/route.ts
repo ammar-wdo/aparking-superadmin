@@ -11,8 +11,7 @@ import { registerSchema } from "@/schemas";
 
 
 export async function PATCH(req:Request,{params}:{params:{companyId:string}}){
-    console.log('patch')
-console.log(params.companyId)
+  
 try {
     const session = await getServerSession(authOptions)
 

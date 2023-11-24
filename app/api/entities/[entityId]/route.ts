@@ -14,7 +14,7 @@ if(!params.entityId) return new NextResponse("entity ID is required",{status:400
     if(!admin)  return new NextResponse("Unauthorized",{status:401})
 
     const body = await req.json()
-    console.log(body)
+   
     const validbody = entitySchema.safeParse(body)
     if(!validbody.success) return NextResponse.json({errors:validbody.error},{status:400})
 
