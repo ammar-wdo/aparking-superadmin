@@ -14,12 +14,17 @@ if(!params.serviceId) return new NextResponse("service ID is required",{status:4
     if(!admin)  return new NextResponse("Unauthorized",{status:401})
 
     const body = await req.json()
-    console.log(body)
+   
     const validbody = serviceSchema.safeParse(body)
     if(!validbody.success) return NextResponse.json({errors:validbody.error},{status:400})
 
     const {entityId,...rest} = validbody.data
-
+   
+    const service = await prisma.service.findUnique({where:{
+        id:params.serviceId
+    },select:{
+        isActive:true
+    }})
     const updated = await prisma.service.update({
         where:{
             id:params.serviceId
@@ -33,11 +38,7 @@ if(!params.serviceId) return new NextResponse("service ID is required",{status:4
         }
     })
 
-    const service = await prisma.service.findUnique({where:{
-        id:params.serviceId
-    },select:{
-        isActive:true
-    }})
+  console.log(updated.isActive, service?.isActive)
 if(updated.isActive===true && service?.isActive === false){
     await prisma.notification.create({
         data:{
