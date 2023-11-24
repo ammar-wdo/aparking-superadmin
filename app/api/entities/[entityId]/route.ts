@@ -56,6 +56,17 @@ if(!params.entityId) return new NextResponse("entity ID is required",{status:400
       
     })
 
+    await prisma.notification.create({
+        data:{
+            companyId:updated.companyId,
+            type:'ENTITY',
+           name:updated.entityName,
+           status:'DELETE',
+            message:`The ${updated.entityName} entity has been deleted by Aparking super admin`
+
+        }
+     })
+
     return NextResponse.json({message:"success"},{status:201})
 
 

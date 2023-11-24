@@ -15,14 +15,6 @@ export const revalidate = 0
 const page = async(props: Props) => {
 
 
-  await prisma.notification.updateMany({
-    where:{
-      isAdmin:true,
-    },
-    data:{
-      isRead:true
-    }
-  })
 
 
   return (

@@ -26,8 +26,26 @@ if(!params.serviceId) return new NextResponse("service ID is required",{status:4
         },
         data:{
             ...rest
+        },include:{
+            entity:{
+                select:{companyId:true}
+            }
         }
     })
+if(updated.isActive===true){
+    await prisma.notification.create({
+        data:{
+            companyId:updated.entity.companyId,
+            entityId:updated.entityId,
+            type:'SERVICE',
+           name:updated.name,
+           status:'APPROVE',
+            message:`The ${updated.name} service has been approved and activated by Aparking super admin`
+
+        }
+     })
+}
+   
 
     return NextResponse.json({message:"success"},{status:201})
 
@@ -54,10 +72,24 @@ if(!params.serviceId) return new NextResponse("service ID is required",{status:4
     const updated = await prisma.service.delete({
         where:{
             id:params.serviceId
-        },
+        },include:{entity:{
+            select:{companyId:true}
+        }}
       
     })
 
+    await prisma.notification.create({
+        data:{
+            companyId:updated.entity.companyId,
+            entityId:updated.entityId,
+            type:'SERVICE',
+           name:updated.name,
+           status:'DELETE',
+            message:`The ${updated.name} service has been deleted by Aparking super admin`
+
+        }
+     })
+    
     return NextResponse.json({message:"success"},{status:201})
 
 

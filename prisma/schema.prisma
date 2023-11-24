@@ -27,6 +27,7 @@ enum STATUS {
   PENDING
   SUCCEEDED
   EXPIRED
+  
 }
 
 model Booking {
@@ -159,6 +160,14 @@ enum NotificationType {
   COMPANY
   ENTITY
   SERVICE
+  BOOKING
+}
+
+enum NotificationsStatus {
+REQUEST
+DELETE
+APPROVE
+
 }
 
 model Notification {
@@ -173,9 +182,12 @@ model Notification {
 
   isAdmin     Boolean @default(false)
 
+name            String?
   message     String?
   IdHolder    String?
   type      NotificationType?  
+  status    NotificationsStatus?
+
 
   isRead    Boolean @default(false)
 

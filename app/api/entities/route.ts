@@ -18,9 +18,19 @@ export async function POST(req:Request){
      const validbody = entitySchema.safeParse(body)
      if(!validbody.success) return NextResponse.json({errors:validbody.error},{status:400})
 
-     await prisma.entity.create({
+    const entity= await prisma.entity.create({
         data:{
             ...validbody.data
+        }
+     })
+
+     await prisma.notification.create({
+        data:{
+            companyId:entity.companyId,
+            type:'ENTITY',
+            IdHolder:entity.id,
+            message:'New entity has been created by Aparking super admin'
+
         }
      })
 

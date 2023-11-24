@@ -19,6 +19,15 @@ const NotificationsFeed = async(props: Props) => {
         }
     })
 
+  await prisma.notification.updateMany({
+    where:{
+      isAdmin:true,
+    },
+    data:{
+      isRead:true
+    }
+  })
+
 const noNotifications = !notifications.length
 
   return (
