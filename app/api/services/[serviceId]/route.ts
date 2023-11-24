@@ -32,7 +32,13 @@ if(!params.serviceId) return new NextResponse("service ID is required",{status:4
             }
         }
     })
-if(updated.isActive===true){
+
+    const service = await prisma.service.findUnique({where:{
+        id:params.serviceId
+    },select:{
+        isActive:true
+    }})
+if(updated.isActive===true && service?.isActive === false){
     await prisma.notification.create({
         data:{
             companyId:updated.entity.companyId,
@@ -42,6 +48,20 @@ if(updated.isActive===true){
            name:updated.name,
            status:'APPROVE',
             message:`The ${updated.name} service has been approved and activated by Aparking super admin`
+
+        }
+     })
+}
+if(updated.isActive===false && service?.isActive === true){
+    await prisma.notification.create({
+        data:{
+            companyId:updated.entity.companyId,
+            entityId:updated.entityId,
+            IdHolder:updated.id,
+            type:'SERVICE',
+           name:updated.name,
+           status:'REQUEST',
+            message:`The ${updated.name} service has been Disabled by Aparking super admin`
 
         }
      })
