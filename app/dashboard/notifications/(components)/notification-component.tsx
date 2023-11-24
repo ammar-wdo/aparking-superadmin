@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils'
 import { Notification } from '@prisma/client'
 import {format} from 'date-fns'
 import Link from 'next/link'
@@ -12,10 +13,17 @@ const NotificationComponent = ({notification}: Props) => {
     const formattedDate = format(new Date(notification.createdAt), 'EEE, MMM/d, HH:mm')
     const url = notification.type==='SERVICE'? `/dashboard/services/${notification.IdHolder}` :''
 
-  return (
-    <div className='rounded-lg p-6 border relative flex gap-4 items-center'>
+    const themes :{[key:string ] :string } =  {
         
-        <p className='text-sm text-neutral-600'>{notification.message}</p>
+      APPROVE: 'bg-green-500/20 text-green-500',
+      REQUEST: 'bg-yellow-500/20 text-yellow-500',
+      DELETE: 'bg-rose-500/20 text-rose-500',
+  }
+
+  return (
+    <div className={cn('rounded-lg p-6 border relative flex gap-4 items-center',themes[notification.status!])}>
+        
+        <p className='text-sm '>{notification.message}</p>
      
        
         <Link href={url} className='hover:underline text-blue-500 text-sm'>Check</Link>

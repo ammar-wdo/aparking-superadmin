@@ -28,7 +28,8 @@ export async function POST(req:Request){
         data:{
             companyId:entity.companyId,
             type:'ENTITY',
-            IdHolder:entity.id,
+            status:'APPROVE',
+            
             message:'New entity has been created by Aparking super admin'
 
         }
