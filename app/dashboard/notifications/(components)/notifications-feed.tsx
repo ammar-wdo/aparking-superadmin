@@ -2,6 +2,7 @@ import prisma from '@/lib/prisma'
 import React from 'react'
 import NotificationComponent from './notification-component'
 import Controller from './controller'
+import Scroller from './scroller'
 
 type Props = {list:string}
 
@@ -46,6 +47,7 @@ const showController = count > 12 * +list
         {noNotifications && <p className='mt-10'>No notifications</p>}
         {notifications.map((notification)=><NotificationComponent key={notification.id} notification={notification} />)}
         {showController&&<Controller list={list}/>}
+        <Scroller />
 
 
     </div>
