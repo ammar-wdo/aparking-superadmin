@@ -4,6 +4,7 @@ import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
+  getPaginationRowModel,
   useReactTable,
   ColumnFiltersState,
   getFilteredRowModel,
@@ -20,6 +21,7 @@ import {
 import { useState } from "react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -40,6 +42,7 @@ export function ServicesDataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
     state: {
       
       columnFilters,
@@ -48,6 +51,7 @@ export function ServicesDataTable<TData, TValue>({
 
   return (
     <div className="mt-20">
+       <div>
 
 <div className="space-y-1 mb-3 flex gap-3 items-center ">
     <h5 className="text-xs text-neutral-500">Filter by status</h5>
@@ -115,6 +119,25 @@ export function ServicesDataTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
+    </div>
+    <div className="flex items-center justify-end space-x-2 py-4">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+        >
+          Previous
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+        >
+          Next
+        </Button>
+      </div>
     </div>
     </div>
   )
