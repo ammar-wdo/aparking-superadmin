@@ -16,9 +16,7 @@ const page = async({searchParams}: Props) => {
         where:{
             entityId:entityId as string | undefined
         },
-        orderBy:{
-            createdAt:'desc'
-        },include:{
+        include:{
             entity:{
                 select:{
                     id:true,
