@@ -6,21 +6,24 @@ import NotificationsFeedSkeleton from './(components)/notifications-feed-skeleto
 import prisma from '@/lib/prisma'
 import Revalidator from './(components)/revalidator'
 
-type Props = {}
+
+
+type Props = {searchParams:{[key:string]:string | string[] | undefined}}
 
 
 export const revalidate = 0
 
 
-const page = async(props: Props) => {
+const page = async({searchParams}: Props) => {
 
-
-
+  if(!searchParams.list || searchParams.list ==="0" || searchParams.list < "0" || isNaN(+searchParams.list)){
+    searchParams.list="1"
+  }
 
   return (
     <div>
         <Heading title='Notifications' description='Manage your activities' />
-        <Suspense fallback={<NotificationsFeedSkeleton />}><NotificationsFeed /></Suspense>
+        <Suspense key={searchParams.list as string} fallback={<NotificationsFeedSkeleton />}><NotificationsFeed  list={searchParams.list as string}/></Suspense>
         <Revalidator />
     </div>
   )
