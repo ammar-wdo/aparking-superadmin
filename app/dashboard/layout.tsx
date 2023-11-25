@@ -19,7 +19,7 @@ const layout = ({children}: Props) => {
 <MainSheet />
   <div className=' p-8 xl:p-20'>
     <EdgeStoreProvider>
-    <Toaster richColors/>
+    <Toaster richColors position='top-right'/>
     {children}
       </EdgeStoreProvider></div> 
   </main>
