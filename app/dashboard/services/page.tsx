@@ -23,6 +23,8 @@ const page = async({searchParams}: Props) => {
                     entityName:true
                 }
             }
+        },orderBy:{
+            createdAt:'desc'
         }
     })
   return (
