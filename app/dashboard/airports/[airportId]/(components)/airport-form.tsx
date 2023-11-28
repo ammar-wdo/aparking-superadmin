@@ -30,7 +30,7 @@ const AirportForm = ({airport}: Props) => {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="Airport name" {...field} />
               </FormControl>
              
               <FormMessage />
