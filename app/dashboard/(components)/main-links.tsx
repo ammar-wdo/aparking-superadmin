@@ -13,6 +13,7 @@ import {
   Group,
   LayoutDashboard,
   MessageSquare,
+  Plane,
 } from "lucide-react";
 import SignoutButton from "./signout-button";
 import { ModeToggle } from "@/components/theme-toggle";
@@ -33,6 +34,12 @@ const MainLinks = (props: Props) => {
       active: pathname === "/dashboard",
       link: "/dashboard",
       Icon: <LayoutDashboard className="w-5 h-5 mr-3" />,
+    },
+    {
+      label: "airports",
+      active: pathname === "/dashboard/airports",
+      link: "/dashboard/airports",
+      Icon: <Plane className="w-5 h-5 mr-3" />,
     },
 
     {
