@@ -1,6 +1,6 @@
 import { serviceSchema } from "@/schemas"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { ParkingType, Service } from "@prisma/client"
+import { Key, ParkingLocation, ParkingType, Service } from "@prisma/client"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { useEdgeStore } from '../../../../lib/edgestore';
@@ -46,10 +46,10 @@ export const useServiceId = ({service}:Props)=>{
           parkingPlace: service?.parkingPlace || "",
           arrivalTodos: service?.arrivalTodos || "",
           departureTodos: service?.departureTodos || "",
-          electricCharging :service?.electricCharging,
-          keyStatus:service?.keyStatus,
-          parkingLocation:service?.parkingLocation,
-          parkingType: service?.parkingType || ParkingType.shuttle,
+          keyStatus:service?.keyStatus || Key.BOTH,
+  parkingLocation:service?.parkingLocation || ParkingLocation.BOTH,
+  parkingType: service?.parkingType || ParkingType.shuttle,
+        
           spots: service?.spots || 1,
           available: service?.available || false,
           airportId:service?.airportId || '',
