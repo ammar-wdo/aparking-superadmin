@@ -69,7 +69,7 @@ const RefundRequestFeed = async(props: Props) => {
    <TableBody>
       
     {refundRequests.map((refund)=>(
-         <TableRow>
+         <TableRow key={refund.id}>
          <TableCell className="">{refund.bookingCode}</TableCell>
          <TableCell>{refund.email}</TableCell>
          <TableCell>{refund.service.name}</TableCell>
