@@ -17,7 +17,7 @@ if(!session){
     return new NextResponse("Unauthorized",{status:401})
 }
 
-const {name} = await req.json()
+const {name,images,content} = await req.json()
 
 if(!name) return new NextResponse("name is required",{status:400})
 
@@ -26,7 +26,9 @@ await prisma.airport.update({
 id:airportId
     },
     data:{
-        name:name 
+        name:name ,
+        images,
+        content
     }
 })
 
