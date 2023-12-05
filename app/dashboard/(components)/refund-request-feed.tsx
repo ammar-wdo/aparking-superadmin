@@ -8,7 +8,9 @@ import {
     TableRow,
   } from "@/components/ui/table"
 import prisma from "@/lib/prisma"
-import { format } from "util"
+import { cn } from "@/lib/utils"
+import { format } from "date-fns"
+
 
 type Props = {}
 
@@ -26,6 +28,23 @@ const RefundRequestFeed = async(props: Props) => {
             }
         }
     })
+
+
+
+    const styles :{ [key: string]: string }= {
+        CANCELED: "text-rose-500 bg-rose-500/20",
+        REVERTED: "text-rose-500 bg-rose-500/20",
+        EXPIRED: "text-rose-500 bg-rose-500/20",
+        ACTIVE: "text-green-500 bg-green-500/20",
+        SUCCEEDED: "text-green-500 text-green-500 bg-green-500/20",
+        REFUNDED: "text-green-500 text-green-500 bg-green-500/20",
+        CREATED: "text-green-500 text-green-500 bg-green-500/20",
+        PENDING: "text-yellow-500 text-yellow-500 bg-yellow-500/20",
+        UPDATED: "text-green-500 text-green-500 bg-green-500/20",
+        UPDATING: "text-yellow-500 text-yellow-500 bg-yellow-500/20",
+        REFUND_REQUEST: "text-yellow-500 text-yellow-500 bg-yellow-500/20",
+       
+      }
   return (
     <div>
 <h3 className="text-xl font-bold my-8">Refund requests</h3>
@@ -61,8 +80,8 @@ const RefundRequestFeed = async(props: Props) => {
          <TableCell>{format(refund.departureDate,'dd-MM-yyyy')}</TableCell>
          <TableCell>{refund.paymentMethod}</TableCell>
          <TableCell>€{refund.total}</TableCell>
-         <TableCell>{refund.bookingStatus}</TableCell>
-         <TableCell>{refund.paymentStatus}</TableCell>
+         <TableCell ><span className={cn("p-3 rounded-lg",styles[refund.bookingStatus!])}> {refund.bookingStatus}</span></TableCell>
+         <TableCell ><span className={cn("p-3 rounded-lg",styles[refund.paymentStatus!])}>{refund.paymentStatus}</span></TableCell>
 
        </TableRow>
     ))}

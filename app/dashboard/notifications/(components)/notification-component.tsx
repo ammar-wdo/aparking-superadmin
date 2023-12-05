@@ -12,7 +12,7 @@ const NotificationComponent = ({notification}: Props) => {
 
 
     const formattedDate = format(new Date(notification.createdAt), 'EEE, MMM/d, HH:mm')
-    const url = notification.type==='SERVICE'? `/dashboard/services/${notification.IdHolder}` :''
+    const url = notification.type==='SERVICE'? `/dashboard/services/${notification.IdHolder}` :notification.type==='BOOKING' ? '/dashboard' :''
 
     const themes :{[key:string ] :React.ReactElement } =  {
         
