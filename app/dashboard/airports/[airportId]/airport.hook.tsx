@@ -126,6 +126,8 @@ export const useAirport =({airport}:Props)=>{
         resolver: zodResolver(airportSchema),
         defaultValues: {
           name:airport?.name || "",
+          images:airport?.images || [],
+          content:airport?.content || ''
         },
       })
 

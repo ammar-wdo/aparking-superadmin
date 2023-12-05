@@ -36,6 +36,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useEntity } from "../entity.hook";
 import PhoneInput from "react-phone-input-2";
 import { useModal } from "@/hooks/modal-hook";
+import { SingleImageDropzone } from "@/components/single-image-drop-zone";
 
 type Props = { entity: Entity | null ,airports:{id:string,name:string}[],companies:{id:string,name:string | null}[]};
 
@@ -63,6 +64,7 @@ const EntityForm = ({ entity,airports,companies }: Props) => {
     onSubmit,
 
     form,
+    imagesFile,setImagesFile,uploadImages,ImagesPlaceholder
   } = useEntity({ entity });
 
   const isLoading = form.formState.isSubmitting;
@@ -259,6 +261,46 @@ const EntityForm = ({ entity,airports,companies }: Props) => {
           
             </div>
           </div>
+          <div className="border rounded-lg p-8">
+            <h3 className="font-bold mb-8 text-xl">Entity content</h3>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-">
+
+        <FormField
+            control={form.control}
+            name="images"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Add images</FormLabel>
+                <div className="flex items-center gap-3 w-full flex-wrap">
+                  <FormControl>
+                    <SingleImageDropzone
+                      width={200}
+                      height={200}
+                      value={imagesFile}
+                      onChange={(imagesFile) => {
+                        setImagesFile(imagesFile);
+                      }}
+                    />
+                  </FormControl>
+                  <Button
+                  disabled={!imagesFile}
+                    type="button"
+                    onClick={uploadImages}
+                   
+                  >
+                    Upload
+                  </Button>
+                  {ImagesPlaceholder()}
+                </div>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+            </div>
+            
+            </div>
 
         
 

@@ -59,6 +59,8 @@ export const entitySchema = z.object({
       IBAN:z.string().optional(),
       chamberOfCommerce:z.string().min(1),
       isActive:z.boolean().default(false),
+      images:z.array(z.string()).default([]),
+      content:z.string().default('')
       
 
 
