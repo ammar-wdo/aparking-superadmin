@@ -37,6 +37,7 @@ import { useEntity } from "../entity.hook";
 import PhoneInput from "react-phone-input-2";
 import { useModal } from "@/hooks/modal-hook";
 import { SingleImageDropzone } from "@/components/single-image-drop-zone";
+import { Textarea } from "@/components/ui/textarea";
 
 type Props = { entity: Entity | null ,airports:{id:string,name:string}[],companies:{id:string,name:string | null}[]};
 
@@ -264,7 +265,7 @@ const EntityForm = ({ entity,airports,companies }: Props) => {
           <div className="border rounded-lg p-8">
             <h3 className="font-bold mb-8 text-xl">Entity content</h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
 
         <FormField
             control={form.control}
@@ -293,6 +294,22 @@ const EntityForm = ({ entity,airports,companies }: Props) => {
                   </Button>
                   {ImagesPlaceholder()}
                 </div>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        <FormField
+            control={form.control}
+            name="content"
+            render={({ field }) => (
+              <FormItem className="">
+                <FormLabel>Content</FormLabel>
+      <Textarea
+      {...field}
+      placeholder="Content"
+      className="whitespace-pre-line resize-none " 
+      />
 
                 <FormMessage />
               </FormItem>

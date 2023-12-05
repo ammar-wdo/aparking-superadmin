@@ -49,6 +49,7 @@ export const useServiceId = ({service}:Props)=>{
           keyStatus:service?.keyStatus || Key.BOTH,
   parkingLocation:service?.parkingLocation || ParkingLocation.BOTH,
   parkingType: service?.parkingType || ParkingType.shuttle,
+  electricCharging:service.electricCharging || false,
         
           spots: service?.spots || 1,
           available: service?.available || false,
