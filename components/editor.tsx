@@ -1,6 +1,6 @@
 "use client"
 
-import { BlockNoteEditor, PartialBlock } from "@blocknote/core";
+import { BlockNoteEditor } from "@blocknote/core";
 import { BlockNoteView, useBlockNote } from "@blocknote/react";
 import "@blocknote/core/style.css";
 import { useEffect, useState } from "react";
@@ -45,7 +45,8 @@ const {resolvedTheme} = useTheme()
 
   });
 
-  // Renders the editor instance using a React component.
+
+
 
   return <BlockNoteView theme={resolvedTheme ==='dark' ? 'dark' : 'light'}  editor={editor} />;
 }
