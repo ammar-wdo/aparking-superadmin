@@ -10,6 +10,9 @@ import { Loader } from 'lucide-react'
 import { useModal } from '@/hooks/modal-hook'
 import { useParams } from 'next/navigation'
 import { SingleImageDropzone } from '@/components/single-image-drop-zone'
+import dynamic from "next/dynamic";
+
+const Editor = dynamic(() => import("../../../../../components/editor"), { ssr: false })
 
 type Props = {airport:Airport | null}
 
@@ -74,6 +77,21 @@ const AirportForm = ({airport}: Props) => {
               </FormItem>
             )}
           />
+
+<FormField
+          control={form.control}
+          name="content"
+          render={({ field }) => (
+            <FormItem className='border p-3 md:col-span-2 rounded-lg '>
+              <FormLabel>Content</FormLabel>
+              <FormControl>
+          <Editor  onChange={(string)=>{form.setValue('content',string)}} initialContent={form.getValues('content')} />
+              </FormControl>
+             
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         </div>
     
         <div className='flex items-center gap-4'>

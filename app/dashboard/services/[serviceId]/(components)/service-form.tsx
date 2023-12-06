@@ -14,6 +14,9 @@ import { Loader } from 'lucide-react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import dynamic from "next/dynamic";
+
+const Editor = dynamic(() => import("../../../../../components/editor"), { ssr: false })
 
 type Props = {
     service:Service & {entity:{companyId:string}}
@@ -130,10 +133,10 @@ const {setOpen} = useModal()
             control={form.control}
             name="generalInformation"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className='p-3 border rounded-lg'>
                 <FormLabel>General information</FormLabel>
                 <FormControl>
-                  <Input placeholder="general info" {...field} />
+                <Editor  onChange={(string)=>{form.setValue('generalInformation',string)}} initialContent={form.getValues('generalInformation')} />
                 </FormControl>
 
                 <FormMessage />
@@ -144,10 +147,10 @@ const {setOpen} = useModal()
             control={form.control}
             name="importantInfo"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className='p-3 border rounded-lg'>
                 <FormLabel>Important information</FormLabel>
                 <FormControl>
-                  <Input placeholder="important info" {...field} />
+                <Editor  onChange={(string)=>{form.setValue('importantInfo',string)}} initialContent={form.getValues('importantInfo')} />
                 </FormControl>
 
                 <FormMessage />
@@ -193,7 +196,7 @@ const {setOpen} = useModal()
             name="images"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Add images</FormLabel>
+                <FormLabel>Gallery</FormLabel>
                 <div className="flex items-center gap-3 w-full flex-wrap">
                   <FormControl>
                     <SingleImageDropzone

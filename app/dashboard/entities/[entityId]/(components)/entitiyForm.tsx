@@ -38,6 +38,9 @@ import PhoneInput from "react-phone-input-2";
 import { useModal } from "@/hooks/modal-hook";
 import { SingleImageDropzone } from "@/components/single-image-drop-zone";
 import { Textarea } from "@/components/ui/textarea";
+import dynamic from "next/dynamic";
+
+const Editor = dynamic(() => import("../../../../../components/editor"), { ssr: false })
 
 type Props = { entity: Entity | null ,airports:{id:string,name:string}[],companies:{id:string,name:string | null}[]};
 
@@ -299,22 +302,20 @@ const EntityForm = ({ entity,airports,companies }: Props) => {
               </FormItem>
             )}
           />
-        <FormField
-            control={form.control}
-            name="content"
-            render={({ field }) => (
-              <FormItem className="">
-                <FormLabel>Content</FormLabel>
-      <Textarea
-      {...field}
-      placeholder="Content"
-      className="whitespace-pre-line resize-none " 
-      />
-
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+       <FormField
+          control={form.control}
+          name="content"
+          render={({ field }) => (
+            <FormItem className='border p-3  rounded-lg '>
+              <FormLabel>Content</FormLabel>
+              <FormControl>
+          <Editor  onChange={(string)=>{form.setValue('content',string)}} initialContent={form.getValues('content')} />
+              </FormControl>
+             
+              <FormMessage />
+            </FormItem>
+          )}
+        />
             </div>
             
             </div>
