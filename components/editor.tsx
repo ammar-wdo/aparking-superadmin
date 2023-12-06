@@ -48,5 +48,5 @@ const {resolvedTheme} = useTheme()
 
 
 
-  return <BlockNoteView theme={resolvedTheme ==='dark' ? 'dark' : 'light'}  editor={editor} />;
+  return <div><BlockNoteView theme={resolvedTheme ==='dark' ? 'dark' : 'light'}  editor={editor} /></div>;
 }
