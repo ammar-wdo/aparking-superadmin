@@ -11,7 +11,12 @@ export const serviceSchema = z.object({
     logo:z.string().min(1),
     images:z.array(z.string()).optional(),
     facilities:z.array(z.string()).optional(),
-    highlights:z.array(z.string()).optional(),
+    highlights: z.array(
+      z.object({
+        label: z.string(),
+        icon: z.string()
+      })
+    ).optional(),
     isActive:z.boolean().optional(),
     name:z.string().min(1),
  terms:z.string().min(1),

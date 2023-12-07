@@ -10,7 +10,7 @@ import { useEffect, useRef } from 'react'
 import { Checkbox } from '@/components/ui/checkbox'
 import { SingleImageDropzone } from '@/components/single-image-drop-zone'
 import { useModal } from '@/hooks/modal-hook'
-import { Loader } from 'lucide-react'
+import { Banknote, BatteryChargingIcon, Bus, Car, CheckCircle, CreditCard, Info, KeyIcon, Loader, ParkingCircle, Star, Warehouse } from 'lucide-react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
@@ -31,7 +31,7 @@ const ServiceForm = ({service,entities,airports}: Props) => {
   if(e.key==='Enter'){
     e.preventDefault()
     handleFacilityAdd(facilityRef)
-    handleHighlightAdd(highlightRef)
+    handleHighlightAdd(highlightRef,highlightIconRef.current)
   }
   }
 
@@ -40,9 +40,23 @@ const ServiceForm = ({service,entities,airports}: Props) => {
   return ()=>document.removeEventListener('keydown',handleEnterPress)
 
   },[])
-
+const theHighlights = ['car','bus','key','info','check','star','electric','payment','cash','parking','indoor']
+  const theIcons :{[key:string]:React.ReactNode} = {
+    car:<Car />,
+    bus:<Bus />,
+    key:<KeyIcon />,
+    info:<Info />,
+    check:<CheckCircle />,
+    star:<Star />,
+    electric:<BatteryChargingIcon />,
+    payment:<CreditCard />,
+    cash:<Banknote />,
+    parking:<ParkingCircle />,
+    indoor:<Warehouse />,
+  }
   const facilityRef = useRef<HTMLInputElement | null>(null);
   const highlightRef = useRef<HTMLInputElement | null>(null);
+  const highlightIconRef = useRef<string>(theHighlights[0]);
 
 const {setOpen} = useModal()
 
@@ -55,7 +69,7 @@ const {setOpen} = useModal()
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 max-w-[1200px]">
       <div className='p-8 border rounded-lg'>
       <h3 className="font-bold mb-8 text-xl">Super admin meta data</h3>
-      <div className="grid grid-cols-2 gap-3 ">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 ">
         <FormField
             control={form.control}
             name="timeToAirport"
@@ -114,9 +128,21 @@ const {setOpen} = useModal()
                 <FormLabel>Highlights</FormLabel>
                 <FormControl>
                   <div className="space-y-3">
-                    <div className="flex items-center gap-5">
+                    <div className="flex items-center gap-2">
                       <Input ref={highlightRef} />
-                      <Button className='flex-shrink-0' onClick={()=>handleHighlightAdd(highlightRef)} type="button">
+                      <div>
+                <Select onValueChange={e=>{highlightIconRef.current=e}} defaultValue={highlightIconRef.current}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a verified email to display" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                {theHighlights.map((highlightLabel)=>   <SelectItem className='cursor-pointer' value={highlightLabel}>{theIcons[highlightLabel]}</SelectItem>)}
+                </SelectContent>
+              </Select>
+                </div>
+                      <Button className='flex-shrink-0' onClick={()=>handleHighlightAdd(highlightRef,highlightIconRef.current)} type="button">
                         Add Highlight
                       </Button>
                     </div>

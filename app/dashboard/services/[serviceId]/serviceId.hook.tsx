@@ -6,17 +6,34 @@ import { z } from "zod"
 import { useEdgeStore } from '../../../../lib/edgestore';
 import { useEffect, useState } from "react"
 import Image from "next/image"
-import { Loader, XIcon } from "lucide-react"
+
 import { uuid as uuidv4 } from 'uuidv4';
 import axios from "axios"
 import { toast } from "sonner"
 import { useParams, useRouter } from "next/navigation"
 import { useImages } from "@/hooks/images-hook"
+import { Banknote, BatteryChargingIcon, Bus, Car, CheckCircle, CreditCard, Info, KeyIcon, Loader, ParkingCircle, Star, Warehouse,XIcon } from 'lucide-react'
 
 type Props = {
   service:Service & {entity:{companyId:string}}
 }
+
+const theIcons :{[key:string]:React.ReactNode} = {
+  car:<Car />,
+  bus:<Bus />,
+  key:<KeyIcon />,
+  info:<Info />,
+  check:<CheckCircle />,
+  star:<Star />,
+  electric:<BatteryChargingIcon />,
+  payment:<CreditCard />,
+  cash:<Banknote />,
+  parking:<ParkingCircle />,
+  indoor:<Warehouse />,
+}
 export const useServiceId = ({service}:Props)=>{
+
+
 
 
   useEffect(()=>{
@@ -36,7 +53,11 @@ export const useServiceId = ({service}:Props)=>{
           logo:service.logo || "",
           images:service.images || [],
           facilities:service.facilities || [],
-          highlights:service.highlights || [],
+          highlights:service.highlights
+          ? service.highlights
+              .filter((el): el is { label?: string; icon?: string } => typeof el === "object" && el !== null)
+              .map((el) => ({ label: el.label, icon: el.icon }))
+          : [],
           isActive:service.isActive || false,
           name: service?.name || "",
           terms: service?.name || "",
@@ -216,18 +237,19 @@ try {
   );
 };
    const handleHighlightAdd = (
-  facilityRef: React.MutableRefObject<HTMLInputElement | null>,
+  highlightRef: React.MutableRefObject<HTMLInputElement | null>,
+  hihlightIconRef:string
 
 ) => {
-  if (!facilityRef.current?.value.trim()) return;
+  if (!highlightRef.current?.value.trim()) return;
   const highlights = form.getValues("highlights");
-  form.setValue("highlights", [...highlights!, facilityRef.current.value]);
-  facilityRef.current.value = "";
+  form.setValue("highlights", [...highlights!, {label:highlightRef.current.value,icon:hihlightIconRef}]);
+  highlightRef.current.value = "";
 };
 
  const handleDeleteHighlight = (input: string) => {
   form.setValue("highlights", [
-    ...form.getValues("highlights")!.filter((facility:string) => facility !== input),
+    ...form.getValues("highlights")!.filter((facility:{label:string,icon:React.ReactNode}) => facility.label !== input),
   ]);
 };
 
@@ -241,10 +263,11 @@ try {
           className="p-2 capitalize flex gap-4 border rounded-sm text-s"
           key={uuidv4()}
         >
-          {highlight}
+         <span>{theIcons[highlight.icon]}</span> 
+         <span>{highlight.label} </span> 
           <XIcon
             className="cursor-pointer"
-            onClick={() => handleDeleteHighlight(highlight)}
+            onClick={() => handleDeleteHighlight(highlight.label)}
           />
         </div>
       ))}
