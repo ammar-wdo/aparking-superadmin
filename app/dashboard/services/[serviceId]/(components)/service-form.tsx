@@ -213,7 +213,7 @@ const {setOpen} = useModal()
                   <FormMessage />
                 </FormItem>
 
-                <ImagesPlaceholder />
+                {<ImagePlaceholder />}
               </div>
             )}
           />
@@ -242,7 +242,7 @@ const {setOpen} = useModal()
                   >
                     Upload
                   </Button>
-                  {ImagesPlaceholder()}
+                <ImagesPlaceholder />
                 </div>
 
                 <FormMessage />
