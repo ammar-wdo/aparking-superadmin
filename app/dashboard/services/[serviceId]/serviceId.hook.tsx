@@ -19,17 +19,17 @@ type Props = {
 }
 
 const theIcons :{[key:string]:React.ReactNode} = {
-  car:<Car />,
-  bus:<Bus />,
-  key:<KeyIcon />,
-  info:<Info />,
-  check:<CheckCircle />,
-  star:<Star />,
-  electric:<BatteryChargingIcon />,
-  payment:<CreditCard />,
-  cash:<Banknote />,
-  parking:<ParkingCircle />,
-  indoor:<Warehouse />,
+  car:<Car  className="text-neutral-500 h-5 w-5"/>,
+  bus:<Bus  className="text-neutral-500 h-5 w-5"/>,
+  key:<KeyIcon  className="text-neutral-500 h-5 w-5"/>,
+  info:<Info  className="text-neutral-500 h-5 w-5"/>,
+  check:<CheckCircle  className="text-neutral-500 h-5 w-5"/>,
+  star:<Star  className="text-neutral-500 h-5 w-5"/>,
+  electric:<BatteryChargingIcon  className="text-neutral-500 h-5 w-5"/>,
+  payment:<CreditCard  className="text-neutral-500 h-5 w-5"/>,
+  cash:<Banknote className="text-neutral-500 h-5 w-5" />,
+  parking:<ParkingCircle  className="text-neutral-500 h-5 w-5"/>,
+  indoor:<Warehouse  className="text-neutral-500 h-5 w-5"/>,
 }
 export const useServiceId = ({service}:Props)=>{
 
@@ -220,15 +220,15 @@ try {
   return !form.getValues("facilities")!.length ? (
     <p className="p-2 text-gray-500 capitalize">No facilities added</p>
   ) : (
-    <div className="flex flex-wrap gap-4">
+    <div className="flex flex-wrap gap-1">
       {form.getValues("facilities")!.map((facility) => (
         <div
-          className="p-2 capitalize flex gap-4 border rounded-sm text-s"
+          className="p-1 px-2 capitalize flex gap-4 border rounded-lg text-s items-center"
           key={uuidv4()}
         >
-          {facility}
+          <p className="text-xs text-neutral-500">{facility}</p>
           <XIcon
-            className="cursor-pointer"
+            className="cursor-pointer text-neutral-500 h-4 w-4"
             onClick={() => handleDeleteFacility(facility)}
           />
         </div>
@@ -257,16 +257,16 @@ try {
   return !form.getValues("highlights")!.length ? (
     <p className="p-2 text-gray-500 capitalize">No highlights added</p>
   ) : (
-    <div className="flex flex-wrap gap-4">
+    <div className="flex flex-wrap gap-1">
       {form.getValues("highlights")!.map((highlight) => (
         <div
-          className="p-2 capitalize flex gap-4 border rounded-sm text-s"
+          className="p-1 capitalize flex gap-2 border rounded-lg text-s items-center"
           key={uuidv4()}
         >
          <span>{theIcons[highlight.icon]}</span> 
-         <span>{highlight.label} </span> 
+         <span className="text-xs text-neutral-500">{highlight.label} </span> 
           <XIcon
-            className="cursor-pointer"
+            className="cursor-pointer text-neutral-500 h-4 w-4"
             onClick={() => handleDeleteHighlight(highlight.label)}
           />
         </div>

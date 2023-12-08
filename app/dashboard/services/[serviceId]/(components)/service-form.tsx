@@ -42,17 +42,17 @@ const ServiceForm = ({service,entities,airports}: Props) => {
   },[])
 const theHighlights = ['car','bus','key','info','check','star','electric','payment','cash','parking','indoor']
   const theIcons :{[key:string]:React.ReactNode} = {
-    car:<Car />,
-    bus:<Bus />,
-    key:<KeyIcon />,
+    car:<Car  className='w-5 h-5 '/>,
+    bus:<Bus  className='w-5 h-5 '/>,
+    key:<KeyIcon  className='w-5 h-5 '/>,
     info:<Info />,
-    check:<CheckCircle />,
-    star:<Star />,
-    electric:<BatteryChargingIcon />,
-    payment:<CreditCard />,
-    cash:<Banknote />,
-    parking:<ParkingCircle />,
-    indoor:<Warehouse />,
+    check:<CheckCircle className='w-5 h-5 ' />,
+    star:<Star className='w-5 h-5 ' />,
+    electric:<BatteryChargingIcon className='w-5 h-5 ' />,
+    payment:<CreditCard  className='w-5 h-5 '/>,
+    cash:<Banknote  className='w-5 h-5 '/>,
+    parking:<ParkingCircle  className='w-5 h-5 '/>,
+    indoor:<Warehouse  className='w-5 h-5 '/>,
   }
   const facilityRef = useRef<HTMLInputElement | null>(null);
   const highlightRef = useRef<HTMLInputElement | null>(null);
@@ -138,7 +138,7 @@ const {setOpen} = useModal()
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                {theHighlights.map((highlightLabel)=>   <SelectItem key={highlightLabel} className='cursor-pointer' value={highlightLabel}>{theIcons[highlightLabel]}</SelectItem>)}
+                {theHighlights.map((highlightLabel)=>   <SelectItem key={highlightLabel} className='cursor-pointer text-neutral-500 ' value={highlightLabel}>{theIcons[highlightLabel]}</SelectItem>)}
                 </SelectContent>
               </Select>
                 </div>
