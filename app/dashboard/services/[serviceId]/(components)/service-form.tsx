@@ -138,7 +138,7 @@ const {setOpen} = useModal()
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                {theHighlights.map((highlightLabel)=>   <SelectItem className='cursor-pointer' value={highlightLabel}>{theIcons[highlightLabel]}</SelectItem>)}
+                {theHighlights.map((highlightLabel)=>   <SelectItem key={highlightLabel} className='cursor-pointer' value={highlightLabel}>{theIcons[highlightLabel]}</SelectItem>)}
                 </SelectContent>
               </Select>
                 </div>
