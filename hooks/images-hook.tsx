@@ -3,7 +3,7 @@ import { Loader, XIcon } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import { UseFormReturn } from "react-hook-form";
-import { uuid, uuid as uuidv4 } from 'uuidv4';
+import {uuid as uuidv4 } from 'uuidv4';
 
 
 
@@ -80,7 +80,7 @@ export const useImages = ({form}:Props)=>{
           <div className="flex items-center gap-3 flex-wrap w-full">
             {form.getValues("images")?.map((image:string) => (
               <div
-                key={uuid()}
+                key={uuidv4()}
                 className="w-[100px] h-[100px] overflow-hidden  relative"
               >
                 {deleteImagesLoader === image ? (
