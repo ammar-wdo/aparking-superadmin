@@ -3,7 +3,7 @@ import { Loader, XIcon } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import { UseFormReturn } from "react-hook-form";
-import {uuid as uuidv4 } from 'uuidv4';
+import {v4 as uuidv4 } from 'uuid';
 
 
 
