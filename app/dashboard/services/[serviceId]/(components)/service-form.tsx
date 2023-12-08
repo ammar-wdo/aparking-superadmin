@@ -213,7 +213,7 @@ const {setOpen} = useModal()
                   <FormMessage />
                 </FormItem>
 
-                {ImagePlaceholder()}
+                <ImagesPlaceholder />
               </div>
             )}
           />

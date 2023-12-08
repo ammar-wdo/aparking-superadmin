@@ -80,7 +80,7 @@ export const useImages = ({form}:Props)=>{
           <div className="flex items-center gap-3 flex-wrap w-full">
             {form.getValues("images")?.map((image:string) => (
               <div
-                key={image}
+                key={uuidv4()}
                 className="w-[100px] h-[100px] overflow-hidden  relative"
               >
                 {deleteImagesLoader === image ? (
@@ -120,6 +120,6 @@ export const useImages = ({form}:Props)=>{
 
 
     return {
-        imagesFile,setImagesFile,uploadImages,ImagesPlaceholder
+        imagesFile,setImagesFile,uploadImages,ImagesPlaceholder,deleteImagesLoader,imagesLoader,deleteanImage
     }
 }

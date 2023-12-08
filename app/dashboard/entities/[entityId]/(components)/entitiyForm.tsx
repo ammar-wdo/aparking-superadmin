@@ -295,7 +295,7 @@ const EntityForm = ({ entity,airports,companies }: Props) => {
                   >
                     Upload
                   </Button>
-                  {ImagesPlaceholder()}
+              <ImagesPlaceholder />
                 </div>
 
                 <FormMessage />

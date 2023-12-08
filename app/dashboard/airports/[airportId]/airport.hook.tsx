@@ -65,8 +65,8 @@ toast.success("Successfully Created")
 
  
       }
-      const {imagesFile,setImagesFile,uploadImages,ImagesPlaceholder} = useImages({form})
+      const {imagesFile,setImagesFile,uploadImages,ImagesPlaceholder,deleteImagesLoader,imagesLoader,deleteanImage} = useImages({form})
 
-      return {form ,onSubmit,imagesFile,setImagesFile,uploadImages,ImagesPlaceholder}
+      return {form ,onSubmit,imagesFile,setImagesFile,uploadImages,ImagesPlaceholder,deleteImagesLoader,imagesLoader,deleteanImage}
 
 }
