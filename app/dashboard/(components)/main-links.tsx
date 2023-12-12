@@ -71,9 +71,9 @@ const MainLinks = (props: Props) => {
       count: data?.count > 0,
     },
     {
-      label: "messages",
-      active: pathname === "/dashboard/messages",
-      link: "/dashboard/messages",
+      label: "reviews",
+      active: pathname === "/dashboard/reviews",
+      link: "/dashboard/reviews",
       Icon: <MessageSquare className="w-5 h-5 mr-3" />,
     },
   ];

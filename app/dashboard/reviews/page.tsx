@@ -1,12 +1,14 @@
 import Heading from '@/components/heading'
 import React from 'react'
+import ReviewsFeed from './(components)/reviews-feed'
 
 type Props = {}
 
 const page = (props: Props) => {
   return (
     <div>
-        <Heading title='Messages' description='Read and write messages' />
+        <Heading title='Reviews' description='Read and manage reviews' />
+        <ReviewsFeed />
     </div>
   )
 }
