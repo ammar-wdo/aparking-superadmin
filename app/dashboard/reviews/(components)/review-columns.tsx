@@ -21,7 +21,7 @@ const themes: { [key: string]: string } = {
 };
 
 export const reviewColumns: ColumnDef<
-  Review & { booking: { firstName: string; lastName: string; email: string } }
+  Review & {entity:{entityName:string},service:{name:string}, booking: { firstName: string; lastName: string; email: string } }
 >[] = [
   {
     accessorKey: "booking.email",
@@ -41,7 +41,7 @@ export const reviewColumns: ColumnDef<
     header: "Rate",
     cell: ({ row }) => (
       <ReactStars
-        className="mx-auto"
+        className="mx-auto flex "
         value={row.getValue("rate")}
         edit={false}
         count={5}
@@ -54,14 +54,15 @@ export const reviewColumns: ColumnDef<
     accessorKey: "reviewContent",
     header: "Content",
     cell: ({ row }) => (
-      <ToolTip side="top" title={row.getValue("reviewContent")}>
-        <p className="line-clamp-1">{row.getValue("reviewContent")}</p>
+      <ToolTip small={true} side="top" title={row.getValue("reviewContent")}>
+        <p className="line-clamp-1 max-w-[300px]">{row.getValue("reviewContent")}</p>
       </ToolTip>
     ),
   },
   {
     accessorKey: "visibility",
     header: "Visibility",
+    cell:({row})=><p className="lowercase first-letter:capitalize">{row.getValue('visibility')}</p>
   },
   {
     accessorKey: "status",
@@ -88,5 +89,18 @@ export const reviewColumns: ColumnDef<
         />
       </div>
     ),
+  },
+  {
+    accessorKey: "service.name",
+    header: "Service name",
+  },
+  {
+    accessorKey: "entity.entityName",
+    header: "Entity name",
+  },
+  {
+  
+    accessorKey: "entity.company.name",
+    header: "Company name",
   },
 ];

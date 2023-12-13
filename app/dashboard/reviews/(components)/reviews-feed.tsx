@@ -7,7 +7,7 @@ type Props = {}
 
 const ReviewsFeed = async(props: Props) => {
 
-    const reviews = await prisma.review.findMany({include:{booking:{select:{firstName:true,lastName:true,email:true}}}})
+    const reviews = await prisma.review.findMany({include:{entity:{select:{entityName:true,company:{select:{name:true}}}},service:{select:{name:true}},booking:{select:{firstName:true,lastName:true,email:true}}},orderBy:{createdAt:'desc'}})
 
   return (
     <div className=''>
