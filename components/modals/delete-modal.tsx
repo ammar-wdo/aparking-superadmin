@@ -31,8 +31,10 @@ const  handleDelete = async()=>{
    
         setIsLoading(true)
 await axios.delete(data?.url as string)
+if(!data.stay){
+  router.back()
+}
 
-router.back()
 setClose()
 router.refresh()
 toast.success("Successfuly deleted")

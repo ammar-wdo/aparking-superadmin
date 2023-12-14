@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 
 import {
   Bell,
+  BookOpenText,
   BookmarkCheck,
   Boxes,
   Building,
@@ -117,6 +118,15 @@ const MainLinks = (props: Props) => {
           {link.label}
         </Link>
       ))}
+
+<h3 className="font-semibold px-4 mt-12">Blogs</h3>
+<Link href={'/dashboard/blogs'} 
+className={cn(
+  "link ",
+  pathname === '/dashboard/blogs' ? "bg-secondary " : "hover:bg-secondary/60",
+ 
+)}
+><BookOpenText className="w-5 h-5 mr-3"  /> Blogs</Link>
 
       <ModeToggle />
       <SignoutButton />
