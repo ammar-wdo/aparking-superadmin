@@ -13,7 +13,7 @@ const BlogsFeed = async(props: Props) => {
     <div className='mt-12 p-4'>
         <div className='flex items-center justify-between'>
         <h3 className='font-semibold'>Blogs section</h3>
-        <Button><Link href={'/dashboard/blogs/new'}>Add blog</Link></Button>
+        <Button asChild><Link href={'/dashboard/blogs/new'}>Add blog</Link></Button>
         </div>
    
         <div className='mt-4'>

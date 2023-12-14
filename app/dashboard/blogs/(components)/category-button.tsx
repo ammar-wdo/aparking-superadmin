@@ -10,7 +10,7 @@ const CategoryButton = (props: Props) => {
 
     const {setOpen} = useModal()
   return (
-    <Button onClick={()=>setOpen('category-modal')} >Add category</Button>
+    <Button  onClick={()=>setOpen('category-modal')} >Add category</Button>
   )
 }
 
