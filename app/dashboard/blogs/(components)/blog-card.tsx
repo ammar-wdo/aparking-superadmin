@@ -13,14 +13,14 @@ const BlogCard = ({blog}: Props) => {
             <Image src={blog.featuredImage} alt='blog-image' fill className='object-cover rounded-lg' />
 
         </div>
-        <p className='capitalize font-bold text-lg text-neutral-700'>{blog.title}</p>
-        <p className='text-xs text-neutral-500 line-clamp-3 first-letter:capitalize'>{blog.shortDescription}</p>
-        <div className='flex items-center flex-wrap gap-1'>
-            {blog.tags.map((tag)=><span key={tag} className='p-1 border rounded-md px-3 text-neutral-500 text-xs '>{tag}</span>)}
+        <p className='capitalize font-bold text-lg '>{blog.title}</p>
+        <p className='text-xs text-foreground line-clamp-3 first-letter:capitalize'>{blog.shortDescription}</p>
+        <div className='flex items-center flex-wrap gap-1 mt-auto'>
+            {blog.tags.map((tag)=><span key={tag} className='p-1 border rounded-md px-3 text-foreground text-xs '>{tag}</span>)}
         </div>
         <div className='flex items-center justify-between mt-5'>
         <p className=' font-semibold capitalize'>{blog.author}</p>
-        <span className='text-sm text-black first-letter:capitalize p-1 px-3 rounded-md bg-slate-100 '>{blog.category.label}</span>
+        <span className='text-sm text-foreground first-letter:capitalize p-1 px-3 rounded-md bg-muted '>{blog.category.label}</span>
         </div>
 
        

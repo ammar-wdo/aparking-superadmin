@@ -13,8 +13,8 @@ const CategoryComponent = ({ category }: Props) => {
 const {setOpen} = useModal()
 
   return (
-    <div className="border rounded-lg p-3 flex items-center gap-3 bg-white">
-      <p className="first-letter:capitalize text-neutral-500 text-xs font-semibold">{category.label}</p>{" "}
+    <div className="border rounded-lg p-3 flex items-center gap-3 ">
+      <p className="first-letter:capitalize text-foreground text-xs font-semibold">{category.label}</p>{" "}
       <div className="flex items-center gap-1">
         <Button variant={'ghost'} onClick={()=>setOpen('category-modal',{category})} className="w-6 h-6 p-0">
           <Edit className="w-3 h-3" />
