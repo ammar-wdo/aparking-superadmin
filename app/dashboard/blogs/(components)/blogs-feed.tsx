@@ -8,7 +8,7 @@ type Props = {}
 
 const BlogsFeed = async(props: Props) => {
 
-    const blogs = await prisma.blog.findMany({orderBy:{createdAt:'desc'}})
+    const blogs = await prisma.blog.findMany({orderBy:{createdAt:'desc'},include:{category:{select:{label:true}}}})
   return (
     <div className='mt-12 p-4'>
         <div className='flex items-center justify-between'>
