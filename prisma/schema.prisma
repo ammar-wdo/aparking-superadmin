@@ -380,7 +380,7 @@ model Review {
 
 model Category {
   id        String   @id @default(uuid())
-  label     String
+  label     String @unique
 
   blogs     Blog[]
   createdAt DateTime @default(now())
@@ -392,7 +392,7 @@ model Blog {
 
   title         String
   content       String
-  slug          String
+  slug          String @unique
   tags          String[]
   featuredImage String
   categoryId    String
