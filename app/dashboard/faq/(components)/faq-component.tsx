@@ -13,7 +13,7 @@ const FaqComponent = ({ faq }: Props) => {
   const { setOpen } = useModal();
 
   return (
-    <div className="flex items-stretch gap-8 border rounded-sm p-3">
+    <div className="flex w-full justify-between border rounded-sm p-3">
       <div className=" rounded-lg  flex flex-col  gap-1 ">
         <p className="first-letter:capitalize text-foreground text-sm font-semibold">
           {faq.question}?

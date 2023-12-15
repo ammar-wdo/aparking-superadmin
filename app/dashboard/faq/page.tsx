@@ -20,7 +20,7 @@ const page = async(props: Props) => {
         <div className='mt-12'>
             {!faqs.length && <p className='text-3xl font-bold text-muted-foreground'>No FAQs</p>}
 
-            <div className='flex items-stretch gap-8 flex-wrap'>
+            <div className='flex flex-col gap-2 max-w-[700px]'>
                 {faqs.map((faq)=><FaqComponent key={faq.id} faq={faq} />)}
             </div>
         </div>
