@@ -34,7 +34,7 @@ export const serviceSchema = z.object({
  keyStatus:z.enum(['BOTH',"LEAVE","KEEP"]).default('BOTH'),
  parkingLocation:z.enum(['INDOOR',"OUTDOOR","BOTH"]).default('BOTH'),
  available:z.boolean().default(false),
- airportId:z.string().min(1),
+
  entityId:z.string().min(1)
 
 })

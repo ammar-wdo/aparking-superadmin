@@ -280,7 +280,7 @@ const {setOpen} = useModal()
       <div className="p-8 border rounded-lg">
             <h3 className="font-bold mb-8 text-xl">Service details</h3>
             <div className="grid grid-cols-2 gap-3 ">
-           {  <FormField
+           {/* {  <FormField
                 control={form.control}
                 name="airportId"
                 render={({ field }) => (
@@ -302,7 +302,7 @@ const {setOpen} = useModal()
                     <FormMessage />
                   </FormItem>
                 )}
-              />}
+              />} */}
               {<FormField
                 control={form.control}
                 name="entityId"
