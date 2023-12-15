@@ -12,7 +12,9 @@ import {
   Boxes,
   Building,
   Building2,
+  FileLock2,
   FileQuestion,
+  FileText,
   Group,
   LayoutDashboard,
   MessageSquare,
@@ -99,6 +101,18 @@ const MainLinks = (props: Props) => {
       active: pathname === "/dashboard/faq",
       link: "/dashboard/faq",
       Icon: <FileQuestion className="w-5 h-5 mr-3" />,
+    },
+    {
+      label: "Terms & conditions",
+      active: pathname === "/dashboard/terms",
+      link: "/dashboard/terms",
+      Icon: <FileText className="w-5 h-5 mr-3" />,
+    },
+    {
+      label: "Privacy policy",
+      active: pathname === "/dashboard/privacy",
+      link: "/dashboard/privacy",
+      Icon: <FileLock2 className="w-5 h-5 mr-3" />,
     },
   
   ]
