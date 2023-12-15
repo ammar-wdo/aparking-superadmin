@@ -15,10 +15,10 @@ const FaqComponent = ({ faq }: Props) => {
   return (
     <div className="flex w-full justify-between border rounded-sm p-3">
       <div className=" rounded-lg  flex flex-col  gap-1 ">
-        <p className="first-letter:capitalize text-foreground text-sm font-semibold">
+        <p className="first-letter:capitalize text-muted-background text-sm font-semibold">
           {faq.question}?
         </p>{" "}
-        <p className="first-letter:capitalize text-foreground text-xs  max-w-[350px]">
+        <p className="first-letter:capitalize text-foreground text-xs  ">
           {faq.answer}
         </p>{" "}
       </div>
