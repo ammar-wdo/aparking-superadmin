@@ -36,11 +36,7 @@ export const useServiceId = ({service}:Props)=>{
 
 
 
-  useEffect(()=>{
-   
-      form.setValue('entityId',service.entity.companyId!)
-    }
-  ,[])
+
 
 
     const form = useForm<z.infer<typeof serviceSchema>>({
@@ -80,12 +76,22 @@ export const useServiceId = ({service}:Props)=>{
         },
       })
 
+
+      useEffect(()=>{
+   
+        form.setValue('entityId',service.entity.companyId!)
+        console.log(form.getValues('entityId'))
+      }
+    ,[])
+ 
+
 const router = useRouter()
 const params = useParams()
     async  function onSubmit(values: z.infer<typeof serviceSchema>) {
 
 
 try {
+  console.log(values.entityId)
   const result = await axios.patch(`/api/services/${service.id}`,values)
   toast.success("Successfully updated")
   router.back()

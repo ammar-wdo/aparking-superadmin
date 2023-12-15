@@ -30,7 +30,8 @@ if(!params.serviceId) return new NextResponse("service ID is required",{status:4
             id:params.serviceId
         },
         data:{
-            ...rest
+            ...rest,
+            entityId
         },include:{
             entity:{
                 select:{companyId:true}
