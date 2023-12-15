@@ -106,3 +106,8 @@ export const registerSchema = z.object({
   categoryId:z.string().min(1)
  })
 
+ export const faqSchema = z.object({
+  question: z.string().min(1),
+  answer:z.string().min(1)
+})
+

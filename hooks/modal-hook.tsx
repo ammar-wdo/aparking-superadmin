@@ -1,12 +1,13 @@
-import { Category } from '@prisma/client'
+import { Category, FAQ } from '@prisma/client'
 import { create } from 'zustand'
 
 
-type modalType ='delete-modal' | 'category-modal'
+type modalType ='delete-modal' | 'category-modal' | 'faq-modal'
 type dataType ={
     url?:string,
     stay?:boolean
     category?:Category
+    faq?:FAQ
 }
 type Store = {
   open: boolean

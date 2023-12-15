@@ -7,10 +7,12 @@ import { usePathname } from "next/navigation";
 import {
   Bell,
   BookOpenText,
+  BookUser,
   BookmarkCheck,
   Boxes,
   Building,
   Building2,
+  FileQuestion,
   Group,
   LayoutDashboard,
   MessageSquare,
@@ -79,6 +81,28 @@ const MainLinks = (props: Props) => {
     },
   ];
 
+  const content = [
+    {
+      label: "blogs",
+      active: pathname === "/dashboard/blogs",
+      link: "/dashboard/blogs",
+      Icon: <BookOpenText className="w-5 h-5 mr-3" />,
+    },
+    {
+      label: "about us",
+      active: pathname === "/dashboard/about-us",
+      link: "/dashboard/about-us",
+      Icon: <BookUser className="w-5 h-5 mr-3" />,
+    },
+    {
+      label: "FAQ",
+      active: pathname === "/dashboard/faq",
+      link: "/dashboard/faq",
+      Icon: <FileQuestion className="w-5 h-5 mr-3" />,
+    },
+  
+  ]
+
   return (
     <div className="w-full flex flex-col mt-16 p-1 px-3 gap-1 flex-1 ">
       <h3 className="font-semibold px-4 ">Main</h3>
@@ -119,14 +143,15 @@ const MainLinks = (props: Props) => {
         </Link>
       ))}
 
-<h3 className="font-semibold px-4 mt-12">Blogs</h3>
-<Link href={'/dashboard/blogs'} 
+<h3 className="font-semibold px-4 mt-12">Content</h3>
+{content.map((el)=><Link key={el.label} href={el.link} 
 className={cn(
   "link ",
-  pathname === '/dashboard/blogs' ? "bg-secondary " : "hover:bg-secondary/60",
+  el.active && "bg-secondary ",
+  !el.active && "hover:bg-secondary/60"
  
 )}
-><BookOpenText className="w-5 h-5 mr-3"  /> Blogs</Link>
+>{el.Icon} {el.label}</Link>)}
 
       <ModeToggle />
       <SignoutButton />

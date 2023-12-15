@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import DeleteModal from "../modals/delete-modal"
 import CategoryModal from "../modals/category-modal"
+import FaqModal from "../modals/faq-modal"
 
 type Props = {}
 
@@ -17,6 +18,7 @@ const ModalProvider = (props: Props) => {
     <>
     <DeleteModal />
     <CategoryModal />
+    <FaqModal />
     </>
   )
 }
