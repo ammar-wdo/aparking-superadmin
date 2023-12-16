@@ -77,12 +77,12 @@ export const useServiceId = ({service}:Props)=>{
       })
 
 
-      useEffect(()=>{
+    //   useEffect(()=>{
    
-        form.setValue('entityId',service.entity.companyId!)
-        console.log(form.getValues('entityId'))
-      }
-    ,[])
+    //     form.setValue('entityId',service.entity.companyId!)
+    //     console.log(form.getValues('entityId'))
+    //   }
+    // ,[])
  
 
 const router = useRouter()
