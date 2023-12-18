@@ -33,7 +33,7 @@ const FaqModal = (props: Props) => {
   
     <DialogContent>
       <DialogHeader>
-        <DialogTitle>Create a new Question</DialogTitle>
+        <DialogTitle> {data.faq ? "Edit a question" : "Create a new Question"}</DialogTitle>
       
        <FaqForm />
       </DialogHeader>

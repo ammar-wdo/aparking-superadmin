@@ -33,7 +33,7 @@ const CategoryModal = (props: Props) => {
   
     <DialogContent>
       <DialogHeader>
-        <DialogTitle>Create a new category</DialogTitle>
+        <DialogTitle>{data.category ? "Edit category" :"Create a new category "}</DialogTitle>
       
        <CategoryForm />
       </DialogHeader>

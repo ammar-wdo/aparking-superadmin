@@ -15,6 +15,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Textarea } from '@/components/ui/textarea'
 import { Loader } from 'lucide-react'
+import { useModal } from '@/hooks/modal-hook'
 
 type Props = {
   
@@ -25,6 +26,8 @@ const FaqForm = ({}: Props) => {
     const {form,onSubmit} = useFaq()
 
     const isLoading = form.formState.isSubmitting
+
+    const {data:{faq}} = useModal()
   return (
     <Form {...form}>
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 pt-4">
@@ -56,7 +59,7 @@ const FaqForm = ({}: Props) => {
           </FormItem>
         )}
       />
-      <Button disabled={isLoading} type="submit">Submit {isLoading && <Loader className='ml-3 w-4 h-4 animate-spin' />}</Button>
+      <Button disabled={isLoading} type="submit">{faq ? 'Edit' :'Submit' } {isLoading && <Loader className='ml-3 w-4 h-4 animate-spin' />}</Button>
     </form>
   </Form>
   )

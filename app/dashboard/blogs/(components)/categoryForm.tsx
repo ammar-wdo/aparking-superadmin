@@ -6,6 +6,7 @@ import { Input } from '../../../../components/ui/input'
 import { Button } from '../../../../components/ui/button'
 import { useCategory } from '@/app/dashboard/blogs/category.hook'
 import { Loader } from 'lucide-react'
+import { useModal } from '@/hooks/modal-hook'
 
 type Props = {}
 
@@ -13,7 +14,7 @@ const CategoryForm = (props: Props) => {
     const {onSubmit,form} = useCategory()
 
 
-
+const {data:{category}} = useModal()
     
     const isLoading = form.formState.isSubmitting
 
@@ -36,7 +37,7 @@ const CategoryForm = (props: Props) => {
         )}
       />
       <div className="flex">
-      <Button disabled={isLoading} className="ml-auto" type="submit">Submit {isLoading && <Loader className="ml-3 h-4 -w4 animate-spin" />}</Button>
+      <Button disabled={isLoading} className="ml-auto" type="submit">{category ? "Edit" :"Submit"} {isLoading && <Loader className="ml-3 h-4 -w4 animate-spin" />}</Button>
       </div>
       
     </form>
