@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import {
   Bell,
@@ -24,6 +24,7 @@ import SignoutButton from "./signout-button";
 import { ModeToggle } from "@/components/theme-toggle";
 import { useNotificationsQuery } from "../notifications/notifications.hook";
 import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
 
 type Props = {};
 
@@ -32,6 +33,7 @@ const MainLinks = (props: Props) => {
   
 
   const pathname = usePathname();
+  const router = useRouter()
 
   const myLinks = [
     {
@@ -121,29 +123,30 @@ const MainLinks = (props: Props) => {
     <div className="w-full flex flex-col mt-16 p-1 px-3 gap-1 flex-1 ">
       <h3 className="font-semibold px-4 ">Main</h3>
       {myLinks.map((link) => (
-        <Link
+        <Button
+        onClick={()=>{router.push(link.link);router.refresh()}}
           key={link.label}
-          href={link.link}
+        variant={'ghost'}
           className={cn(
-            "link",
+            "link justify-start",
             link.active && "bg-secondary ",
             !link.active && "hover:bg-secondary/60"
           )}
         >
           {link.Icon} {link.label}
-        </Link>
+        </Button>
       ))}
       <h3 className="font-semibold px-4 mt-12">Activites</h3>
       {activities.map((link) => (
-        <Link
-        prefetch={link.label==="notifications" ? false : true}
-          key={link.label}
-          href={link.link}
-          className={cn(
-            "link",
-            link.active && "bg-secondary ",
-            !link.active && "hover:bg-secondary/60"
-          )}
+        <Button
+        onClick={()=>{router.push(link.link);router.refresh()}}
+        key={link.label}
+      variant={'ghost'}
+        className={cn(
+          "link justify-start",
+          link.active && "bg-secondary ",
+          !link.active && "hover:bg-secondary/60"
+        )}
         >
           <span className="relative">
             {link.Icon}{" "}
@@ -154,18 +157,19 @@ const MainLinks = (props: Props) => {
             )}
           </span>{" "}
           {link.label}
-        </Link>
+        </Button>
       ))}
 
 <h3 className="font-semibold px-4 mt-12">Content</h3>
-{content.map((el)=><Link key={el.label} href={el.link} 
-className={cn(
-  "link ",
-  el.active && "bg-secondary ",
-  !el.active && "hover:bg-secondary/60"
- 
-)}
->{el.Icon} {el.label}</Link>)}
+{content.map((el)=><Button   onClick={()=>{router.push(el.link);router.refresh()}}
+          key={el.label}
+        variant={'ghost'}
+          className={cn(
+            "link justify-start",
+            el.active && "bg-secondary ",
+            !el.active && "hover:bg-secondary/60"
+          )}
+>{el.Icon} {el.label}</Button>)}
 
       <ModeToggle />
       <SignoutButton />
