@@ -42,8 +42,8 @@ export const useServiceId = ({service}:Props)=>{
     const form = useForm<z.infer<typeof serviceSchema>>({
         resolver: zodResolver(serviceSchema),
         defaultValues: {
-          timeToAirport:service.timeToAirport || 0,
-          distanceToAirport:service.distanceToAirport || 0,
+          timeToAirport:service.timeToAirport || undefined,
+          distanceToAirport:service.distanceToAirport || undefined,
           generalInformation:service.generalInformation || "",
           importantInfo:service.importantInfo || "",
           logo:service.logo || "",

@@ -76,9 +76,14 @@ const {setOpen} = useModal()
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Time to airport*</FormLabel>
-                <FormControl>
-                <Input placeholder="time to airport" {...field} />
+                <div className='flex items-center gap-3'>
+                <FormControl >
+                <Input placeholder="time to airport" className='w-fit' maxLength={2} {...field} />
+              
                 </FormControl>
+                <span>hour(s)</span>
+                </div>
+            
 
                 <FormMessage />
               </FormItem>
@@ -90,9 +95,14 @@ const {setOpen} = useModal()
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Distance to airport*</FormLabel>
-                <FormControl>
-                  <Input placeholder="distance to airport" {...field} />
+                <div className='flex items-center gap-3'>
+                <FormControl >
+                  <Input placeholder="distance to airport" className='w-fit' maxLength={2} {...field} />
+                  
                 </FormControl>
+                <span>km</span>
+                </div>
+           
 
                 <FormMessage />
               </FormItem>
