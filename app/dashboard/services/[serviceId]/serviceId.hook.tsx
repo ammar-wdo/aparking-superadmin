@@ -56,7 +56,7 @@ export const useServiceId = ({service}:Props)=>{
           : [],
           isActive:service.isActive || false,
           name: service?.name || "",
-          terms: service?.name || "",
+          terms: service?.terms || "",
           bookingsEmail: service?.bookingsEmail || "",
           parkingAddress: service?.parkingAddress || "",
           parkingZipcode: service?.parkingZipcode || "",
