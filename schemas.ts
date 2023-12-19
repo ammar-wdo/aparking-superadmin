@@ -4,8 +4,8 @@ import * as z from "zod"
 
 const emailSchema = z.string().email()
 export const serviceSchema = z.object({
-    timeToAirport: z.string().min(2),
-    distanceToAirport:z.string().min(1),
+    timeToAirport: z.coerce.number().min(1),
+    distanceToAirport: z.coerce.number().min(1),
     generalInformation:z.string().optional(),
     importantInfo:z.string().optional(),
     logo:z.string().min(1),
