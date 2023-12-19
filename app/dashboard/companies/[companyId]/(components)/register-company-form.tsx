@@ -154,6 +154,34 @@ const RegisterForm = ({ company }: Props) => {
               </FormItem>
             )}
           />
+          <FormField
+            control={form.control}
+            name="vatNO"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>VAT NO*</FormLabel>
+                <FormControl>
+                  <Input placeholder="VAT NO" {...field} />
+                </FormControl>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="chamberOfCommerce"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Chamber of commerce*</FormLabel>
+                <FormControl>
+                  <Input placeholder="Chamber of commerce" {...field} />
+                </FormControl>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
             </div>
           </div>
        

@@ -92,7 +92,7 @@ export const useImages = ({form}:Props)=>{
                     alt="added logo"
                     src={image}
                     fill
-                    className="object-cover rounded-lg"
+                    className="object-contain rounded-lg"
                   />
                 )}
   

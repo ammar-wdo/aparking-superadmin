@@ -120,10 +120,11 @@ const SingleImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
     }, [fileRejections, dropzoneOptions]);
 
     return (
-      <div>
+      <div className=''>
         <div
+        
           {...getRootProps({
-            className: dropZoneClassName,
+            className: dropZoneClassName ,
             style: {
               width,
               height,
@@ -136,7 +137,7 @@ const SingleImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
           {imageUrl ? (
             // Image Preview
             <img
-              className="h-full w-full rounded-md object-cover"
+              className="h-full w-full rounded-md object-contain bg-white"
               src={imageUrl}
               alt={acceptedFiles[0]?.name}
             />

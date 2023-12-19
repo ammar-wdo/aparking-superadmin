@@ -31,8 +31,8 @@ export const serviceSchema = z.object({
  arrivalTodos:z.string().optional(),
  departureTodos:z.string().optional(),
  electricCharging:z.boolean().default(false),
- keyStatus:z.enum(['BOTH',"LEAVE","KEEP"]).default('BOTH'),
- parkingLocation:z.enum(['INDOOR',"OUTDOOR","BOTH"]).default('BOTH'),
+ keyStatus:z.enum(["LEAVE","KEEP"]).default('LEAVE'),
+ parkingLocation:z.enum(['INDOOR',"OUTDOOR"]).default('INDOOR'),
  available:z.boolean().default(false),
 
  entityId:z.string().min(1)
@@ -83,6 +83,8 @@ export const registerSchema = z.object({
    address: z.string().min(2).max(50),
    password:z.string().min(6),
    contact:z.string().min(2).max(50),
+   chamberOfCommerce:z.string().min(1),
+   vatNO:z.string().min(1),
   
    phone: z.string().refine((value) => {
      const phoneRegex =/^(?:[0-9]){1,3}(?:[ -]*[0-9]){6,14}$/;

@@ -18,4 +18,6 @@ isActive:company?.isActive || false,
   phone: company?.phone || "",
   place: company?.place || "",
   zipcode: company?.zipcode || "",
+  vatNO:company?.vatNO || '',
+  chamberOfCommerce:company?.chamberOfCommerce || ''
 })

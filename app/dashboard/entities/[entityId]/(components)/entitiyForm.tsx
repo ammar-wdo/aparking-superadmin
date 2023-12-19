@@ -368,10 +368,10 @@ const EntityForm = ({ entity,airports,companies }: Props) => {
                 name="companyName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Company name*</FormLabel>
+                    <FormLabel>Entity name*</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Company name"
+                        placeholder="Entity name"
                       
                         {...field}
                       />
@@ -388,7 +388,7 @@ const EntityForm = ({ entity,airports,companies }: Props) => {
                   <FormItem>
                     <FormLabel>Chamber of commerce*</FormLabel>
                     <FormControl>
-                      <Input placeholder="Entity place" {...field} />
+                      <Input placeholder="Chamber of commerce" {...field} />
                     </FormControl>
 
                     <FormMessage />
@@ -404,7 +404,7 @@ const EntityForm = ({ entity,airports,companies }: Props) => {
                     <FormLabel>VAT no.</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Name"
+                        placeholder="VAT NO"
                       
                         {...field}
                       />
