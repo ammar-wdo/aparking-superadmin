@@ -183,7 +183,7 @@ try {
               alt="added logo"
               src={form.getValues("logo")}
               fill
-              className="object-cover rounded-lg"
+              className="object-contain rounded-lg"
             />
           )}
 
