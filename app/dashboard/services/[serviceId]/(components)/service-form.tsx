@@ -585,12 +585,7 @@ const {setOpen} = useModal()
                      Outdoor
                     </FormLabel>
                   </FormItem>
-                  <FormItem className="flex items-center space-x-3 space-y-0">
-                    <FormControl>
-                      <RadioGroupItem value={ParkingLocation.BOTH} />
-                    </FormControl>
-                    <FormLabel className="font-normal">Both</FormLabel>
-                  </FormItem>
+             
                 </RadioGroup>
               </FormControl>
               <FormMessage />
@@ -625,12 +620,7 @@ const {setOpen} = useModal()
                      Leave
                     </FormLabel>
                   </FormItem>
-                  <FormItem className="flex items-center space-x-3 space-y-0">
-                    <FormControl>
-                      <RadioGroupItem value={Key.BOTH} />
-                    </FormControl>
-                    <FormLabel className="font-normal">Both</FormLabel>
-                  </FormItem>
+              
                 </RadioGroup>
               </FormControl>
               <FormMessage />
