@@ -18,7 +18,7 @@ const page = async({params}: Props) => {
             entity:{select:{
                 companyId:true
             }},
-            extraOptions:true
+            extraOptions:{orderBy:{createdAt:'desc'}}
         }
     })
     if(!service) return redirect('/dashboard/companies')
