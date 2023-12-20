@@ -22,12 +22,12 @@ import { cn } from "@/lib/utils";
 type Props = { service: Service & { extraOptions: ExraOption[] } };
 
 const OptionsFeed = ({ service }: Props) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState('');
   const router = useRouter();
 
   const toggleOption = async (id: string) => {
     try {
-      setIsLoading(true);
+      setIsLoading(id);
       await axios.post(`/api/option/${id}`);
       toast.success("Done successfully!");
       router.refresh();
@@ -35,7 +35,7 @@ const OptionsFeed = ({ service }: Props) => {
       console.log(error);
       toast.error("Something went wrong");
     } finally {
-      setIsLoading(false);
+      setIsLoading('');
     }
   };
   return (
@@ -77,11 +77,11 @@ const OptionsFeed = ({ service }: Props) => {
                 </TableCell>
                 <TableCell>
                   <Button
-                    disabled={isLoading}
+                    disabled={isLoading === option.id}
                     onClick={() => toggleOption(option.id)}
                   >
                     {option.isActive ? "Disable" : "Enable"}
-                    {isLoading && (
+                    {isLoading===option.id && (
                       <Loader className="ml-3 w-4 h-4 animate-spin" />
                     )}
                   </Button>
