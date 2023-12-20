@@ -1,6 +1,6 @@
 
 'use client'
-import { Airport, Entity, Key, ParkingLocation, ParkingType, Service } from '@prisma/client'
+import { Airport, Entity, ExraOption, Key, ParkingLocation, ParkingType, Service } from '@prisma/client'
 
 import { useServiceId } from '../serviceId.hook'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
@@ -16,10 +16,12 @@ import { Textarea } from '@/components/ui/textarea'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import dynamic from "next/dynamic";
 
+
+
 const Editor = dynamic(() => import("../../../../../components/editor"), { ssr: false })
 
 type Props = {
-    service:Service & {entity:{companyId:string}}
+    service:Service & {entity:{companyId:string},extraOptions:ExraOption[]}
     airports:{id:string,name:string}[],entities:{id:string,entityName:string}[]
 }
 
@@ -638,10 +640,11 @@ const {setOpen} = useModal()
           )}
         />
             </div>
+
+        
           </div>
         
         
-
     
 
  

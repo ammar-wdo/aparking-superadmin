@@ -3,6 +3,7 @@ import prisma from '@/lib/prisma'
 import { redirect } from 'next/navigation'
 import React from 'react'
 import ServiceForm from './(components)/service-form'
+import OptionsFeed from './(components)/options.feed'
 
 type Props = {
     params:{companyId:string,serviceId:string}
@@ -16,7 +17,8 @@ const page = async({params}: Props) => {
         },include:{
             entity:{select:{
                 companyId:true
-            }}
+            }},
+            extraOptions:true
         }
     })
     if(!service) return redirect('/dashboard/companies')
@@ -29,6 +31,10 @@ const entities  =await prisma.entity.findMany({where:{companyId:service.entity.c
     <div>
         <Heading title={"Services - " + service?.name!} description={'Manage ' + service?.name + ' service'} />
         <ServiceForm service={service} entities={entities} airports={airports}/>
+        <div className='mt-12'>
+        <OptionsFeed service={service} />
+        </div>
+       
       
       
     </div>
