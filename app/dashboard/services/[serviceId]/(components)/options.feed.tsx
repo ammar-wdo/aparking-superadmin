@@ -42,12 +42,10 @@ const OptionsFeed = ({ service }: Props) => {
     <div className="p-8 border rounded-lg">
       <h3 className="font-bold mb-8 text-xl">Extra options</h3>
       <div className="mt-2">
-        {!service.extraOptions.length && (
+        {!service.extraOptions.length ? 
           <p className="p-4 text-center text-3xl font-bold text-neutral-500">
             No extra options
-          </p>
-        )}
-        <Table>
+          </p> :  <Table>
           <TableHeader>
             <TableRow>
               <TableHead>Label</TableHead>
@@ -92,6 +90,8 @@ const OptionsFeed = ({ service }: Props) => {
             ))}
           </TableBody>
         </Table>
+        }
+       
       </div>
     </div>
   );
