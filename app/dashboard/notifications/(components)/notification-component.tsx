@@ -31,7 +31,7 @@ const NotificationComponent = ({ notification }: Props) => {
   };
 
   const showCheck =
-    ((notification.type === "ENTITY" || notification.type === "SERVICE") &&
+    ((notification.type === "ENTITY" || notification.type === "SERVICE" || notification.type ==='OPTION') &&
       notification.status !== "DELETE") ||
     notification.type === "BOOKING";
 
