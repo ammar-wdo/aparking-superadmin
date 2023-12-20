@@ -18,6 +18,7 @@ import { Loader } from "lucide-react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import CommessionInput from "@/app/dashboard/(components)/commessions-input";
 
 type Props = { service: Service & { extraOptions: ExraOption[] } };
 
@@ -28,7 +29,7 @@ const OptionsFeed = ({ service }: Props) => {
   const toggleOption = async (id: string) => {
     try {
       setIsLoading(id);
-      await axios.post(`/api/option/${id}`);
+      await axios.post(`/api/option/${id}`,{});
       toast.success("Done successfully!");
       router.refresh();
     } catch (error) {
@@ -51,6 +52,7 @@ const OptionsFeed = ({ service }: Props) => {
               <TableHead>Label</TableHead>
               <TableHead>Description</TableHead>
               <TableHead>Price</TableHead>
+              <TableHead>Commession</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Action</TableHead>
             </TableRow>
@@ -65,6 +67,7 @@ const OptionsFeed = ({ service }: Props) => {
                   </ToolTip>
                 </TableCell>
                 <TableCell>€ {option.price}</TableCell>
+                <TableCell><CommessionInput commession={option.commession} id={option.id} /></TableCell>
                 <TableCell>
                   <span
                     className={cn(

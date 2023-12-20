@@ -17,6 +17,7 @@ import { Loader } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { toast } from "sonner"
+import CommessionInput from "./commessions-input"
 
 type Props = {
     extraOptions:ExraOption[]
@@ -32,7 +33,7 @@ const PendingOptionsTable = ({extraOptions}: Props) => {
         const toggleOption = async (id: string) => {
           try {
             setIsLoading(id);
-            await axios.post(`/api/option/${id}`);
+            await axios.post(`/api/option/${id}`,{});
             toast.success("Done successfully!");
             router.refresh();
           } catch (error) {
@@ -49,6 +50,7 @@ const PendingOptionsTable = ({extraOptions}: Props) => {
         <TableHead>Label</TableHead>
         <TableHead>Description</TableHead>
         <TableHead>Price</TableHead>
+        <TableHead>Commession</TableHead>
         <TableHead>Status</TableHead>
         <TableHead>Action</TableHead>
       </TableRow>
@@ -63,6 +65,7 @@ const PendingOptionsTable = ({extraOptions}: Props) => {
             </ToolTip>
           </TableCell>
           <TableCell>€ {option.price}</TableCell>
+          <TableCell><CommessionInput commession={option.commession} id={option.id} /></TableCell>
           <TableCell>
             <span
               className={cn(

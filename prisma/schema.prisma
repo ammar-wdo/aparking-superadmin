@@ -446,6 +446,8 @@ model ExraOption {
   isActive Boolean @default(false)
   available Boolean @default(false)
 
+  commession Int @default(0)
+
   serviceId String
   service   Service @relation(fields: [serviceId], references: [id])
 

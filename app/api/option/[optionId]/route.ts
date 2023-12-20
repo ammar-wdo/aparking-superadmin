@@ -16,22 +16,48 @@ export const POST = async(req:Request,{params}:{params:{optionId:string}})=>{
 
         if(!optionId) return NextResponse.json({error:'optionId is required'},{status:401})
 
-        const option = await prisma.exraOption.findUnique({
-            where:{
-                id:optionId
+        
+
+        const {value} = await req.json()
+        console.log(value)
+        if(value){
+
+            try {
+                await prisma.exraOption.update({
+                    where:{
+                        id:optionId
+                    },
+                    data:{
+                        commession:value
+                    }
+                })
+    
+                return NextResponse.json({message:'success'},{status:201})
+            } catch (error) {
+                console.log(error)
+                return NextResponse.json({error:'Internal error'},{status:500})
+            }
+         
+        }else{
+            const option = await prisma.exraOption.findUnique({
+                where:{
+                    id:optionId
+                }
+            })
+    
+            if(!option) return NextResponse.json({error:'option does not exist'},{status:401})
+    
+        await prisma.exraOption.update({
+            where:{id:optionId},data:{
+                isActive:!option?.isActive
             }
         })
-
-        if(!option) return NextResponse.json({error:'option does not exist'},{status:401})
-
-    await prisma.exraOption.update({
-        where:{id:optionId},data:{
-            isActive:!option?.isActive
+    
+        return NextResponse.json({message:'success'},{status:201})
+            
         }
-    })
 
-    return NextResponse.json({message:'success'},{status:201})
-        
+     
     } catch (error) {
         console.log(error)
         return NextResponse.json({error:'something went wrong'},{status:500})
