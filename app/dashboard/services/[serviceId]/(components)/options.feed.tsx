@@ -63,7 +63,7 @@ const OptionsFeed = ({ service }: Props) => {
                 <TableCell>{option.label}</TableCell>
                 <TableCell className="max-w-[100px]">
                   <ToolTip side="top" title={option.description}>
-                    {option.description}
+                    <p className="text-start line-clamp-1">{option.description}</p>
                   </ToolTip>
                 </TableCell>
                 <TableCell>€ {option.price}</TableCell>

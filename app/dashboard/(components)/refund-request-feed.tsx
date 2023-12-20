@@ -47,7 +47,7 @@ const RefundRequestFeed = async(props: Props) => {
       }
   return (
     <div>
-<h3 className="text-xl font-bold my-8">Refund requests</h3>
+<h3 className="text-xl font-bold ">Refund requests</h3>
 <Table>
    
    <TableHeader>

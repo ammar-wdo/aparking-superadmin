@@ -59,9 +59,9 @@ const PendingOptionsTable = ({extraOptions}: Props) => {
       {extraOptions.map((option) => (
         <TableRow key={option.id}>
           <TableCell>{option.label}</TableCell>
-          <TableCell className="max-w-[100px]">
-            <ToolTip side="top" title={option.description}>
-              {option.description}
+          <TableCell className="max-w-[100px] text-start">
+            <ToolTip  side="top" title={option.description}>
+              <p className="text-start line-clamp-1">{option.description}</p>
             </ToolTip>
           </TableCell>
           <TableCell>€ {option.price}</TableCell>
