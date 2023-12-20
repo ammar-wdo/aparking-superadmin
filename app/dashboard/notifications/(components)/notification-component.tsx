@@ -1,8 +1,10 @@
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Notification } from "@prisma/client";
 import { format } from "date-fns";
 import { AlertTriangle, CheckCheck, CheckCircle, Delete } from "lucide-react";
 import Link from "next/link";
+import NotificationButton from "./notification-button";
 
 type Props = {
   notification: Notification;
@@ -56,12 +58,8 @@ const NotificationComponent = ({ notification }: Props) => {
         {notification.message}
       </p>
       {showCheck && (
-        <Link
-          href={url}
-          className="hover:underline text-blue-500 text-sm ml-auto sm:mr-32 "
-        >
-          Check
-        </Link>
+        <NotificationButton url={url} />
+       
       )}
       <p className="text-xs text-neutral-500 pt-3 absolute bottom-2 right-3 dark:text-neutral-200">
         {formattedDate}
