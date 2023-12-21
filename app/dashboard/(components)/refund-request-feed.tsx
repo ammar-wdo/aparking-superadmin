@@ -26,7 +26,8 @@ const RefundRequestFeed = async(props: Props) => {
             service:{
         select:{name:true,parkingType:true}
             }
-        }
+        },
+        orderBy:{createdAt:'desc'}
     })
 
 
