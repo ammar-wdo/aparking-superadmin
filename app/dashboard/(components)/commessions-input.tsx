@@ -14,6 +14,7 @@ const CommessionInput = ({id,commession}: Props) => {
 
     const [value, setValue] = useState(commession)
     const [isLoading, setIsLoading] = useState(false)
+    const [edit, setEdit] = useState(false)
 
     const router = useRouter()
 
@@ -21,6 +22,7 @@ const CommessionInput = ({id,commession}: Props) => {
         try {
             setIsLoading(true)
 await axios.post(`/api/option/${id}`,{value})
+setEdit(false)
 
 
 
@@ -35,9 +37,16 @@ toast.success('Successfully changed')
             setIsLoading(false)
         }
     }
+
+    if(!edit) return (
+        <div className='flex items-center gap-4'>
+            <p className='w-[30px]'>%{value}</p>
+            <Button variant={'secondary'} onClick={()=>setEdit(true)}>Edit</Button>
+        </div>
+    )
   return (
     <div className='flex items-center gap-4'>
-        <Input value={value || ''} placeholder='%0' type='number' min={0} className='w-fit' max={100} onChange={(e)=>setValue(+e.target.value)} />
+        <Input value={value || ''} placeholder='%0' type='number' min={0}  className='w-fit' max={100} onChange={(e)=>setValue(+e.target.value)} />
         <Button disabled={isLoading} onClick={handleSave}  className=''>{isLoading ? 'Saving..' : 'Save'} {isLoading&& <Loader className='ml-3 h-4 w-4 animate-spin' />}</Button>
     </div>
   )

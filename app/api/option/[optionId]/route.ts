@@ -20,7 +20,7 @@ export const POST = async(req:Request,{params}:{params:{optionId:string}})=>{
 
         const {value} = await req.json()
         console.log(value)
-        if(value){
+        if(value >=0){
 
             try {
                 await prisma.exraOption.update({
@@ -38,6 +38,8 @@ export const POST = async(req:Request,{params}:{params:{optionId:string}})=>{
                 return NextResponse.json({error:'Internal error'},{status:500})
             }
          
+        }else if(value < 0){
+            return NextResponse.json({error:'value should be positive'},{status:400})
         }else{
             const option = await prisma.exraOption.findUnique({
                 where:{

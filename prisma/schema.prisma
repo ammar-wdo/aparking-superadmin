@@ -441,7 +441,7 @@ model ExraOption {
   id          String @id @default(uuid())
   label       String
   description String
-  image       String
+  image       String?
   price       Float
   isActive Boolean @default(false)
   available Boolean @default(false)
