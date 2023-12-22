@@ -22,7 +22,9 @@ import Link from "next/link"
         <Sheet  >
         <SheetTrigger  className="lg:hidden fixed top-4 right-4"><Menu /></SheetTrigger>
         <SheetContent  side={'left'} className="bg-background p-0 flex flex-col ">
-      
+        <div className='p-6 border-b'>
+        <h3 className='text-center text-foreground font-bold'>Super admin</h3>
+      </div>
           <MainLinks />
         </SheetContent>
       </Sheet>
