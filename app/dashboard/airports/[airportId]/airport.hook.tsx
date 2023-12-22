@@ -36,10 +36,10 @@ export const useAirport =({airport}:Props)=>{
       })
 
       useEffect(()=>{
-        const slug = form.watch('name').replace(/ /g, '-');
+        const slug = form.watch('slug').replace(/ /g, '-');
 form.setValue('slug',slug)
 
-      },[form.watch('name')])
+      },[form.watch('slug')])
 
       const router = useRouter()
 

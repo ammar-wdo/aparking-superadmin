@@ -45,10 +45,10 @@ const RegisterForm = ({ company }: Props) => {
   const { setOpen } = useModal();
 
   useEffect(()=>{
-    const slug = form.watch('name').replace(/ /g, '-');
-    form.setValue('slug',slug)
-    
-          },[form.watch('name')])
+    const slug = form.watch('slug').replace(/ /g, '-');
+form.setValue('slug',slug)
+
+  },[form.watch('slug')])
 
   return (
     <Form {...form}>

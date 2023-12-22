@@ -53,10 +53,10 @@ export const useEntity =({entity}:Props)=>{
 
       
       useEffect(()=>{
-        const slug = form.watch('entityName').replace(/ /g, '-');
+        const slug = form.watch('slug').replace(/ /g, '-');
 form.setValue('slug',slug)
 
-      },[form.watch('entityName')])
+      },[form.watch('slug')])
       const router = useRouter()
       const params = useParams()
           async  function onSubmit(values: z.infer<typeof entitySchema>) {
