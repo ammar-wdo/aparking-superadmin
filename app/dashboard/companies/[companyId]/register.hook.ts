@@ -6,15 +6,16 @@ import axios from 'axios'
 import * as z from "zod";
 import { Company } from "@prisma/client";
 
-import { useToast } from "@/components/ui/use-toast";
+
 import { registerSchema } from "@/schemas";
+import { toast } from "sonner";
 
 
 
 export const useRegister = (company:Company|null)=>{
 
 
-    const { toast } = useToast()
+  
   const router = useRouter()
   const params = useParams()
 
@@ -27,20 +28,13 @@ export const useRegister = (company:Company|null)=>{
       await axios.post('/api/company',values)
     }
 
-toast({
-    title: "Success",
-    description: "company is created",
-  })
+toast.success(company ? "Company updated" : "Company created")
 router.push(`/dashboard/companies`)
 router.refresh()
     
   } catch (error) {
     console.log(error)
-    toast({
-        title:'Error',
-        description:'Something went wrong',
-        variant:'destructive'
-    })
+ toast.error('Something went wrong')
   }
   }
 

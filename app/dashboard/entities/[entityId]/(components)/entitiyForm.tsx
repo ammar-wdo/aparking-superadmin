@@ -527,14 +527,14 @@ const EntityForm = ({ entity,airports,companies }: Props) => {
           <Button disabled={isLoading} type="submit">
             {isLoading ? (
               <>
-                {entity ? "Saving.." : "  Submitting"}
+                {entity ? "Updating" : "  creating"}
 
                 <Loader className="ml-3 w-3 h-3 animate-spin" />
               </>
             ) : entity ? (
               "Save changes"
             ) : (
-              "Submit"
+              "Create"
             )}
           </Button>
           {entity && (

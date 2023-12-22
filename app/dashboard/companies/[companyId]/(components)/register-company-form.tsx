@@ -266,11 +266,11 @@ form.setValue('slug',slug)
           <Button disabled={isLoading} type="submit">
             {isLoading ? (
               <>
-                {company ? "Editing" : "Creating"}
+                {company ? "Updating" : "Creating"}
                 <Loader className="ml-3 w-3 h-3 animate-spin" />
               </>
             ) : company ? (
-              "Edit"
+              "Save changes"
             ) : (
               "Create"
             )}
