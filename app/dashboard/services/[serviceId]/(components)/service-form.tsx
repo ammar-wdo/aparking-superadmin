@@ -72,6 +72,24 @@ const {setOpen} = useModal()
       <div className='p-8 border rounded-lg'>
       <h3 className="font-bold mb-8 text-xl">Super admin meta data</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 ">
+      <FormField
+            control={form.control}
+            name="slug"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Service slug*</FormLabel>
+              
+                <FormControl >
+                <Input placeholder="slug"  {...field} />
+              
+                </FormControl>
+               
+            
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         <FormField
             control={form.control}
             name="timeToAirport"

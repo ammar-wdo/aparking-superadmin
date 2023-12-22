@@ -7,7 +7,7 @@ import axios from "axios"
 import { Loader, XIcon } from "lucide-react"
 import Image from "next/image"
 import { useParams, useRouter } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { UseFormReturn, useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { z } from "zod"
@@ -42,7 +42,8 @@ export const useEntity =({entity}:Props)=>{
           chamberOfCommerce:entity?.chamberOfCommerce || "",
           isActive:entity?.isActive || false,
           images:entity?.images || [],
-          content:entity?.content || ''
+          content:entity?.content || '',
+          slug:entity?.slug || ''
 
 
         },
@@ -51,7 +52,11 @@ export const useEntity =({entity}:Props)=>{
 
 
       
+      useEffect(()=>{
+        const slug = form.watch('entityName').replace(/ /g, '-');
+form.setValue('slug',slug)
 
+      },[form.watch('entityName')])
       const router = useRouter()
       const params = useParams()
           async  function onSubmit(values: z.infer<typeof entitySchema>) {

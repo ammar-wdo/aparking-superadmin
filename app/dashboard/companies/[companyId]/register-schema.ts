@@ -18,6 +18,7 @@ isActive:company?.isActive || false,
   phone: company?.phone || "",
   place: company?.place || "",
   zipcode: company?.zipcode || "",
+  slug: company?.slug || "",
   vatNO:company?.vatNO || '',
   chamberOfCommerce:company?.chamberOfCommerce || ''
 })

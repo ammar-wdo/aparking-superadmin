@@ -174,6 +174,20 @@ const EntityForm = ({ entity,airports,companies }: Props) => {
               />
               <FormField
                 control={form.control}
+                name="slug"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Entity slug*</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Entity slug" {...field} />
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
                 name="entityAddress"
                 render={({ field }) => (
                   <FormItem>

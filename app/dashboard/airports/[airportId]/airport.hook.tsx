@@ -5,19 +5,15 @@ import { Airport } from "@prisma/client"
 import axios from "axios"
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useEdgeStore } from "@/lib/edgestore"
 import Image from "next/image"
 import { Loader, XIcon } from "lucide-react"
 import { useImages } from "@/hooks/images-hook"
+import { airportSchema } from "@/schemas"
 
 
- 
-const airportSchema = z.object({
-  name: z.string().min(2).max(50),
-  images:z.array(z.string()).default([]),
-  content:z.string().default('')
-})
+
 
 
 
@@ -34,9 +30,16 @@ export const useAirport =({airport}:Props)=>{
         defaultValues: {
           name:airport?.name || "",
           images:airport?.images || [],
-          content:airport?.content || ''
+          content:airport?.content || '',
+          slug:airport?.slug || ''
         },
       })
+
+      useEffect(()=>{
+        const slug = form.watch('name').replace(/ /g, '-');
+form.setValue('slug',slug)
+
+      },[form.watch('name')])
 
       const router = useRouter()
 

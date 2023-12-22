@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+import { airportSchema } from "@/schemas";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
@@ -13,15 +14,14 @@ if(!session){
     return new NextResponse("Unauthorized",{status:401})
 }
 
-const {name,images,content} = await req.json()
+const body = await req.json()
 
-if(!name) return new NextResponse("name is required",{status:400})
+const validBody = airportSchema.safeParse(body)
+if(!validBody.success) return NextResponse.json({error:validBody.error},{status:400})
 
 await prisma.airport.create({
     data:{
-        name:name ,
-        images,
-        content
+       ...validBody.data
     }
 })
 

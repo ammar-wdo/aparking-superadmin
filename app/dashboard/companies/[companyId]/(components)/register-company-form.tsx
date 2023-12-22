@@ -1,6 +1,6 @@
 "use client";
 
-"use client";
+
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
@@ -27,6 +27,7 @@ import { Company } from "@prisma/client";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useModal } from "@/hooks/modal-hook";
 import { registerSchema } from "@/schemas";
+import { useEffect } from "react";
 
 type Props = {
   company: Company | null;
@@ -42,6 +43,12 @@ const RegisterForm = ({ company }: Props) => {
 
   const isLoading = form.formState.isSubmitting;
   const { setOpen } = useModal();
+
+  useEffect(()=>{
+    const slug = form.watch('name').replace(/ /g, '-');
+    form.setValue('slug',slug)
+    
+          },[form.watch('name')])
 
   return (
     <Form {...form}>
@@ -60,6 +67,20 @@ const RegisterForm = ({ company }: Props) => {
                 <FormLabel>Company name*</FormLabel>
                 <FormControl>
                   <Input placeholder="Company name" {...field} />
+                </FormControl>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="slug"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Company slug*</FormLabel>
+                <FormControl>
+                  <Input placeholder="Company slug" {...field} />
                 </FormControl>
 
                 <FormMessage />

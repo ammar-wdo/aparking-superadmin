@@ -10,6 +10,9 @@ export const serviceSchema = z
     logo: z.string().min(1),
     images: z.array(z.string()).optional(),
     facilities: z.array(z.string()).optional(),
+    slug:z.string().min(1).refine((value) => !/\s/.test(value), 
+     'Slug should not contain spaces',
+    ),
     highlights: z
       .array(
         z.object({
@@ -55,6 +58,10 @@ export const entitySchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
   entityName: z.string().min(1),
+  slug:z.string().min(1).refine((value) => !/\s/.test(value), 
+   'Slug should not contain spaces',
+   
+  ),
   entityAddress: z.string().min(1),
   entityZipcode: z.string().min(1),
   entityPlace: z.string().min(1),
@@ -86,6 +93,9 @@ export const registerSchema = z.object({
   contact: z.string().min(2).max(50),
   chamberOfCommerce: z.string().min(1),
   vatNO: z.string().min(1),
+  slug:z.string().min(1).refine((value) => !/\s/.test(value), 
+  'Slug should not contain spaces',
+  ),
 
   phone: z.string().refine((value) => {
     const phoneRegex = /^(?:[0-9]){1,3}(?:[ -]*[0-9]){6,14}$/;
@@ -110,3 +120,14 @@ export const faqSchema = z.object({
   question: z.string().min(1),
   answer: z.string().min(1),
 });
+
+
+
+export const airportSchema = z.object({
+  name: z.string().min(2).max(50),
+  images:z.array(z.string()).default([]),
+  content:z.string().default(''),
+  slug:z.string().min(1).refine((value) => !/\s/.test(value), 
+  'Slug should not contain spaces',
+  ),
+})
