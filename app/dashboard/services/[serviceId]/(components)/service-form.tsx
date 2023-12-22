@@ -261,6 +261,25 @@ const {setOpen} = useModal()
               </FormItem>
             )}
           />
+               <FormField
+                control={form.control}
+                name="commession"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Commession</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="%0"
+                        className="resize-none"
+                        {...field}
+                        value={field.value || ''}
+                      />
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
           
 
@@ -547,6 +566,7 @@ const {setOpen} = useModal()
                   </FormItem>
                 )}
               />
+         
 
 <FormField
           control={form.control}

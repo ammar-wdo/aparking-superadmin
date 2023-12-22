@@ -19,6 +19,7 @@ export const serviceSchema = z
       )
       .optional(),
     isActive: z.boolean().optional(),
+    commession:z.coerce.number().min(0),
     name: z.string().min(1),
     terms: z.string().min(1),
     bookingsEmail: z

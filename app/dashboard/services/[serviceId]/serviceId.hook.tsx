@@ -61,6 +61,7 @@ export const useServiceId = ({service}:Props)=>{
           parkingAddress: service?.parkingAddress || "",
           parkingZipcode: service?.parkingZipcode || "",
           parkingCountry: service?.parkingCountry || "",
+          commession:service.commession,
           parkingPlace: service?.parkingPlace || "",
           arrivalTodos: service?.arrivalTodos || "",
           departureTodos: service?.departureTodos || "",
