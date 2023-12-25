@@ -9,12 +9,12 @@ const page = (props: Props) => {
   return (
     <div>
               <Heading title='Blogs' description='Manage blogs' />
-              <div className='bg-background p-4 shadow-md rounded-md'>
+              <div className='separate'>
 
               <CategoriesFeed />
               </div>
 
-              <div className='bg-background p-4 shadow-md mt-8 rounded-md'>
+              <div className='separate mt-8'>
 
               <BlogsFeed />
               </div>

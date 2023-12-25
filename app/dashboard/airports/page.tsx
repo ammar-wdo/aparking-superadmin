@@ -15,7 +15,7 @@ const page = (props: Props) => {
       </div>
      
 
-         <div className='mt-12 bg-background p-4 shadow-md rounded-md'>
+         <div className='mt-12 separate'>
           <AirportsFeed />
 
          </div>

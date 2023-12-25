@@ -27,7 +27,7 @@ const page = async(props: Props) => {
       </div>
     
        
-<div className='bg-background p-4 shadow-md rounded-md'>
+<div className='separate'>
 <CompaniesDataTable columns={companiesColumns} data={companies} />
 </div>
 

@@ -30,7 +30,7 @@ const page = async({searchParams}: Props) => {
   return (
     <div className=''>
         <Heading title='Services' description='Manage services' />
-<div className='bg-background p-8 shadow-md rounded-md'>
+<div className='separate'>
 
         <ServicesDataTable columns={servicesColumns} data={services} />
 </div>

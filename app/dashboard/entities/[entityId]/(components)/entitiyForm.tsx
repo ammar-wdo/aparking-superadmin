@@ -81,7 +81,7 @@ const EntityForm = ({ entity,airports,companies }: Props) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="  max-w-[1200px] ">
         <div className="space-y-12 pt-8">
-          <div className="p-8 border rounded-lg bg-background  shadow-md">
+          <div className="p-8 border separate">
             <h3 className="font-bold mb-8 text-xl">Entity details</h3>
             <div className="grid grid-cols-2 gap-3 ">
         <FormField
@@ -279,7 +279,7 @@ const EntityForm = ({ entity,airports,companies }: Props) => {
           
             </div>
           </div>
-          <div className="border rounded-lg p-8 bg-background  shadow-md">
+          <div className="border separate">
             <h3 className="font-bold mb-8 text-xl">Entity content</h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -337,7 +337,7 @@ const EntityForm = ({ entity,airports,companies }: Props) => {
         
 
 
-          <div className="border rounded-lg p-8 bg-background  shadow-md">
+          <div className="border separate">
             <h3 className="font-bold mb-8 text-xl">Bank/invoice information</h3>
             <div className="grid grid-cols-2 gap-3">
           

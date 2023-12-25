@@ -69,7 +69,7 @@ const {setOpen} = useModal()
   return (
     <Form {...form}>
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 max-w-[1200px]">
-      <div className='p-8 border rounded-lg bg-background  shadow-md '>
+      <div className='p-8 border separate '>
       <h3 className="font-bold mb-8 text-xl">Super admin meta data</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 ">
    
@@ -327,7 +327,7 @@ const {setOpen} = useModal()
 
         </div>
       </div>
-      <div className="p-8 border rounded-lg bg-background  shadow-md ">
+      <div className="p-8 border separate ">
             <h3 className="font-bold mb-8 text-xl">Service details</h3>
             <div className="grid grid-cols-2 gap-3 ">
               
@@ -443,7 +443,7 @@ const {setOpen} = useModal()
             </div>
           </div>
 
-          <div className="p-8 border rounded-lg bg-background  shadow-md ">
+          <div className="p-8 border separate ">
             <h3 className="font-bold mb-8 text-xl">Parking details</h3>
             <div className="grid grid-cols-2 gap-3">
               <FormField

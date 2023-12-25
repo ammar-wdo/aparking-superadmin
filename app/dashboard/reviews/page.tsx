@@ -8,7 +8,7 @@ const page = (props: Props) => {
   return (
     <div>
         <Heading title='Reviews' description='Read and manage reviews' />
-        <div className='bg-background p-4 shadow-md rounded-md'>
+        <div className='separate'>
 
         <ReviewsFeed />
         </div>

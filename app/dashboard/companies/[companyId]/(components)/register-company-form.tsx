@@ -55,7 +55,7 @@ form.setValue('slug',slug)
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8  max-w-[1200px]">
       
 
-          <div className="space-y-4 p-6 border rounded-lg bg-background  shadow-md">
+          <div className="space-y-4 p-6 border separate">
             <h3 className="font-bold mb-8 text-xl">Company details</h3>
             <div className="grid grid-cols-2 gap-4">
 
@@ -208,7 +208,7 @@ form.setValue('slug',slug)
        
        
 
-          <div className="p-8 border rounded-lg space-y-4 bg-background  shadow-md">
+          <div className="p-8 border  space-y-4 separate">
             <h3 className="font-bold mb-8 text-xl">Login details</h3>
             <div className="grid grid-cols-2 gap-4">
             <FormField

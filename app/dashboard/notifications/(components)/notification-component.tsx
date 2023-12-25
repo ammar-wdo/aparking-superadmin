@@ -40,7 +40,7 @@ const NotificationComponent = ({ notification }: Props) => {
   return (
     <div
       className={cn(
-        " p-6  relative flex gap-4 items-center  border  bg-background  shadow-md rounded-md",
+        "   relative flex gap-4 items-center  border  separate",
         notification.isRead && "opacity-60"
       )}
     >
