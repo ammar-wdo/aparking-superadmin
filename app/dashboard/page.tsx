@@ -21,12 +21,12 @@ const page = async(props: Props) => {
   <RefundRequestFeed />
   </Suspense>
   </div>
- <div className='mt-32 separate '>
+ <div className='mt-6 separate '>
  <Suspense fallback={<Skeleton className='p-40  w-full' />}>
 <PendingOptionsFeed />
 </Suspense>
  </div>
- <div className='mt-32 separate '>
+ <div className='mt-6 separate '>
  <Suspense fallback={<Skeleton className='p-40  w-full' />}>
 <PendingServicesFeed />
 </Suspense>
