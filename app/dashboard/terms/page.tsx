@@ -17,7 +17,10 @@ const term = await prisma.term.findUnique({
   return (
     <div>
         <Heading title='Terms & conditions' description='Manage terms and conditions' />
+        <div className='bg-background p-4 shadow-md rounded-md'>
+
         <TermForm term={term} />
+        </div>
   
     </div>
   )

@@ -18,7 +18,10 @@ const privacy = await prisma.privacy.findUnique({
   return (
     <div>
         <Heading title='Privacy policy' description='Manage privacy policy' />
+        <div className='bg-background p-4 shadow-md rounded-md'>
+
         <PrivacyForm privacy={privacy} />
+        </div>
   
     </div>
   )

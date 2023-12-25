@@ -56,7 +56,7 @@ const BlogForm = ({categories,blog}: Props) => {
   return (
     <Form {...form}>
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className='grid grid-cols-1 md:grid-cols-2 max-w-[1200px] w-full gap-10 border p-4 rounded-lg'>
+        <div className='grid grid-cols-1 md:grid-cols-2 max-w-[1200px] w-full gap-10 border p-8 rounded-lg bg-background  shadow-md'>
         <FormField
           control={form.control}
           name="categoryId"
@@ -194,12 +194,12 @@ const BlogForm = ({categories,blog}: Props) => {
           />
 
         </div>
-        <div className='max-w-[1200px]'>
+        <div className='max-w-[1200px] bg-background p-4 shadow-md rounded-lg'>
         <FormField
             control={form.control}
             name="content"
             render={({ field }) => (
-              <FormItem className='p-3 border rounded-lg'>
+              <FormItem className='p-3  '>
                 <FormLabel>Blog content</FormLabel>
                 <FormControl>
                 <Editor  onChange={(string)=>{form.setValue('content',string)}} initialContent={form.getValues('content')} />

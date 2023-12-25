@@ -17,9 +17,9 @@ const airport = await prisma.airport.findUnique({
 })
 
   return (
-    <div>
+    <div >
       <Heading title={airport ? `${airport.name} ` : "Airport"} description={airport ? `Manage ${airport.name} ` : "Create new airport"}/>
-      <div className='mt-20 '>
+      <div className='mt-20 bg-background p-4 shadow-md'>
       <AirportForm  airport={airport}/>
       </div>
      

@@ -13,20 +13,20 @@ const page = async(props: Props) => {
 
 
   return (
-    <div>
+    <div className=''>
 <Heading title='Super Admin' description='Manage your dashboard' />
 <div className='mt-12 p-2 '>
-  <div >
+  <div className='bg-background p-4 shadow-md'>
   <Suspense fallback={<Skeleton className='p-40   w-full' />}>
   <RefundRequestFeed />
   </Suspense>
   </div>
- <div className='mt-32'>
+ <div className='mt-32 bg-background p-4 shadow-md'>
  <Suspense fallback={<Skeleton className='p-40  w-full' />}>
 <PendingOptionsFeed />
 </Suspense>
  </div>
- <div className='mt-32'>
+ <div className='mt-32 bg-background p-4 shadow-md'>
  <Suspense fallback={<Skeleton className='p-40  w-full' />}>
 <PendingServicesFeed />
 </Suspense>

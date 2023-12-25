@@ -32,8 +32,10 @@ const page = async({searchParams}: Props) => {
             <Heading title='Entities' description='Manage entities' />
             <Link href={`/dashboard/entities/new`}><Button>Add entity</Button></Link>
         </div>
+<div className='bg-background p-4 shadow-md rounded-md'>
 
         <EntitiesDataTable columns={entitiesColumns} data={entites} />
+</div>
     </div>
   )
 }

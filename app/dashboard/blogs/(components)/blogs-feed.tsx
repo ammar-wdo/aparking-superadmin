@@ -10,7 +10,7 @@ const BlogsFeed = async(props: Props) => {
 
     const blogs = await prisma.blog.findMany({orderBy:{createdAt:'desc'},include:{category:{select:{label:true}}}})
   return (
-    <div className='mt-12 p-4'>
+    <div className=' p-4'>
         <div className='flex items-center justify-between'>
         <h3 className='font-semibold'>Blogs section</h3>
         <Button asChild><Link href={'/dashboard/blogs/new'}>Add blog</Link></Button>

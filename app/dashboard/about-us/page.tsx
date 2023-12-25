@@ -16,7 +16,10 @@ const about = await prisma.about.findUnique({
   return (
     <div>
         <Heading title='about us' description='About us content' />
+        <div className='bg-background p-4 shadow-md rounded-md'>
+
         <AboutForm about={about} />
+        </div>
     </div>
   )
 }

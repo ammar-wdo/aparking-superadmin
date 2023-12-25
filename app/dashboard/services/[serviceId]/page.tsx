@@ -31,7 +31,7 @@ const entities  =await prisma.entity.findMany({where:{companyId:service.entity.c
     <div>
         <Heading title={"Services - " + service?.name!} description={'Manage ' + service?.name + ' service'} />
         <ServiceForm service={service} entities={entities} airports={airports}/>
-        <div className='mt-12'>
+        <div className='mt-12 bg-background p-8 shadow-md rounded-sm'>
         <OptionsFeed service={service} />
         </div>
        

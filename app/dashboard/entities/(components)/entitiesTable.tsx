@@ -56,7 +56,7 @@ export function EntitiesDataTable<TData, TValue>({
   })
 
   return (
-    <div className="mt-12">
+    <div className="">
 
 <div className="space-y-1 mb-3 flex gap-3 items-center ">
     <h5 className="text-xs text-neutral-500">Filter by status</h5>
