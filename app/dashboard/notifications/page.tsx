@@ -23,14 +23,16 @@ const page = async ({ searchParams }: Props) => {
   return (
     <div>
       <Heading title="Notifications" description="Manage your activities" />
+      
       <Suspense
         key={searchParams.list as string}
         fallback={<NotificationsFeedSkeleton />}
       >
-        <div className="bg-background p-4 shadow-md rounded-md">
+       
           <NotificationsFeed list={searchParams.list as string} />
-        </div>
+      
       </Suspense>
+  
       <Revalidator />
     </div>
   );
