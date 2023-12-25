@@ -26,10 +26,11 @@ const AirportForm = ({airport}: Props) => {
 
     const {setOpen} = useModal()
     const params = useParams()
+   
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="">
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[700px]'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1200px] mt-20 bg-background p-8 shadow-md rounded-md'>
 
         <FormField
           control={form.control}
@@ -138,7 +139,7 @@ const AirportForm = ({airport}: Props) => {
           control={form.control}
           name="content"
           render={({ field }) => (
-            <FormItem className='  max-w-[1500px] w-full px-4  mt-20'>
+            <FormItem className='  w-full px-4  mt-20 rounded-md bg-background p-4 shadow-md'>
               <FormLabel>Content</FormLabel>
               <FormControl>
           <Editor  onChange={(string)=>{form.setValue('content',string)}} initialContent={form.getValues('content')} />
