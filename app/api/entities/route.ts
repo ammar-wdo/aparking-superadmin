@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/options";
 import { entitySchema } from "@/schemas";
 import prisma from "@/lib/prisma";
+import { encryptPassword } from "../(helpers)/bcrypt";
 
 
 export async function POST(req:Request){
@@ -18,9 +19,12 @@ export async function POST(req:Request){
      const validbody = entitySchema.safeParse(body)
      if(!validbody.success) return NextResponse.json({errors:validbody.error},{status:400})
 
+     const encryptedPassword = await encryptPassword(validbody.data.password)
+
     const entity= await prisma.entity.create({
         data:{
-            ...validbody.data
+            ...validbody.data,
+            password:encryptedPassword
         }
      })
 

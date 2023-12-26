@@ -144,7 +144,7 @@ const EntityForm = ({ entity,airports,companies }: Props) => {
                   </FormItem>
                 )}
               />
-              <FormField
+           { !entity ?  <FormField
                 control={form.control}
                 name="password"
                 render={({ field }) => (
@@ -157,7 +157,21 @@ const EntityForm = ({ entity,airports,companies }: Props) => {
                     <FormMessage />
                   </FormItem>
                 )}
-              />
+              /> :
+              <FormField
+              control={form.control}
+              name="newPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>New password</FormLabel>
+                  <FormControl>
+                    <Input placeholder="new password" {...field} />
+                  </FormControl>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />   }
               <FormField
                 control={form.control}
                 name="entityName"

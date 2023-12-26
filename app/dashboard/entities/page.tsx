@@ -21,7 +21,8 @@ const page = async({searchParams}: Props) => {
           company:{
             select:{name:true}
           }
-        }
+        },
+        orderBy:{createdAt:'desc'}
       }
     )
 

@@ -225,7 +225,7 @@ form.setValue('slug',slug)
               </FormItem>
             )}
           />
-            <FormField
+           {!company ? <FormField
             control={form.control}
             name="password"
             render={({ field }) => (
@@ -238,7 +238,21 @@ form.setValue('slug',slug)
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> :
+          <FormField
+          control={form.control}
+          name="newPassword"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>New password</FormLabel>
+              <FormControl>
+                <Input placeholder="new password" {...field} />
+              </FormControl>
+
+              <FormMessage />
+            </FormItem>
+          )}
+        /> } 
             <FormField
             control={form.control}
             name="isActive"

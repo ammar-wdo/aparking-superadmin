@@ -72,6 +72,6 @@ html ,body {
 
 
 .separate {
-  @apply bg-background p-8 shadow-md rounded-md
+  @apply bg-background p-8 border rounded-md  hover:shadow-lg transition
 }
 

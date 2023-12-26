@@ -52,11 +52,15 @@ export const serviceSchema = z
     path: ["distanceToAirport"],
   });
 
+  const newPassword = z.string().min(6);
+
 export const entitySchema = z.object({
   companyId: z.string().min(1),
   airportId: z.string().min(1),
   email: z.string().email(),
-  password: z.string().min(8),
+  password: z.string().min(6),
+  newPassword:  z.union([z.string(), z.undefined()])
+  .refine((val) => !val || newPassword.safeParse(val).success),
   entityName: z.string().min(1),
   slug:z.string().min(1).refine((value) => !/\s/.test(value), 
    'Slug should not contain spaces',
@@ -90,6 +94,8 @@ export const registerSchema = z.object({
   isActive: z.boolean(),
   address: z.string().min(2).max(50),
   password: z.string().min(6),
+  newPassword:  z.union([z.string(), z.undefined()])
+  .refine((val) => !val || newPassword.safeParse(val).success),
   contact: z.string().min(2).max(50),
   chamberOfCommerce: z.string().min(1),
   vatNO: z.string().min(1),

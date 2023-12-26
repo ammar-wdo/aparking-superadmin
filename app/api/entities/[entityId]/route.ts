@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/options";
 import { entitySchema, serviceSchema } from "@/schemas";
 import prisma from "@/lib/prisma";
+import { encryptPassword } from "../../(helpers)/bcrypt";
 
 
 export async function PATCH(req:Request,{params}:{params:{entityId:string}}) {
@@ -18,12 +19,21 @@ if(!params.entityId) return new NextResponse("entity ID is required",{status:400
     const validbody = entitySchema.safeParse(body)
     if(!validbody.success) return NextResponse.json({errors:validbody.error},{status:400})
 
+    const {newPassword,password,...rest} = validbody.data
+    let thePassword
+    if(newPassword){
+        thePassword = await encryptPassword(newPassword)
+    }else{
+        thePassword = password
+    }
+
     const updated = await prisma.entity.update({
         where:{
             id:params.entityId
         },
         data:{
-            ...validbody.data
+            ...rest,
+            password:thePassword
         }
     })
 

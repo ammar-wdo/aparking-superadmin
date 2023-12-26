@@ -6,6 +6,7 @@ import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/options";
 import { registerSchema } from "@/schemas";
+import { encryptPassword } from "../../(helpers)/bcrypt";
 
 
 
@@ -27,13 +28,23 @@ try {
     if(!validBody.success)  return  NextResponse.json({error:validBody.error},{status:401})
 
 
+    const {newPassword,password,...rest} = validBody.data
+    let thePassword
+    if(newPassword){
+        thePassword = await encryptPassword(newPassword)
+    }else{
+        thePassword = password
+    }
+
+
 
     const company = await prisma.company.update({
         where:{
 id:params.companyId
         },
         data:{
-         ...validBody.data
+         ...rest,
+         password:thePassword
         }
     })
 
