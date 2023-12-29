@@ -18,7 +18,7 @@ const BlogsFeed = async(props: Props) => {
    
         <div className='mt-4'>
             {!blogs.length && <p className='text-xl text-neutral-500 fonr-bold'>No blogs</p>}
-            <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3  gap-4'>
+            <div className='flex flex-wrap  gap-4'>
                 {blogs.map((blog)=><BlogCard blog={blog} key={blog.id} />)}
 
             </div>

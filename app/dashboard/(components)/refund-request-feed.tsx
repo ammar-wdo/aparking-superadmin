@@ -7,6 +7,7 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table"
+import { NLtimezone } from "@/lib/nl-timezone"
 import prisma from "@/lib/prisma"
 import { cn } from "@/lib/utils"
 import { format } from "date-fns"
@@ -76,9 +77,9 @@ const RefundRequestFeed = async(props: Props) => {
          <TableCell>{refund.service.name}</TableCell>
          <TableCell className="">{refund.service.parkingType}</TableCell>
          <TableCell className="">{refund.firstName} {refund.lastName}</TableCell>
-         <TableCell>{format(refund.createdAt,'dd-MM-yyyy')}</TableCell>
-         <TableCell>{format(refund.arrivalDate,'dd-MM-yyyy')}</TableCell>
-         <TableCell>{format(refund.departureDate,'dd-MM-yyyy')}</TableCell>
+         <TableCell>{NLtimezone(refund.createdAt,'Europe/Amsterdam')}</TableCell>
+         <TableCell>{NLtimezone(refund.arrivalDate,'UTC')}</TableCell>
+         <TableCell>{NLtimezone(refund.departureDate,'UTC')}</TableCell>
          <TableCell>{refund.paymentMethod}</TableCell>
          <TableCell>€{refund.total}</TableCell>
          <TableCell ><span className={cn("p-3 rounded-lg",styles[refund.bookingStatus!])}> {refund.bookingStatus}</span></TableCell>

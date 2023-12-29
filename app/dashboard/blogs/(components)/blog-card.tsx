@@ -8,7 +8,7 @@ type Props = {blog:Blog & {category:{label:string}}}
 
 const BlogCard = ({blog}: Props) => {
   return (
-    <div className='p-3 flex flex-col gap-3 border rounded-lg'>
+    <div className={'p-3 flex flex-col gap-3 border rounded-lg max-w-[300px] w-full separate'}>
         <div className='w-full aspect-video relative'>
             <Image src={blog.featuredImage} alt='blog-image' fill className='object-cover rounded-lg' />
 

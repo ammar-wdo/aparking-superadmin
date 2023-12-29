@@ -5,16 +5,14 @@ import { format } from "date-fns";
 import { AlertTriangle, CheckCheck, CheckCircle, Delete } from "lucide-react";
 import Link from "next/link";
 import NotificationButton from "./notification-button";
+import { NLtimezone } from "@/lib/nl-timezone";
 
 type Props = {
   notification: Notification;
 };
 
 const NotificationComponent = ({ notification }: Props) => {
-  const formattedDate = format(
-    new Date(notification.createdAt),
-    "EEE, MMM/d, HH:mm"
-  );
+
   const url =
     notification.type === "SERVICE"
       ? `/dashboard/services/${notification.IdHolder}`
@@ -62,7 +60,7 @@ const NotificationComponent = ({ notification }: Props) => {
        
       )}
       <p className="text-xs text-neutral-500 pt-3 absolute bottom-2 right-3 dark:text-neutral-200">
-        {formattedDate}
+      {NLtimezone(notification.createdAt,'Europe/Amsterdam')}
       </p>
     </div>
   );
