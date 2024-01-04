@@ -18,13 +18,14 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { toast } from "sonner"
 import CommessionInput from "./commessions-input"
-
+type FullExtraOption = ExraOption & {service:{name:string}}
 type Props = {
-    extraOptions:ExraOption[]
+    extraOptions:FullExtraOption[]
 }
 
 
 const PendingOptionsTable = ({extraOptions}: Props) => {
+
 
 
         const [isLoading, setIsLoading] = useState('');
@@ -43,10 +44,13 @@ const PendingOptionsTable = ({extraOptions}: Props) => {
             setIsLoading('');
           }
         };
+
+   
   return (
     <Table>
     <TableHeader>
       <TableRow>
+        <TableHead>Service name</TableHead>
         <TableHead>Label</TableHead>
         <TableHead>Description</TableHead>
         <TableHead>Price</TableHead>
@@ -58,6 +62,7 @@ const PendingOptionsTable = ({extraOptions}: Props) => {
     <TableBody>
       {extraOptions.map((option) => (
         <TableRow key={option.id}>
+          <TableCell><Button className="" variant={'link'} onClick={()=>router.push(`/dashboard/services/${option.serviceId}`)}>{option.service.name}</Button></TableCell>
           <TableCell>{option.label}</TableCell>
           <TableCell className="max-w-[100px] text-start">
             <ToolTip  side="top" title={option.description}>

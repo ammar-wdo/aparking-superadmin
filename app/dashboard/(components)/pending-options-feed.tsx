@@ -12,7 +12,7 @@ const PendingOptionsFeed = async(props: Props) => {
         },
         orderBy:{
             createdAt:'desc'
-        }
+        },include:{service:{select:{name:true}}}
     })
   return (
     <div className=''>
