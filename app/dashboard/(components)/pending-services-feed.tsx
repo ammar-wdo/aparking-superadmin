@@ -27,7 +27,7 @@ const PendingServicesFeed =async (props: Props) => {
     })
   return (
     <div className=''>
-        <h3 className="text-xl font-bold my-8">Pending services</h3>
+        <h3 className="text-xl font-bold my-8 first-letter:capitalize">services pending requests</h3>
 
         <Table>
 

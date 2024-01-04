@@ -16,7 +16,7 @@ const PendingOptionsFeed = async(props: Props) => {
     })
   return (
     <div className=''>
-        <h3 className="text-xl font-bold my-8">Extra options pendeng requests</h3>
+        <h3 className="text-xl font-bold my-8 first-letter:capitalize">extra options pending requests</h3>
         <PendingOptionsTable extraOptions={pendingOptions} />
         {!pendingOptions.length && <p className="p-4 text-center w-full">No pending requests for extra options</p>}
        
