@@ -54,7 +54,10 @@ const FaqForm = ({}: Props) => {
           <FormItem>
             <FormLabel>Answer</FormLabel>
             <FormControl>
-            <Editor  onChange={(string)=>{form.setValue('answer',string)}} initialContent={form.getValues('answer')} />
+              <div className='max-h-[500px] overflow-y-scroll'>
+              <Editor  onChange={(string)=>{form.setValue('answer',string)}} initialContent={form.getValues('answer')} />
+              </div>
+           
             </FormControl>
           
             <FormMessage />
