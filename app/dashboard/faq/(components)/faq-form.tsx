@@ -16,6 +16,8 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from '@/components/ui/textarea'
 import { Loader } from 'lucide-react'
 import { useModal } from '@/hooks/modal-hook'
+import dynamic from "next/dynamic"
+const Editor = dynamic(() => import("@/components/editor"), { ssr: false })
 
 type Props = {
   
@@ -52,7 +54,7 @@ const FaqForm = ({}: Props) => {
           <FormItem>
             <FormLabel>Answer</FormLabel>
             <FormControl>
-              <Textarea className='resize-none' placeholder="Add an answer" {...field} />
+            <Editor  onChange={(string)=>{form.setValue('answer',string)}} initialContent={form.getValues('answer')} />
             </FormControl>
           
             <FormMessage />
