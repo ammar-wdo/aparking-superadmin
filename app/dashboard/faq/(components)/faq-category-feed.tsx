@@ -19,8 +19,15 @@ const FaqCategoryFeed = async(props: Props) => {
       </div>
       
 
-        {!categoriesFaq.length && <p className='font-bold text-neutral-500 text-3xl text-center capitalize my-4'>No categories</p>}
-        {categoriesFaq.map((category)=><CategoryComponent key={category.id} category={category} />)}
+      <div className='my-4'>
+      {!categoriesFaq.length && <p className='font-bold text-neutral-500 text-3xl text-center capitalize my-4'>No categories</p>}
+      <div className='grid grid-cols-4 md:grid'>
+
+      </div>
+        {categoriesFaq.map((category)=><CategoryComponent faq key={category.id} category={category} />)}
+      </div>
+
+     
 
     </div>
   )

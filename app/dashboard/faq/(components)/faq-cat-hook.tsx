@@ -41,8 +41,8 @@ const form = useForm<z.infer<typeof categorySchema>>({
 
         try {
 
-            if(data.category){
-                await axios.patch(`/api/faq-category/${data.category.id}`,values)
+            if(data.categoryFaq){
+                await axios.patch(`/api/faq-category/${data.categoryFaq.id}`,values)
             }else {
                 await axios.post('/api/faq-category',values)
             }
