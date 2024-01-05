@@ -6,6 +6,7 @@ import ModalProvider from "@/components/providers/modal-provider";
 import { ThemeProvider } from "@/components/providers/theme-provicer";
 
 import { QueryProvider } from "@/components/providers/query-provicer";
+import { EdgeStoreProvider } from "@/lib/edgestore";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+      <EdgeStoreProvider>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -32,6 +34,7 @@ export default function RootLayout({
         </ThemeProvider>
         <Toaster />
         <ModalProvider />
+        </EdgeStoreProvider>
       </body>
     </html>
   );

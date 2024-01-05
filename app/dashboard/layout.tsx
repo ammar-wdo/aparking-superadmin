@@ -18,10 +18,10 @@ const layout = ({children}: Props) => {
    <main className='lg:pl-[270px] '>
 <MainSheet />
   <div className=' p-8 xl:p-20 bg-muted min-h-screen'>
-    <EdgeStoreProvider>
+   
     <Toaster richColors position='top-right'/>
     {children}
-      </EdgeStoreProvider></div> 
+     </div> 
   </main>
    </div>
   )
