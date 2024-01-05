@@ -4,6 +4,7 @@ import React from 'react'
 import FaqButton from './(components)/faq-button'
 import prisma from '@/lib/prisma'
 import FaqComponent from './(components)/faq-component'
+import FaqCategoryFeed from './(components)/faq-category-feed'
 
 type Props = {}
 
@@ -16,6 +17,8 @@ const page = async(props: Props) => {
         <Heading title='FAQ' description='FAQ content' />
       <FaqButton />
         </div>
+
+        <FaqCategoryFeed />
 
         <div className='mt-12 '>
             {!faqs.length && <p className='text-3xl font-bold text-muted-foreground'>No FAQs</p>}
