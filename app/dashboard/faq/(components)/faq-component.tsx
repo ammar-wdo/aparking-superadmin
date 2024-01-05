@@ -18,9 +18,7 @@ const FaqComponent = ({ faq }: Props) => {
         <p className="first-letter:capitalize text-muted-background text-sm font-semibold">
           {faq.question}?
         </p>{" "}
-        <p className="first-letter:capitalize text-foreground text-xs  ">
-          {faq.answer}
-        </p>{" "}
+  
       </div>
 
       <div className="flex  gap-1">
