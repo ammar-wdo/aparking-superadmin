@@ -4,6 +4,7 @@ import RefundRequestFeed from './(components)/refund-request-feed'
 import PendingOptionsFeed from './(components)/pending-options-feed'
 import { Skeleton } from '@/components/ui/skeleton'
 import PendingServicesFeed from './(components)/pending-services-feed'
+import ReviewsPendingFeed from './(components)/reviews-pending-feed'
 
 
 type Props = {}
@@ -29,6 +30,11 @@ const page = async(props: Props) => {
  <div className='mt-6 separate '>
  <Suspense fallback={<Skeleton className='p-40  w-full' />}>
 <PendingServicesFeed />
+</Suspense>
+ </div>
+ <div className='mt-6 separate '>
+ <Suspense fallback={<Skeleton className='p-40  w-full' />}>
+< ReviewsPendingFeed/>
 </Suspense>
  </div>
 
