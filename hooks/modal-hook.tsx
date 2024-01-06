@@ -8,7 +8,8 @@ type dataType ={
     stay?:boolean
     category?:Category
     faq?:FAQ,
-    categoryFaq?:CategoryFAQ
+    categoryFaq?:CategoryFAQ,
+    categoryFaqArray?:CategoryFAQ[]
 }
 type Store = {
   open: boolean

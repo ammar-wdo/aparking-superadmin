@@ -125,6 +125,7 @@ export const blogSchema = z.object({
 export const faqSchema = z.object({
   question: z.string().min(1,{message:'Question field is required'}),
   answer: z.string().min(1,{message:'Answer field is required'}),
+  categoryFaqId:z.string().min(1,{message:'Category is required'})
 });
 
 

@@ -27,7 +27,8 @@ const router = useRouter()
         resolver: zodResolver(faqSchema),
         defaultValues: {
           question:faq?.question || '',
-          answer:faq?.answer || ''
+          answer:faq?.answer || '',
+          categoryFaqId:faq?.categoryFaqId || ""
         },
       })
      

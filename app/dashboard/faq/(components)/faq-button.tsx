@@ -2,15 +2,16 @@
 
 import { Button } from '@/components/ui/button'
 import { useModal } from '@/hooks/modal-hook'
+import { CategoryFAQ } from '@prisma/client'
 import React from 'react'
 
-type Props = {}
+type Props = {categoriesFaq:CategoryFAQ[]}
 
-const FaqButton = (props: Props) => {
+const FaqButton = ({categoriesFaq}: Props) => {
 
     const {setOpen} = useModal()
   return (
-    <Button onClick={()=>setOpen('faq-modal')}>Add a question</Button>
+    <Button onClick={()=>setOpen('faq-modal',{categoryFaqArray:categoriesFaq})}>Add a question</Button>
   )
 }
 

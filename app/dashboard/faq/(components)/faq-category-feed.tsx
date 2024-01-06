@@ -2,14 +2,15 @@ import prisma from '@/lib/prisma'
 import React from 'react'
 import FaqCatButton from './faq-cat-button'
 import CategoryComponent from '../../blogs/(components)/category-component'
+import { CategoryFAQ } from '@prisma/client'
 
-type Props = {}
+type Props = {categoriesFaq:CategoryFAQ[]}
 
-const FaqCategoryFeed = async(props: Props) => {
+const FaqCategoryFeed = async({categoriesFaq}: Props) => {
 
-    const categoriesFaq = await prisma.categoryFAQ.findMany()
+ 
   return (
-    <div  className='my-8' >
+    <div  className='my-8 separate' >
       <div className='flex items-center justify-between'>
       <h3 className='font-bold capitalize'>
             Add Category
@@ -21,10 +22,10 @@ const FaqCategoryFeed = async(props: Props) => {
 
       <div className='my-4'>
       {!categoriesFaq.length && <p className='font-bold text-neutral-500 text-3xl text-center capitalize my-4'>No categories</p>}
-      <div className='grid grid-cols-4 md:grid'>
-
+      <div className='flex items-center gap-5 flex-wrap '>
+      {categoriesFaq.map((category)=><CategoryComponent faq key={category.id} category={category} />)}
       </div>
-        {categoriesFaq.map((category)=><CategoryComponent faq key={category.id} category={category} />)}
+     
       </div>
 
      

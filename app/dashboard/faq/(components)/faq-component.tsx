@@ -1,19 +1,22 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { useModal } from "@/hooks/modal-hook";
-import { Category, FAQ } from "@prisma/client";
+import { Category, CategoryFAQ, FAQ } from "@prisma/client";
 import { Edit, Trash } from "lucide-react";
 import React from "react";
 
 type Props = {
-  faq: FAQ;
+  faq: FAQ & {categoryFaq:{label:string} | null};
+  categoriesFaq:CategoryFAQ[]
 };
 
-const FaqComponent = ({ faq }: Props) => {
+const FaqComponent = ({ faq ,categoriesFaq}: Props) => {
   const { setOpen } = useModal();
 
   return (
-    <div className="flex w-full justify-between rounded-sm ">
+    <div>
+      <h3 className=" text-xs capitalize">{faq.categoryFaq?.label}</h3>
+ <div className="flex w-full justify-between  ">
       <div className=" rounded-lg  flex flex-col  gap-1 ">
         <p className="first-letter:capitalize text-muted-background text-sm font-semibold">
           {faq.question}?
@@ -23,15 +26,15 @@ const FaqComponent = ({ faq }: Props) => {
 
       <div className="flex  gap-1">
         <Button
-          variant={"ghost"}
-          onClick={() => setOpen("faq-modal", { faq })}
-          className="w-6 h-6 p-0"
+          variant={"default"}
+          onClick={() => setOpen("faq-modal", { faq,categoryFaqArray:categoriesFaq})}
+          className="w-6 h-6 p-0 text-white"
         >
           <Edit className="w-3 h-3" />
         </Button>
         <Button
-          className="w-6 h-6 p-0"
-          variant={"ghost"}
+          className="w-6 h-6 p-0 text-white"
+          variant={"destructive"}
           onClick={() =>
             setOpen("delete-modal", {
               url: `/api/faq/${faq.id}`,
@@ -43,6 +46,8 @@ const FaqComponent = ({ faq }: Props) => {
         </Button>
       </div>
     </div>
+    </div>
+   
   );
 };
 
