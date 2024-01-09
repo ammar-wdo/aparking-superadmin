@@ -4,6 +4,8 @@ import { authOptions } from "../../auth/[...nextauth]/options";
 import { entitySchema, serviceSchema } from "@/schemas";
 import prisma from "@/lib/prisma";
 import { encryptPassword } from "../../(helpers)/bcrypt";
+import { duplicateEmailChecker } from "../../(helpers)/duplicate-email-checker";
+import { duplicateSlugChecker } from "../../(helpers)/duplicate-slug-checker";
 
 export async function PATCH(
   req: Request,
@@ -30,30 +32,36 @@ export async function PATCH(
       thePassword = password;
     }
 
-    const companyExist = await prisma.company.findUnique({
-      where: {
-        email: validbody.data.email,
-      },
-    });
+    const message = await duplicateEmailChecker(validbody,undefined,params.entityId)
+    if(message) return NextResponse.json({message},{status:200})
 
-    if (companyExist)
-      return NextResponse.json(
-        { message: "E-mail already exist as a Company" },
-        { status: 200 }
-      );
+    const slugMessage = await duplicateSlugChecker({slug:validbody.data.slug,element:'entity',id:params.entityId})
+if(slugMessage) return NextResponse.json({message:slugMessage},{status:200})
 
-    const entityExist = await prisma.entity.findUnique({
-      where: {
-        email: validbody.data.email,
-        NOT: { id: params.entityId },
-      },
-    });
+    // const companyExist = await prisma.company.findUnique({
+    //   where: {
+    //     email: validbody.data.email,
+    //   },
+    // });
 
-    if (entityExist)
-      return NextResponse.json(
-        { message: "E-mail already exist" },
-        { status: 200 }
-      );
+    // if (companyExist)
+    //   return NextResponse.json(
+    //     { message: "E-mail already exist as a Company" },
+    //     { status: 200 }
+    //   );
+
+    // const entityExist = await prisma.entity.findUnique({
+    //   where: {
+    //     email: validbody.data.email,
+    //     NOT: { id: params.entityId },
+    //   },
+    // });
+
+    // if (entityExist)
+    //   return NextResponse.json(
+    //     { message: "E-mail already exist" },
+    //     { status: 200 }
+    //   );
 
     const updated = await prisma.entity.update({
       where: {

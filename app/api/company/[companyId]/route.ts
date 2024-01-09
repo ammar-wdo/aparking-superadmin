@@ -7,6 +7,8 @@ import { NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/options";
 import { registerSchema } from "@/schemas";
 import { encryptPassword } from "../../(helpers)/bcrypt";
+import { duplicateEmailChecker } from "../../(helpers)/duplicate-email-checker";
+import { duplicateSlugChecker } from "../../(helpers)/duplicate-slug-checker";
 
 
 
@@ -36,27 +38,31 @@ try {
         thePassword = password
     }
 
+const message = await duplicateEmailChecker(validBody,params.companyId)
+if(message) return NextResponse.json({message},{status:200})
+
+const slugMessage = await duplicateSlugChecker({slug:validBody.data.slug,element:'company',id:params.companyId})
+if(slugMessage) return NextResponse.json({message:slugMessage},{status:200})
 
 
-
-    const companyExist = await prisma.company.findUnique({
-        where:{
-            email:validBody.data.email,
-            NOT:{id:params.companyId}
+    // const companyExist = await prisma.company.findUnique({
+    //     where:{
+    //         email:validBody.data.email,
+    //         NOT:{id:params.companyId}
           
-        }
-    })
+    //     }
+    // })
 
-    if(companyExist) return NextResponse.json({message:"E-mail already exist"},{status:200})
+    // if(companyExist) return NextResponse.json({message:"E-mail already exist"},{status:200})
 
-    const entityExist = await prisma.entity.findUnique({
-        where:{
-            email:validBody.data.email
-        }
-    })
+    // const entityExist = await prisma.entity.findUnique({
+    //     where:{
+    //         email:validBody.data.email
+    //     }
+    // })
 
 
-    if(entityExist) return NextResponse.json({message:"E-mail already exist as an entity"},{status:200})
+    // if(entityExist) return NextResponse.json({message:"E-mail already exist as an entity"},{status:200})
 
 
 

@@ -2,6 +2,7 @@ import prisma from "@/lib/prisma";
 import { airportSchema } from "@/schemas";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
+import { duplicateSlugChecker } from "../../(helpers)/duplicate-slug-checker";
 
 
 export async function PATCH(req:Request,{params}:{params:{airportId:string}}){
@@ -21,6 +22,10 @@ const body = await req.json()
 
 const validBody = airportSchema.safeParse(body)
 if(!validBody.success) return NextResponse.json({error:validBody.error},{status:400})
+
+
+const slugMessage = await duplicateSlugChecker({slug:validBody.data.slug,element:'airport',id:airportId})
+if(slugMessage) return NextResponse.json({message:slugMessage},{status:200})
 
 await prisma.airport.update({
     where:{

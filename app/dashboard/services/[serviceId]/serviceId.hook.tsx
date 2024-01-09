@@ -108,9 +108,14 @@ form.setValue('slug',slug)
     try {
       console.log(values.entityId);
       const result = await axios.patch(`/api/services/${service.id}`, values);
-      toast.success("Successfully updated");
-      router.back();
-      router.refresh();
+      if(result.data.message){
+toast.error(result.data.message)
+      }else{
+        toast.success("Successfully updated");
+        router.back();
+        router.refresh();
+      }
+      
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong");

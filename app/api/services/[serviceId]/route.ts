@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/options";
 import { serviceSchema } from "@/schemas";
 import prisma from "@/lib/prisma";
+import { duplicateSlugChecker } from "../../(helpers)/duplicate-slug-checker";
 
 
 export async function PATCH(req:Request,{params}:{params:{serviceId:string}}) {
@@ -19,6 +20,10 @@ if(!params.serviceId) return new NextResponse("service ID is required",{status:4
     if(!validbody.success) return NextResponse.json({errors:validbody.error},{status:400})
 
     const {entityId,...rest} = validbody.data
+
+
+    const slugMessage = await duplicateSlugChecker({slug:rest.slug,element:'service',id:params.serviceId})
+if(slugMessage) return NextResponse.json({message:slugMessage},{status:200})
    
     const service = await prisma.service.findUnique({where:{
         id:params.serviceId
@@ -70,7 +75,7 @@ if(updated.isActive===false && service?.isActive === true){
 }
    
 
-    return NextResponse.json({message:"success"},{status:201})
+    return NextResponse.json({done:"success"},{status:201})
 
 
 

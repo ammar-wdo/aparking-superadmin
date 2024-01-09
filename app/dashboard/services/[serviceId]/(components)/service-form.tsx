@@ -84,7 +84,7 @@ const {setOpen} = useModal()
                 <Input placeholder="time to airport" className='w-fit' maxLength={2} {...field} />
               
                 </FormControl>
-                <span>hour(s)</span>
+                <span>min</span>
                 </div>
             
 
