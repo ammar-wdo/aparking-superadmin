@@ -19,6 +19,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import CommessionInput from "@/app/dashboard/(components)/commessions-input";
+import { useModal } from "@/hooks/modal-hook";
 
 type Props = { service: Service & { extraOptions: ExraOption[] } };
 
@@ -39,6 +40,8 @@ const OptionsFeed = ({ service }: Props) => {
       setIsLoading('');
     }
   };
+
+  const {setOpen} = useModal()
   return (
     <div className="p-8 border rounded-lg">
       <h3 className="font-bold mb-8 text-xl">Extra options</h3>
@@ -55,6 +58,7 @@ const OptionsFeed = ({ service }: Props) => {
               <TableHead>Commession</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Action</TableHead>
+              <TableHead>Delete</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -87,6 +91,16 @@ const OptionsFeed = ({ service }: Props) => {
                     {isLoading===option.id && (
                       <Loader className="ml-3 w-4 h-4 animate-spin" />
                     )}
+                  </Button>
+                </TableCell>
+                <TableCell>
+                  <Button
+                  onClick={()=>setOpen('delete-modal',{url:`/api/option/${option.id}`,stay:true})}
+                    variant={'destructive'}
+                    
+                  >
+                 
+                  Delete
                   </Button>
                 </TableCell>
               </TableRow>

@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { toast } from "sonner"
 import CommessionInput from "./commessions-input"
+import { useModal } from "@/hooks/modal-hook"
 type FullExtraOption = ExraOption & {service:{name:string}}
 type Props = {
     extraOptions:FullExtraOption[]
@@ -45,6 +46,8 @@ const PendingOptionsTable = ({extraOptions}: Props) => {
           }
         };
 
+        const {setOpen} = useModal()
+
    
   return (
     <Table>
@@ -57,6 +60,7 @@ const PendingOptionsTable = ({extraOptions}: Props) => {
         <TableHead>Commession</TableHead>
         <TableHead>Status</TableHead>
         <TableHead>Action</TableHead>
+        <TableHead>Delete</TableHead>
       </TableRow>
     </TableHeader>
     <TableBody>
@@ -92,6 +96,16 @@ const PendingOptionsTable = ({extraOptions}: Props) => {
               )}
             </Button>
           </TableCell>
+          <TableCell>
+                  <Button
+                  onClick={()=>setOpen('delete-modal',{url:`/api/option/${option.id}`,stay:true})}
+                    variant={'destructive'}
+                    
+                  >
+                 
+                  Delete
+                  </Button>
+                </TableCell>
         </TableRow>
       ))}
     </TableBody>

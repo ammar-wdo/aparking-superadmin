@@ -66,3 +66,34 @@ export const POST = async(req:Request,{params}:{params:{optionId:string}})=>{
     }
 
 }
+
+
+export const DELETE = async (req:Request,{params}:{params:{optionId:string}})=>{
+
+
+
+    try {
+
+
+        const session = await getServerSession(authOptions)
+
+        if(!session) return NextResponse.json({error:'Unauthorized'},{status:401})
+
+        const optionId = params.optionId
+
+        if(!optionId) return NextResponse.json({error:'optionId is required'},{status:401})
+
+
+        await prisma.exraOption.delete({
+            where:{
+                id:optionId
+            }
+        })
+
+        return NextResponse.json({done:'success'},{status:200})
+        
+    } catch (error) {
+        console.log(error)
+        return NextResponse.json({message:'internal error'},{status:500})
+    }
+}
