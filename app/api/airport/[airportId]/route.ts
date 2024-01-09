@@ -36,7 +36,7 @@ id:airportId
     }
 })
 
-return NextResponse.json({message:'Success'},{status:201})
+return NextResponse.json({done:'Success'},{status:201})
 
     } catch (error) {
         console.log("airport patch error",error)

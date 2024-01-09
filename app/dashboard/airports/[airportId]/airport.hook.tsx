@@ -48,17 +48,30 @@ form.setValue('slug',slug)
         try {
 console.log('try')
             if(airport){
-await axios.patch(`/api/airport/${airport.id}`,values)
+const res = await axios.patch(`/api/airport/${airport.id}`,values)
+if(res.data.message){
+toast.error(res.data.message)
+}else{
+  router.back()
+  router.refresh()
+  toast.success("Successfully Created")
+}
 
-toast.success("Successfully Created")
+
             }else{
 
-                await axios.post(`/api/airport`,values)
+              const res =   await axios.post(`/api/airport`,values)
+              if(res.data.message){
+                toast.error(res.data.message)
+              }else{
+                router.back()
+                router.refresh()
                 toast.success("Successfully Updated")
+              }
+           
             }
 
-            router.back()
-            router.refresh()
+      
             
         } catch (error) {
             console.log(error)
