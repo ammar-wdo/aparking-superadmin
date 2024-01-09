@@ -20,7 +20,12 @@ const page = async({searchParams}: Props) => {
             entity:{
                 select:{
                     id:true,
-                    entityName:true
+                    entityName:true,
+                    company:{
+                        select:{
+                            name:true
+                        }
+                    }
                 }
             }
         },orderBy:{

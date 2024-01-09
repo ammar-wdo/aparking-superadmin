@@ -12,12 +12,20 @@ import ToolTip from "@/components/tool-tip";
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 
-type FullService =Service &{entity:{id:string,entityName:string}}
+type FullService =Service &{entity:{id:string,entityName:string,company:{name:string}}}
 
 export const servicesColumns: ColumnDef<FullService>[] = [
   {
     accessorKey: "name",
     header: "Name",
+  },
+  {
+    accessorKey: "entity.entityName",
+    header: "Entity name",
+  },
+  {
+    accessorKey: "entity.company.name",
+    header: "Company name",
   },
   {
     accessorKey: "parkingAddress",
