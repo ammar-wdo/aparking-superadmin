@@ -66,13 +66,26 @@ form.setValue('slug',slug)
 
         if(entity){
           const result = await axios.patch(`/api/entities/${entity.id}`,values)
+          if(result.data.message){
+toast.error(result.data.message)
+          }else{
+            toast.success("Successfully created")
+            router.push(`/dashboard/entities`)
+            router.refresh()
+          }
         }else{
           const result = await axios.post(`/api/entities`,values)
+          if(result.data.message){
+            toast.error(result.data.message)
+
+          }else{
+            toast.success("Successfully created")
+            router.push(`/dashboard/entities`)
+            router.refresh()
+          }
         }
       
-        toast.success("Successfully created")
-        router.push(`/dashboard/entities`)
-        router.refresh()
+      
       } catch (error) {
         console.log(error)
         toast.error('Something went wrong')

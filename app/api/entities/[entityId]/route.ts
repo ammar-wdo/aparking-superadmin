@@ -5,87 +5,102 @@ import { entitySchema, serviceSchema } from "@/schemas";
 import prisma from "@/lib/prisma";
 import { encryptPassword } from "../../(helpers)/bcrypt";
 
+export async function PATCH(
+  req: Request,
+  { params }: { params: { entityId: string } }
+) {
+  try {
+    if (!params.entityId)
+      return new NextResponse("entity ID is required", { status: 400 });
+    const admin = await getServerSession(authOptions);
 
-export async function PATCH(req:Request,{params}:{params:{entityId:string}}) {
+    if (!admin) return new NextResponse("Unauthorized", { status: 401 });
 
-try {
-if(!params.entityId) return new NextResponse("entity ID is required",{status:400})
-    const admin = await getServerSession(authOptions)
+    const body = await req.json();
 
-    if(!admin)  return new NextResponse("Unauthorized",{status:401})
+    const validbody = entitySchema.safeParse(body);
+    if (!validbody.success)
+      return NextResponse.json({ errors: validbody.error }, { status: 400 });
 
-    const body = await req.json()
-   
-    const validbody = entitySchema.safeParse(body)
-    if(!validbody.success) return NextResponse.json({errors:validbody.error},{status:400})
-
-    const {newPassword,password,...rest} = validbody.data
-    let thePassword
-    if(newPassword){
-        thePassword = await encryptPassword(newPassword)
-    }else{
-        thePassword = password
+    const { newPassword, password, ...rest } = validbody.data;
+    let thePassword;
+    if (newPassword) {
+      thePassword = await encryptPassword(newPassword);
+    } else {
+      thePassword = password;
     }
 
+    const companyExist = await prisma.company.findUnique({
+      where: {
+        email: validbody.data.email,
+      },
+    });
+
+    if (companyExist)
+      return NextResponse.json(
+        { message: "E-mail already exist as a Company" },
+        { status: 200 }
+      );
+
+    const entityExist = await prisma.entity.findUnique({
+      where: {
+        email: validbody.data.email,
+        NOT: { id: params.entityId },
+      },
+    });
+
+    if (entityExist)
+      return NextResponse.json(
+        { message: "E-mail already exist" },
+        { status: 200 }
+      );
+
     const updated = await prisma.entity.update({
-        where:{
-            id:params.entityId
-        },
-        data:{
-            ...rest,
-            password:thePassword
-        }
-    })
+      where: {
+        id: params.entityId,
+      },
+      data: {
+        ...rest,
+        password: thePassword,
+      },
+    });
 
-    return NextResponse.json({message:"success"},{status:201})
-
-
-
-  
-    
-} catch (error) {
-    console.log(error)
-    return new NextResponse("Internal error",{status:500})
+    return NextResponse.json({ done: "success" }, { status: 201 });
+  } catch (error) {
+    console.log(error);
+    return new NextResponse("Internal error", { status: 500 });
+  }
 }
-  
-}
-export async function DELETE(req:Request,{params}:{params:{entityId:string}}) {
+export async function DELETE(
+  req: Request,
+  { params }: { params: { entityId: string } }
+) {
+  try {
+    if (!params.entityId)
+      return new NextResponse("entity ID is required", { status: 400 });
+    const admin = await getServerSession(authOptions);
 
-try {
-if(!params.entityId) return new NextResponse("entity ID is required",{status:400})
-    const admin = await getServerSession(authOptions)
-
-    if(!admin)  return new NextResponse("Unauthorized",{status:401})
-
-
+    if (!admin) return new NextResponse("Unauthorized", { status: 401 });
 
     const updated = await prisma.entity.delete({
-        where:{
-            id:params.entityId
-        },
-      
-    })
+      where: {
+        id: params.entityId,
+      },
+    });
 
     await prisma.notification.create({
-        data:{
-            companyId:updated.companyId,
-            type:'ENTITY',
-           name:updated.entityName,
-           status:'DELETE',
-            message:`The ${updated.entityName} entity has been deleted by Aparking super admin`
+      data: {
+        companyId: updated.companyId,
+        type: "ENTITY",
+        name: updated.entityName,
+        status: "DELETE",
+        message: `The ${updated.entityName} entity has been deleted by Aparking super admin`,
+      },
+    });
 
-        }
-     })
-
-    return NextResponse.json({message:"success"},{status:201})
-
-
-
-  
-    
-} catch (error) {
-    console.log(error)
-    return new NextResponse("Internal error",{status:500})
-}
-  
+    return NextResponse.json({ message: "success" }, { status: 201 });
+  } catch (error) {
+    console.log(error);
+    return new NextResponse("Internal error", { status: 500 });
+  }
 }

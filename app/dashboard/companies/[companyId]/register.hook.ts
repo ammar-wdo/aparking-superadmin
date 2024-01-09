@@ -23,14 +23,26 @@ export const useRegister = (company:Company|null)=>{
   try {
 
     if(company){
-      await axios.patch(`/api/company/${params.companyId}`,values)
+    const res =  await axios.patch(`/api/company/${params.companyId}`,values)
+    if(res.data.message){
+      toast.error(res.data.message)
     }else{
-      await axios.post('/api/company',values)
+      toast.success(company ? "Company updated" : "Company created")
+      router.push(`/dashboard/companies`)
+      router.refresh()
+    }
+    }else{
+    const res =  await axios.post('/api/company',values)
+    if(res.data.message){
+      toast.error(res.data.message)
+    }else{
+      toast.success(company ? "Company updated" : "Company created")
+      router.push(`/dashboard/companies`)
+      router.refresh()
+    }
     }
 
-toast.success(company ? "Company updated" : "Company created")
-router.push(`/dashboard/companies`)
-router.refresh()
+
     
   } catch (error) {
     console.log(error)

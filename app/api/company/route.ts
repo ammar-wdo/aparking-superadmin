@@ -26,6 +26,24 @@ try {
   
     const encryptedPassword = await encryptPassword(validBody.data.password)
 
+    const companyExist = await prisma.company.findUnique({
+        where:{
+            email:validBody.data.email
+        }
+    })
+
+    if(companyExist) return NextResponse.json({message:"E-mail already exist"},{status:200})
+
+    const entityExist = await prisma.entity.findUnique({
+        where:{
+            email:validBody.data.email
+        }
+    })
+
+
+    if(entityExist) return NextResponse.json({message:"E-mail already exist as an entity"},{status:200})
+
+
     const company = await prisma.company.create({
         data:{
          ...validBody.data,

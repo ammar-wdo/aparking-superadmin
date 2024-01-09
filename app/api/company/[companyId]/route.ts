@@ -38,6 +38,28 @@ try {
 
 
 
+
+    const companyExist = await prisma.company.findUnique({
+        where:{
+            email:validBody.data.email,
+            NOT:{id:params.companyId}
+          
+        }
+    })
+
+    if(companyExist) return NextResponse.json({message:"E-mail already exist"},{status:200})
+
+    const entityExist = await prisma.entity.findUnique({
+        where:{
+            email:validBody.data.email
+        }
+    })
+
+
+    if(entityExist) return NextResponse.json({message:"E-mail already exist as an entity"},{status:200})
+
+
+
     const company = await prisma.company.update({
         where:{
 id:params.companyId
