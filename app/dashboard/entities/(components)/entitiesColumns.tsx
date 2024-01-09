@@ -22,6 +22,10 @@ export const entitiesColumns: ColumnDef<Entity>[] = [
     header: "E-mail",
   },
   {
+    accessorKey: "company.name",
+    header: "Company name",
+  },
+  {
     accessorKey: "entityAddress",
     header: "Address",
   },
@@ -33,10 +37,7 @@ export const entitiesColumns: ColumnDef<Entity>[] = [
     accessorKey: "entityName",
     header: "Name",
   },
-  {
-    accessorKey: "company.name",
-    header: "Company name",
-  },
+ 
   {
     accessorKey: "id",
     header: "Services",
