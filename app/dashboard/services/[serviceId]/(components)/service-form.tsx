@@ -63,7 +63,7 @@ const theHighlights = ['car','bus','key','info','check','star','electric','payme
 const {setOpen} = useModal()
 
 
-    const {form,onSubmit,uploadImage,uploadImages,ImagePlaceholder,ImagesPlaceholder,setFile,setImagesFile,handleFacilityAdd,MyFacilities,file,imagesFile,handleHighlightAdd,MyHighlights} = useServiceId({service})
+    const {form,onSubmit,uploadImages,ImagesPlaceholder,setImagesFile,handleFacilityAdd,MyFacilities,imagesFile,handleHighlightAdd,MyHighlights} = useServiceId({service})
 
     const isLoading = form.formState.isSubmitting
   return (
@@ -197,39 +197,7 @@ const {setOpen} = useModal()
             )}
           />
        
-          <FormField
-            control={form.control}
-            name="logo"
-            render={({ field }) => (
-              <div className="flex gap-4 items-center">
-                <FormItem>
-                  <FormLabel>Logo*</FormLabel>
-                  <FormControl>
-                    <SingleImageDropzone
-                      width={200}
-                      height={200}
-                      value={file}
-                      onChange={(file) => {
-                        setFile(file);
-                      }}
-                    />
-                  </FormControl>
-                  <Button
-                  disabled={!file || !!form.watch('logo')}
-                    type="button"
-                    onClick={uploadImage}
-             
-                  >
-                    Upload
-                  </Button>
-
-                  <FormMessage />
-                </FormItem>
-
-                {<ImagePlaceholder />}
-              </div>
-            )}
-          />
+    
           <FormField
             control={form.control}
             name="images"

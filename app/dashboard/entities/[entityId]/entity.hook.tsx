@@ -42,12 +42,94 @@ export const useEntity =({entity}:Props)=>{
           chamberOfCommerce:entity?.chamberOfCommerce || "",
           isActive:entity?.isActive || false,
           images:entity?.images || [],
+          logo: entity?.logo || "",
           content:entity?.content || '',
           slug:entity?.slug || ''
 
 
         },
       })
+
+      const [file, setFile] = useState<File>();
+
+  const [deleteLoader, setDeleteLoader] = useState(false);
+
+  const [imageLoader, setImageLoader] = useState(false);
+  const { edgestore } = useEdgeStore();
+
+  const uploadImage = async () => {
+    if (file) {
+      setImageLoader(true);
+      if (file) {
+        const res = await edgestore.publicFiles.upload({
+          file,
+          onProgressChange: (progress) => {
+            if (progress === 0) {
+              setImageLoader(true);
+            } else {
+              setImageLoader(false);
+            }
+          },
+        });
+        setImageLoader(false);
+
+        setImage(res.url);
+      }
+    }
+  };
+
+  const deleteImage = async (image: string) => {
+    try {
+      setDeleteLoader(true);
+      await edgestore.publicFiles.delete({
+        url: image,
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setDeleteLoader(false);
+      setImage("");
+    }
+  };
+
+  const setImage = (url: string) => {
+    form.setValue("logo", url);
+  };
+
+
+  const ImagePlaceholder = () => {
+    if (!!form.watch("logo"))
+      return (
+        <div className="w-[150px] h-[150px] overflow-hidden  relative">
+          {deleteLoader ? (
+            <div className="flex items-center justify-center w-full h-full ">
+              <Loader className="w-5 h-5 animate-spin" />
+            </div>
+          ) : (
+            <Image
+              alt="added logo"
+              src={form.getValues("logo")}
+              fill
+              className="object-contain rounded-lg"
+            />
+          )}
+
+          <XIcon
+            className="absolute top-1 right-1 cursor-pointer text-white bg-rose-400 p-1 rounded-md"
+            onClick={() => {
+              deleteImage(form.getValues("logo"));
+            }}
+          />
+        </div>
+      );
+    if (imageLoader)
+      return (
+        <div className="w-[150px] h-[150px] overflow-hidden flex items-center justify-center  relative">
+          {" "}
+          <Loader className="w-5 h-5 animate-spin" />
+        </div>
+      );
+  };
 
 
 
@@ -99,6 +181,6 @@ toast.error(result.data.message)
             const {imagesFile,setImagesFile,uploadImages,ImagesPlaceholder} = useImages({form})
 
 
-      return {form,onSubmit,imagesFile,setImagesFile,uploadImages,ImagesPlaceholder}
+      return {form,onSubmit,imagesFile,setImagesFile,uploadImages,ImagesPlaceholder,file,setFile,uploadImage,ImagePlaceholder}
 
 }

@@ -7,7 +7,7 @@ export const serviceSchema = z
     distanceToAirport: z.coerce.number().min(1).or(z.undefined()),
     generalInformation: z.string().optional(),
     importantInfo: z.string().optional(),
-    logo: z.string().min(1,{message:"Upload an image please"}),
+ 
     images: z.array(z.string()).optional(),
     facilities: z.array(z.string()).optional(),
     slug:z.string().min(1).refine((value) => !/\s/.test(value), 
@@ -85,6 +85,7 @@ export const entitySchema = z.object({
   chamberOfCommerce: z.string().min(1,{message:'Chamber of commerce is required'}),
   isActive: z.boolean().default(false),
   images: z.array(z.string()).default([]),
+  logo: z.string().min(1,{message:"Upload an image please"}),
   content: z.string().default(""),
 });
 

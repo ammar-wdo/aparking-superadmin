@@ -68,7 +68,7 @@ const EntityForm = ({ entity,airports,companies }: Props) => {
     onSubmit,
 
     form,
-    imagesFile,setImagesFile,uploadImages,ImagesPlaceholder
+    imagesFile,setImagesFile,uploadImages,ImagesPlaceholder,file,setFile,uploadImage,ImagePlaceholder
   } = useEntity({ entity });
 
   const isLoading = form.formState.isSubmitting;
@@ -328,6 +328,39 @@ const EntityForm = ({ entity,airports,companies }: Props) => {
 
                 <FormMessage />
               </FormItem>
+            )}
+          />
+           <FormField
+            control={form.control}
+            name="logo"
+            render={({ field }) => (
+              <div className="flex gap-4 items-center">
+                <FormItem>
+                  <FormLabel>Logo*</FormLabel>
+                  <FormControl>
+                    <SingleImageDropzone
+                      width={200}
+                      height={200}
+                      value={file}
+                      onChange={(file) => {
+                        setFile(file);
+                      }}
+                    />
+                  </FormControl>
+                  <Button
+                  disabled={!file || !!form.watch('logo')}
+                    type="button"
+                    onClick={uploadImage}
+             
+                  >
+                    Upload
+                  </Button>
+
+                  <FormMessage />
+                </FormItem>
+
+                {<ImagePlaceholder />}
+              </div>
             )}
           />
        <FormField
