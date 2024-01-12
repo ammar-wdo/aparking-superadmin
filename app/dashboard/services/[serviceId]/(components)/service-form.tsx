@@ -10,7 +10,7 @@ import { useEffect, useRef } from 'react'
 import { Checkbox } from '@/components/ui/checkbox'
 import { SingleImageDropzone } from '@/components/single-image-drop-zone'
 import { useModal } from '@/hooks/modal-hook'
-import { Banknote, BatteryChargingIcon, Bus, Car, CheckCircle, CreditCard, Info, KeyIcon, Loader, ParkingCircle, Star, Warehouse } from 'lucide-react'
+import { Banknote, BatteryChargingIcon, Bus, Car, CheckCircle, CreditCard, Droplets, Footprints, Info, KeyIcon, KeyRound, KeySquare, Loader, ParkingCircle, ShieldCheck, Star, Warehouse } from 'lucide-react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
@@ -42,20 +42,26 @@ const ServiceForm = ({service,entities,airports}: Props) => {
   return ()=>document.removeEventListener('keydown',handleEnterPress)
 
   },[])
-const theHighlights = ['car','bus','key','info','check','star','electric','payment','cash','parking','indoor']
+
+const theHighlights = ['car','bus','info','star','electric','payment','cash','parking','indoor','safety','wash','key','key2','walk']
+
   const theIcons :{[key:string]:React.ReactNode} = {
     car:<Car  className='w-5 h-5 '/>,
     bus:<Bus  className='w-5 h-5 '/>,
-    key:<KeyIcon  className='w-5 h-5 '/>,
+ key:<KeySquare className='w-5 h-5 ' />,
+ key2:<KeyRound className='w-5 h-5 '/>,
     info:<Info />,
-    check:<CheckCircle className='w-5 h-5 ' />,
     star:<Star className='w-5 h-5 ' />,
     electric:<BatteryChargingIcon className='w-5 h-5 ' />,
     payment:<CreditCard  className='w-5 h-5 '/>,
     cash:<Banknote  className='w-5 h-5 '/>,
     parking:<ParkingCircle  className='w-5 h-5 '/>,
     indoor:<Warehouse  className='w-5 h-5 '/>,
+    safety:<ShieldCheck className='w-5 h-5 ' />,
+    wash:<Droplets className='w-5 h-5 ' />,
+    walk:<Footprints className='w-5 h-5 '/>,
   }
+
   const facilityRef = useRef<HTMLInputElement | null>(null);
   const highlightRef = useRef<HTMLInputElement | null>(null);
   const highlightIconRef = useRef<string>(theHighlights[0]);
