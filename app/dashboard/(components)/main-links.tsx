@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 import {
+  BadgeEuro,
   Bell,
   BookOpenText,
   BookUser,
@@ -66,6 +67,12 @@ const MainLinks = (props: Props) => {
       active: pathname === "/dashboard/services",
       link: "/dashboard/services",
       Icon: <Boxes className="w-5 h-5 mr-3" />,
+    },
+    {
+      label: "discount",
+      active: pathname === "/dashboard/discount",
+      link: "/dashboard/discount",
+      Icon: <BadgeEuro className="w-5 h-5 mr-3" />,
     },
   ];
 

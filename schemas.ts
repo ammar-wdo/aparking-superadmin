@@ -139,3 +139,28 @@ export const airportSchema = z.object({
   'Slug should not contain spaces',
   ),
 })
+
+
+
+
+export const discountSchema = z.object({
+  label:z.string().min(1,'label is required'),
+  type:z.enum(['PERCENTAGE','FIXED']).optional(),
+  based:z.enum(['BOOKING','CREATING']).optional(),
+  startDate:z.date(),
+  endDate:z.date(),
+  percentage: z.coerce.number().max(90).optional(),
+  value: z.coerce.number().optional(),
+})
+.refine((data) => data.type !== "FIXED" ||  !!data.value, {
+  message: "Value is required",
+  path: ["value"],
+})
+.refine((data) => data.type !== "PERCENTAGE" || !!data.percentage, {
+  message: "percentage is required",
+  path: ["percentage"],
+}).refine(
+  (date) =>
+    new Date(date.startDate).getTime() <= new Date(date.endDate).getTime(),
+  { message: "Invalid blocking range", path: ["startDate"] }
+);
