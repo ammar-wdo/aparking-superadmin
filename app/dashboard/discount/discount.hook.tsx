@@ -68,7 +68,7 @@ export const useDiscount = () => {
         setClose();
         router.refresh();
       } else {
-        await axios.patch(`/api/discount/${discount.id}`, values);
+        await axios.patch(`/api/discount/${discount.id}`, refinedValues);
         toast.success("Successfully updated");
         setClose();
         router.refresh();
