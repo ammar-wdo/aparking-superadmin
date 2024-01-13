@@ -8,7 +8,7 @@ export const serviceSchema = z
     generalInformation: z.string().optional(),
     importantInfo: z.string().optional(),
  
-    images: z.array(z.string()).optional(),
+    images: z.array(z.string()).min(1, 'At least one image is required'),
     facilities: z.array(z.string()).optional(),
     slug:z.string().min(1).refine((value) => !/\s/.test(value), 
      'Slug should not contain spaces',
@@ -84,7 +84,7 @@ export const entitySchema = z.object({
   IBAN: z.string().optional(),
   chamberOfCommerce: z.string().min(1,{message:'Chamber of commerce is required'}),
   isActive: z.boolean().default(false),
-  images: z.array(z.string()).default([]),
+ images: z.array(z.string()).min(1, 'At least one image is required'),
   logo: z.string().min(1,{message:"Upload an image please"}),
   content: z.string().default(""),
 });
@@ -133,7 +133,7 @@ export const faqSchema = z.object({
 
 export const airportSchema = z.object({
   name: z.string().min(2,{message:'Name is required'}).max(50),
-  images:z.array(z.string()).default([]),
+  images: z.array(z.string()).min(1, 'At least one image is required'),
   content:z.string().default(''),
   slug:z.string().min(1,{message:'Slug is required'}).refine((value) => !/\s/.test(value), 
   'Slug should not contain spaces',
