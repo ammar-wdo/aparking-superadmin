@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/options";
 import { discountSchema } from "@/schemas";
 import prisma from "@/lib/prisma";
-import { generate10DigitID } from "./(helpers)/code-generator";
+import { generate10DigitID } from "../../dashboard/discount/(helpers)/code-generator";
 
 
 export const POST = async (req:Request)=>{
@@ -21,28 +21,20 @@ export const POST = async (req:Request)=>{
         if(!validBody.success) return NextResponse.json({error:validBody.error},{status:400})
 
 
-        let code = generate10DigitID()
-        let existingDiscount = await prisma.discount.findFirst({
-          where: {
-            code: code,
-          },
-          select: { code: true },
-        });
-    
-        while (existingDiscount) {
-          code =generate10DigitID()
-          existingDiscount = await prisma.discount.findFirst({
-            where: {
-              code: code,
-            },
-            select: { code: true },
-          });
+      const existDiscout = await prisma.discount.findUnique({
+        where:{
+          code:validBody.data.code
         }
+      })
+
+      if(existDiscout) return NextResponse.json({message:'Code already exist'},{status:200})
+    
+     
 
         await prisma.discount.create({
             data:{
                 ...validBody.data,
-                code,
+                
                 endDate:new Date(validBody.data.endDate.setHours(23,45,0,0))
             }
         })

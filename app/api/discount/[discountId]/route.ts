@@ -22,6 +22,15 @@ const validBody = discountSchema.safeParse(refinedBody);
 if (!validBody.success)
   return NextResponse.json(validBody.error, { status: 400 });
 
+  const existDiscout = await prisma.discount.findUnique({
+    where:{
+        NOT:{id:discountId},
+      code:validBody.data.code
+    }
+  })
+
+  if(existDiscout) return NextResponse.json({message:'Code already exist'},{status:200})
+
   await prisma.discount.update({
     where:{
         id:discountId

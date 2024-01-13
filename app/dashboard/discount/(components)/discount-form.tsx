@@ -3,7 +3,7 @@ import { useDiscount } from '../discount.hook'
 import { Button } from '@/components/ui/button'
 
 import { format } from 'date-fns'
-import { CalendarIcon, Loader } from 'lucide-react'
+import { CalendarIcon, Loader, RefreshCcwDot } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 import { Input } from '@/components/ui/input'
@@ -11,13 +11,14 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Calendar } from '@/components/ui/calendar'
 import { Based } from '@prisma/client'
+import ToolTip from '@/components/tool-tip'
 
 type Props = {}
 
 const DiscountForm = (props: Props) => {
 
 
-    const {form,onSubmit,startOpen,endOpen,setEndOpen,setStartOpen} = useDiscount()
+    const {form,onSubmit,startOpen,endOpen,setEndOpen,setStartOpen,generateCode} = useDiscount()
 
     const loading = form.formState.isSubmitting
   return (
@@ -31,6 +32,31 @@ const DiscountForm = (props: Props) => {
             <FormLabel>Label</FormLabel>
             <FormControl>
            <Input {...field} className='' placeholder='Discount label' />
+            </FormControl>
+    
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+    <FormField
+        control={form.control}
+        name="code"
+        render={({ field }) => (
+          <FormItem className='flex flex-col w-full'>
+            <FormLabel>Code</FormLabel>
+            <FormControl>
+              <div className='flex items-center gap-2 border pr-2 rounded-lg'>
+              <Input  {...field} className='border-0' placeholder='Discount code' />
+              <ToolTip title='Generate' side='top' >
+              <Button type='button' className='w-8 h-8 p-0' onClick={generateCode}>
+             
+         
+              <RefreshCcwDot  className='w-4 h-4' />
+              </Button>
+              </ToolTip>
+            
+              </div>
+         
             </FormControl>
     
             <FormMessage />

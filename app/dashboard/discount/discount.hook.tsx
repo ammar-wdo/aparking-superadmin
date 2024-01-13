@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+import { generate10DigitID } from "./(helpers)/code-generator";
 
 export const useDiscount = () => {
   const {
@@ -18,11 +19,13 @@ export const useDiscount = () => {
   const [startOpen, setStartOpen] = useState(false);
   const [endOpen, setEndOpen] = useState(false);
 
+
   const form = useForm<z.infer<typeof discountSchema>>({
     resolver: zodResolver(discountSchema),
     defaultValues: {
       label: discount?.label || "",
       based: discount?.based || "CREATING",
+      code:discount?.code || '',
       startDate: discount?.startDate
         ? new Date(new Date(discount.startDate).setUTCHours(0, 0, 0, 0))
         : new Date(Date.now()),
@@ -55,6 +58,18 @@ export const useDiscount = () => {
     }
   }, [form.watch("type")]);
 
+
+  useEffect(()=>{
+    const modified = form.watch('code').toUpperCase().trim()
+    form.setValue('code',modified)
+  },[form.watch('code')])
+
+
+  const generateCode = ()=>{
+    const code = generate10DigitID()
+    form.setValue('code',code)
+  }
+
   const router = useRouter();
   async function onSubmit(values: z.infer<typeof discountSchema>) {
 
@@ -63,12 +78,18 @@ export const useDiscount = () => {
       const refinedValues = {...values,startDate:startDateString,endDate:endDateString}
     try {
       if (!discount) {
-        await axios.post("/api/discount", refinedValues);
+     const res =   await axios.post("/api/discount", refinedValues);
+     if(res.data.message){
+      return toast.error(res.data.message)
+     }
         toast.success("Successfully created");
         setClose();
         router.refresh();
       } else {
-        await axios.patch(`/api/discount/${discount.id}`, refinedValues);
+     const res =   await axios.patch(`/api/discount/${discount.id}`, refinedValues);
+     if(res.data.message){
+      return toast.error(res.data.message)
+     }
         toast.success("Successfully updated");
         setClose();
         router.refresh();
@@ -82,5 +103,5 @@ export const useDiscount = () => {
     console.log(values);
   }
 
-  return { form, onSubmit, startOpen, endOpen, setStartOpen, setEndOpen };
+  return { form, onSubmit, startOpen, endOpen, setStartOpen, setEndOpen,generateCode };
 };

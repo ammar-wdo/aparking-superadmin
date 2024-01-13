@@ -145,6 +145,7 @@ export const airportSchema = z.object({
 
 export const discountSchema = z.object({
   label:z.string().min(1,'label is required'),
+  code:z.string().min(1,'code is mandatory'),
   type:z.enum(['PERCENTAGE','FIXED']).optional(),
   based:z.enum(['BOOKING','CREATING']).optional(),
   startDate:z.date(),

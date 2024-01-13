@@ -19,7 +19,7 @@ if(!mount) return null
   return (
 <TooltipProvider>
   <Tooltip delayDuration={40}>
-    <TooltipTrigger  className="w-auto h-auto">{children}</TooltipTrigger>
+    <TooltipTrigger  type="button" className="w-auto h-auto">{children}</TooltipTrigger>
     <TooltipContent side={side} sideOffset={8}  className={cn("max-w-[400px]",small && 'text-xs')}>
       <p>{title}</p>
     </TooltipContent>
