@@ -21,7 +21,7 @@ const DiscountFeed = async(props: Props) => {
     <div className='separate mt-12'>
 <h3>Discounts</h3>
 <div className='mt-8'>
-{!discounts.length && <p className='text-3xl font-bold text-center text-neutral-500'>No discounts</p>} 
+{!discounts.length && <p className='text-3xl font-bold text-center text-neutral-500 my-6'>No discounts</p>} 
 
 <Table>
 
