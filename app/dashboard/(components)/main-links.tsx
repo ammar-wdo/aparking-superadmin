@@ -69,6 +69,12 @@ const MainLinks = (props: Props) => {
       Icon: <Boxes className="w-5 h-5 mr-3" />,
     },
     {
+      label: "bookings",
+      active: pathname === "/dashboard/bookings",
+      link: "/dashboard/bookings",
+      Icon: <BookmarkCheck className="w-5 h-5 mr-3" />,
+    },
+    {
       label: "discount",
       active: pathname === "/dashboard/discount",
       link: "/dashboard/discount",
