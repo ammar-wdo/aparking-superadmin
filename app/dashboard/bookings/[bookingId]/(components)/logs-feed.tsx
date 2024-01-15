@@ -1,4 +1,4 @@
-import prisma from "@/lib/db";
+
 
 import {
   Table,
@@ -16,6 +16,7 @@ import { HelpCircle } from "lucide-react";
 import ActionToolTip from "@/components/tool-tip";
 import Explane from "./explane";
 import { NLtimezone } from "@/lib/nl-timezone";
+import prisma from "@/lib/prisma";
 
 type Props = {
   bookingId: string;
