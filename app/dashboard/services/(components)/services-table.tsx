@@ -3,6 +3,8 @@
 import {
   ColumnDef,
   flexRender,
+  SortingState,
+  getSortedRowModel,
   getCoreRowModel,
   getPaginationRowModel,
   useReactTable,
@@ -36,6 +38,7 @@ export function ServicesDataTable<TData, TValue>({
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
     []
   )
+  const [sorting, setSorting] =useState<SortingState>([])
   const table = useReactTable({
     data,
     columns,
@@ -43,9 +46,12 @@ export function ServicesDataTable<TData, TValue>({
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
     state: {
       
       columnFilters,
+      sorting,
     },
   })
 

@@ -7,6 +7,8 @@ import { Company, Entity } from "@prisma/client"
 import { ColumnDef } from "@tanstack/react-table"
 import { Edit, Trash } from "lucide-react"
 import Link from "next/link"
+import { ArrowUpDown, MoreHorizontal } from "lucide-react"
+import { Button } from "@/components/ui/button"
  
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -19,23 +21,73 @@ company:Company
 export const entitiesColumns: ColumnDef<Entity>[] = [
   {
     accessorKey: "email",
-    header: "E-mail",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Email
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
   },
   {
     accessorKey: "company.name",
-    header: "Company name",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Company name
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
   },
   {
     accessorKey: "entityAddress",
-    header: "Address",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Address
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
   },
   {
     accessorKey: "entityPlace",
-    header: "Place",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Place
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
   },
   {
     accessorKey: "entityName",
-    header: "Name",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Name
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
   },
  
   {
