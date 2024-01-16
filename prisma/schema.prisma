@@ -79,6 +79,7 @@ model Booking {
   extraOptions          Json[]
   reivew                Review?
   discount              Json?
+  serviceCommession     Float
 }
 
 enum Attempt {
