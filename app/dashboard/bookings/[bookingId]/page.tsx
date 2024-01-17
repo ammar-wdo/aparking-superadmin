@@ -15,7 +15,7 @@ import { format } from "date-fns";
 import LogsFeed from "./(components)/logs-feed";
 import { redirect } from "next/navigation";
 import { JsonArray } from "@prisma/client/runtime/library";
-import { ExraOption } from "@prisma/client";
+import { Discount, ExraOption } from "@prisma/client";
 import { NLtimezone } from "@/lib/nl-timezone";
 import prisma from "@/lib/prisma";
 import { daysAndTotal } from "../(helpers)/days-and-total";
@@ -25,6 +25,8 @@ import { Separator } from "@/components/ui/separator";
 type Props = {
   params: { bookingId: string; companyId: string };
 };
+
+
 
 const page = async ({ params }: Props) => {
   const booking = await prisma.booking.findUnique({
@@ -39,6 +41,10 @@ const page = async ({ params }: Props) => {
   if(!booking) return redirect('/dashboard')
   
 const {daysofparking} = await daysAndTotal(booking?.arrivalDate!,booking?.departureDate!,booking?.service.id!)
+
+const discount  = booking.discount as  Discount | null
+
+const discountApplied = discount?.type ==='FIXED' ? `€${discount.value}` : `%${discount?.percentage}`
   return (
     <div className="p-12 separate">
       <h2 className="text-3xl font-semibold ">
@@ -156,15 +162,19 @@ const {daysofparking} = await daysAndTotal(booking?.arrivalDate!,booking?.depart
        
         {!!booking.extraOptions.length&&<div className="border-b mt-4 pb-2">
                 <h3 className="font-bold first-letter:capitalize ">Extra options</h3>
-                <div className="flex flex-col gap-1">
-                  {(booking.extraOptions as unknown as ExraOption[]).map((option) =><div key={option.id} className="flex justify-between items-center mt-2 font-semibold">
-                    <span className="first-letter:capitalize">{option.label}</span>
+                <div className="flex flex-col gap-1 mt-2">
+                  {(booking.extraOptions as unknown as ExraOption[]).map((option) =><div key={option.id} className="flex justify-between items-center font-semibold">
+                    <span className="first-letter:capitalize font-normal text-neutral-500">{option.label}</span>
                     <span>€{option.price}</span>
                   </div>)}
 
                 </div>
                 
                 </div>}
+                {!!booking.discount && <div className="flex items-center justify-between">
+                  <p className="font-semibold">Discount applied</p>
+                  <p className="font-semibold">{discountApplied}</p>
+                  </div>}
         <div className="flex items-center justify-between font-semibold space-x-3">
         <p className="">Total amount paid</p>
         <p>€ { booking?.total}</p>
