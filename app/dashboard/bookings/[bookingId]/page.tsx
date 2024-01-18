@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   Table,
@@ -11,7 +10,6 @@ import {
 } from "@/components/ui/table";
 import { format } from "date-fns";
 
-
 import LogsFeed from "./(components)/logs-feed";
 import { redirect } from "next/navigation";
 import { JsonArray } from "@prisma/client/runtime/library";
@@ -21,12 +19,9 @@ import prisma from "@/lib/prisma";
 import { daysAndTotal } from "../(helpers)/days-and-total";
 import { Separator } from "@/components/ui/separator";
 
-
 type Props = {
   params: { bookingId: string; companyId: string };
 };
-
-
 
 const page = async ({ params }: Props) => {
   const booking = await prisma.booking.findUnique({
@@ -38,13 +33,20 @@ const page = async ({ params }: Props) => {
     },
   });
 
-  if(!booking) return redirect('/dashboard')
-  
-const {daysofparking} = await daysAndTotal(booking?.arrivalDate!,booking?.departureDate!,booking?.service.id!)
+  if (!booking) return redirect("/dashboard");
 
-const discount  = booking.discount as  Discount | null
+  const { daysofparking } = await daysAndTotal(
+    booking?.arrivalDate!,
+    booking?.departureDate!,
+    booking?.service.id!
+  );
 
-const discountApplied = discount?.type ==='FIXED' ? `€${discount.value}` : `%${discount?.percentage}`
+  const discount = booking.discount as Discount | null;
+
+  const discountApplied =
+    discount?.type === "FIXED"
+      ? `€${discount.value}`
+      : `%${discount?.percentage}`;
   return (
     <div className="p-12 separate">
       <h2 className="text-3xl font-semibold ">
@@ -54,7 +56,9 @@ const discountApplied = discount?.type ==='FIXED' ? `€${discount.value}` : `%$
         <Table>
           <TableHeader className="">
             <TableRow>
-              <TableHead className="w-full bg-muted/80">Customer data</TableHead>
+              <TableHead className="w-full bg-muted/80">
+                Customer data
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -110,32 +114,34 @@ const discountApplied = discount?.type ==='FIXED' ? `€${discount.value}` : `%$
             <TableRow>
               <TableCell className="flex items-center justify-between">
                 <p className="font-semibold">Reserve date</p>
-                <p className="capitalize text-muted-foreground">{NLtimezone(booking.createdAt,'Europe/Amsterdam')}</p>
+                <p className="capitalize text-muted-foreground">
+                  {NLtimezone(booking.createdAt, "Europe/Amsterdam")}
+                </p>
               </TableCell>
             </TableRow>
             <TableRow>
               <TableCell className="flex items-center justify-between">
                 <p className="font-semibold">Provider</p>
                 <p className="capitalize text-muted-foreground">
-                   {booking?.service.name}
+                  {booking?.service.name}
                 </p>
               </TableCell>
             </TableRow>
             <TableRow>
-           
               <TableCell className="flex items-center justify-between">
                 <p className="font-semibold">Arrival date</p>
-                <p className="capitalize text-muted-foreground">{NLtimezone(booking.arrivalDate,'UTC')}</p>
+                <p className="capitalize text-muted-foreground">
+                  {NLtimezone(booking.arrivalDate, "UTC")}
+                </p>
               </TableCell>
-           
             </TableRow>
             <TableRow>
-           
               <TableCell className="flex items-center justify-between">
                 <p className="font-semibold">Departure date</p>
-                <p className="capitalize text-muted-foreground">{NLtimezone(booking.departureDate,'UTC')}</p>
+                <p className="capitalize text-muted-foreground">
+                  {NLtimezone(booking.departureDate, "UTC")}
+                </p>
               </TableCell>
-           
             </TableRow>
             <TableRow>
               <TableCell className="flex items-center justify-between">
@@ -150,38 +156,48 @@ const discountApplied = discount?.type ==='FIXED' ? `€${discount.value}` : `%$
       </div>
       <div className="mt-12 border p-3 rounded-sm text-sm space-y-5 font-light max-w-[350px]   w-full text-muted-foreground">
         <div className="space-y-2">
-        <div className="flex items-center justify-between">
-        <p>{daysofparking} day(s) of {booking?.service.parkingType} parking</p>
- 
+          <div className="flex items-center justify-between">
+            <p>
+              {daysofparking} day(s) of {booking?.service.parkingType} parking
+            </p>
+          </div>
         </div>
-        
-        </div>
-     
+
         <Separator className="my-4 bg-muted-foreground h-[2px]" />
         <div className="space-y-2  text-black dark:text-white">
-       
-        {!!booking.extraOptions.length&&<div className="border-b mt-4 pb-2">
-                <h3 className="font-bold first-letter:capitalize ">Extra options</h3>
-                <div className="flex flex-col gap-1 mt-2">
-                  {(booking.extraOptions as unknown as ExraOption[]).map((option) =><div key={option.id} className="flex justify-between items-center font-semibold">
-                    <span className="first-letter:capitalize font-normal text-neutral-500">{option.label}</span>
-                    <span>€{option.price}</span>
-                  </div>)}
-
-                </div>
-                
-                </div>}
-                {!!booking.discount && <div className="flex items-center justify-between">
-                  <p className="font-semibold">Discount applied</p>
-                  <p className="font-semibold">{discountApplied}</p>
-                  </div>}
-        <div className="flex items-center justify-between font-semibold space-x-3">
-        <p className="">Total amount paid</p>
-        <p>€ { booking?.total}</p>
+          {!!booking.extraOptions.length && (
+            <div className="border-b mt-4 pb-2">
+              <h3 className="font-bold first-letter:capitalize ">
+                Extra options
+              </h3>
+              <div className="flex flex-col gap-1 mt-2">
+                {(booking.extraOptions as unknown as ExraOption[]).map(
+                  (option) => (
+                    <div
+                      key={option.id}
+                      className="flex justify-between items-center font-semibold"
+                    >
+                      <span className="first-letter:capitalize font-normal text-neutral-500">
+                        {option.label}
+                      </span>
+                      <span>€{option.price}</span>
+                    </div>
+                  )
+                )}
+              </div>
+            </div>
+          )}
+          {!!booking.discount && (
+            <div className="flex items-center justify-between">
+              <p className="font-semibold">Discount applied</p>
+              <p className="font-semibold">{discountApplied}</p>
+            </div>
+          )}
+          <div className="flex items-center justify-between font-semibold space-x-3">
+            <p className="">Total amount paid</p>
+            <p>€ {booking?.total}</p>
+          </div>
         </div>
-        </div>
-       
-
       </div>
 
       <LogsFeed bookingId={params.bookingId} />
