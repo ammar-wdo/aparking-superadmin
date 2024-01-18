@@ -1,6 +1,6 @@
 import Heading from '@/components/heading'
 import prisma from '@/lib/prisma'
-import { redirect } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import React from 'react'
 import ServiceForm from './(components)/service-form'
 import OptionsFeed from './(components)/options.feed'
@@ -21,7 +21,7 @@ const page = async({params}: Props) => {
             extraOptions:{orderBy:{createdAt:'desc'}}
         }
     })
-    if(!service) return redirect('/dashboard/companies')
+    if(!service) return notFound()
 
  
     const airports = await prisma.airport.findMany({select:{id:true,name:true}})

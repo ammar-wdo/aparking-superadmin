@@ -2,7 +2,7 @@ import Heading from '@/components/heading'
 import React from 'react'
 import BlogForm from './(components)/blog-form'
 import prisma from '@/lib/prisma'
-import { redirect } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 
 type Props = {
   params:{blogId:string}
@@ -15,7 +15,7 @@ const page = async({params}: Props) => {
     where:{id:params.blogId}
   })
 
-  if(params.blogId !=='new' && !blog) return redirect('/')
+  if(params.blogId !=='new' && !blog) return notFound()
 
 
   return (

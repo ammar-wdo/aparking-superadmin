@@ -2,6 +2,7 @@ import Heading from '@/components/heading'
 import React from 'react'
 import EntityForm from './(components)/entitiyForm'
 import prisma from '@/lib/prisma'
+import { notFound } from 'next/navigation'
 
 type Props = {
   params:{entityId:string}
@@ -30,6 +31,8 @@ const entity = await prisma.entity.findUnique({
     id:params.entityId
   }
 })
+
+if(!entity && params.entityId !== 'new') return notFound()
   return (
     <div className=''>
     <Heading title={entity?.entityName ? "Entities - " + entity?.entityName! : "Create new entity"} description={'Manage ' + (entity?.entityName || "entities")} />

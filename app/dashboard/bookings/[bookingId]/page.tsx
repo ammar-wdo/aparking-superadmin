@@ -11,7 +11,7 @@ import {
 import { format } from "date-fns";
 
 import LogsFeed from "./(components)/logs-feed";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { JsonArray } from "@prisma/client/runtime/library";
 import { Discount, ExraOption } from "@prisma/client";
 import { NLtimezone } from "@/lib/nl-timezone";
@@ -33,7 +33,7 @@ const page = async ({ params }: Props) => {
     },
   });
 
-  if (!booking) return redirect("/dashboard");
+  if (!booking) return notFound();
 
   const { daysofparking } = await daysAndTotal(
     booking?.arrivalDate!,

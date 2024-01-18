@@ -3,6 +3,7 @@ import { useAirport } from './airport.hook'
 import AirportForm from './(components)/airport-form'
 import prisma from '@/lib/prisma'
 import Heading from '@/components/heading'
+import { notFound } from 'next/navigation'
 
 
 
@@ -15,6 +16,8 @@ const airport = await prisma.airport.findUnique({
     id:params.airportId
   }
 })
+
+if(!airport && params.airportId !=='new') return notFound()
 
   return (
     <div >
