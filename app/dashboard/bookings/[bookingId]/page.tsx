@@ -180,7 +180,7 @@ const page = async ({ params }: Props) => {
                       <span className="first-letter:capitalize font-normal text-neutral-500">
                         {option.label}
                       </span>
-                      <span>€{option.price}</span>
+                      <span>€{option.price.toFixed(2)}</span>
                     </div>
                   )
                 )}
@@ -195,7 +195,7 @@ const page = async ({ params }: Props) => {
           )}
           <div className="flex items-center justify-between font-semibold space-x-3">
             <p className="">Total amount paid</p>
-            <p>€ {booking?.total}</p>
+            <p>€ {booking?.total.toFixed(2)}</p>
           </div>
         </div>
       </div>
