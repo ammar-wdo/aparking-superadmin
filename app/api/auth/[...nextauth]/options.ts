@@ -22,7 +22,7 @@ signIn:'/'
           const password = credentials?.password
   
           // Perform your custom authentication logic here
-          if (username === 'admin' && password === 'adminpassword') {
+          if (username === process.env.ADMIN_USERNAME && password === process.env.ADMIN_PASSWORD) {
             // Return a user object with the required 'id' property
             const user = { id: 'unique_user_id', username };
             return user;
