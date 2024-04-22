@@ -29,7 +29,7 @@ if(slugMessage) return NextResponse.json({message:slugMessage},{status:200})
         id:params.serviceId
     },select:{
         isActive:true,
-        isParkingproService:true
+      
     }})
     const updated = await prisma.service.update({
         where:{
@@ -38,7 +38,7 @@ if(slugMessage) return NextResponse.json({message:slugMessage},{status:200})
         data:{
             ...rest,
             entityId,
-            parkingproId:service?.isParkingproService ? rest.parkingproId : ''
+            parkingproId:rest?.isParkingproService ? rest.parkingproId : ''
         },include:{
             entity:{
                 select:{companyId:true}
