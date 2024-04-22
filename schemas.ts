@@ -42,6 +42,8 @@ export const serviceSchema = z
     available: z.boolean().default(false),
 
     entityId: z.string().min(1),
+    isParkingproService:z.boolean(),
+    parkingproId:z.string().optional().or(z.literal(undefined))
   })
   .refine((data) => data.timeToAirport, {
     message: "time to airport is required",
@@ -50,7 +52,9 @@ export const serviceSchema = z
   .refine((data) => data.distanceToAirport, {
     message: "distance to airport is required",
     path: ["distanceToAirport"],
-  });
+  }).refine(data=>!data.isParkingproService || data.parkingproId,{message:"Please enter parkingpro Id for this service",path:['parkingproId']})
+  
+  ;
 
   const newPassword = z.string().min(6,{message:"Enter at least 6 chars"});
 

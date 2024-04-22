@@ -11,16 +11,7 @@ import {
     DialogTrigger,
   } from "@/components/ui/dialog"
 import { useModal } from "@/hooks/modal-hook"
-import { Button } from "../ui/button"
 
-import axios from "axios"
-import { useState } from "react"
-import { Loader } from "lucide-react"
-import { useRouter } from "next/navigation"
-import { toast } from "sonner"
-import { useCategory } from "@/app/dashboard/blogs/category.hook"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
-import { Input } from "../ui/input"
 import CategoryForm from "@/app/dashboard/blogs/(components)/categoryForm"
 type Props = {}
 

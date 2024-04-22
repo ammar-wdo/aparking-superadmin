@@ -299,6 +299,44 @@ const {setOpen} = useModal()
             )}
           />
 
+
+<FormField
+          control={form.control}
+          name="isParkingproService"
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 shadow">
+              <FormControl>
+                <Checkbox
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormControl>
+              <div className="space-y-1 leading-none">
+                <FormLabel>
+                 Is Parkingpro Service
+                </FormLabel>
+            
+              </div>
+            </FormItem>
+          )}
+        />
+
+
+{!!form.watch('isParkingproService') && <FormField
+          control={form.control}
+          name="parkingproId"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Parkingpro Service Id</FormLabel>
+              <FormControl>
+                <Input placeholder="Parkingpro Service Id" {...field} />
+              </FormControl>
+           
+              <FormMessage />
+            </FormItem>
+          )}
+        />}
+
         </div>
       </div>
       <div className="p-8 border separate ">
