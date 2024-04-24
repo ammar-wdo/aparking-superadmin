@@ -169,3 +169,31 @@ export const discountSchema = z.object({
     new Date(date.startDate).getTime() <= new Date(date.endDate).getTime(),
   { message: "Invalid blocking range", path: ["startDate"] }
 );
+
+export const reviewStatusArray = ['PENDING','ACTIVE']
+export const reviewVisibilityArray = ['FIRSTNAME',
+'FULLNAME',
+'ANOUNYMOS']
+
+const reviewStatus = ['PENDING','ACTIVE'] as const
+const reviewVisibility = ['FIRSTNAME',
+  'FULLNAME',
+  'ANOUNYMOS'] as const
+
+export const reviewSchema = z.object({
+  entityId:z.string().min(1),
+  serviceId:z.string().min(1),
+  reviewContent:z.string().optional().or(z.literal(undefined)),
+  rate:z.string().refine(value=>+value <=5),
+  status:z.enum(reviewStatus).refine(val=>reviewStatus.includes(val),{message:'Invalid Value',path:['rate']}),
+  visibility:z.enum(reviewVisibility).refine(val=>reviewVisibility.includes(val),{message:"Invalid Value",path:['visibility']}),
+  firstName:z.string().optional(),
+  lastName:z.string().optional(),
+  email:emailSchema,
+  placeHolderDate:z.date()
+
+
+
+
+}).refine(val=>val.visibility === 'ANOUNYMOS' || !!val.firstName,{message:'Required Field',path:['firstName']})
+.refine(val=>val.visibility !=='FULLNAME' || !!val.lastName,{message:'Required Field',path:['lastName']})

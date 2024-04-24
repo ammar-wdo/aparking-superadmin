@@ -1,16 +1,18 @@
-import { Category, CategoryFAQ, Discount, FAQ } from '@prisma/client'
+import { Category, CategoryFAQ, Discount, FAQ, Review } from '@prisma/client'
 import { create } from 'zustand'
 
 
-type modalType ='delete-modal' | 'category-modal' | 'faq-modal' | 'faq-cat-modal' |'discount-modal'
-type dataType ={
+export type modalType ='delete-modal' | 'category-modal' | 'faq-modal' | 'faq-cat-modal' |'discount-modal' | 'review-modal'
+export type dataType ={
     url?:string,
     stay?:boolean
     category?:Category
     discount?:Discount
     faq?:FAQ,
     categoryFaq?:CategoryFAQ,
-    categoryFaqArray?:CategoryFAQ[]
+    categoryFaqArray?:CategoryFAQ[],
+    review?:Review,
+    entities?:{id:string,entityName:string,services:{id:string,name:string}[]}[]
 }
 type Store = {
   open: boolean

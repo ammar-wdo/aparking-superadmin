@@ -21,19 +21,19 @@ const themes: { [key: string]: string } = {
 };
 
 export const reviewColumns: ColumnDef<
-  Review & {entity:{entityName:string},service:{name:string}, booking: { firstName: string; lastName: string; email: string } }
+  Review & {entity:{entityName:string},service:{name:string}}
 >[] = [
   {
-    accessorKey: "booking.email",
+    accessorKey: "email",
     header: "E-mail",
-    cell: ({ row }) => <p>{row.original.booking.email}</p>,
+    cell: ({ row }) => <p>{row.original.email}</p>,
   },
   {
-    accessorKey: "booking.firstName",
+    accessorKey: "firstName",
     header: "First name",
   },
   {
-    accessorKey: "booking.lastName",
+    accessorKey: "lastName",
     header: "Last name",
   },
   {
