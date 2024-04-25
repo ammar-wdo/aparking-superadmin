@@ -30,7 +30,8 @@ export const useReview = ()=>{
           visibility:review?.visibility || 'ANOUNYMOS',
           placeHolderDate:review?.placeHolderDate || undefined,
           status:review?.status || 'PENDING',
-          reviewContent:''
+          reviewContent:review?.reviewContent || '',
+          
         },
       })
      
