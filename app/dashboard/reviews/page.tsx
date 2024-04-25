@@ -29,7 +29,7 @@ const page = async(props: Props) => {
       
         <div className='separate'>
 
-        <ReviewsFeed />
+        <ReviewsFeed entities={entities}/>
         </div>
     </div>
   )

@@ -3,9 +3,18 @@ import React from "react";
 import { DataTable } from "./reviews-table";
 import { reviewColumns } from "./review-columns";
 
-type Props = {};
+type Props = {
+  entities:{
+    entityName: string;
+    id: string;
+    services: {
+        name: string;
+        id: string;
+    }[];
+}[]
+};
 
-const ReviewsFeed = async (props: Props) => {
+const ReviewsFeed = async ({entities}: Props) => {
   const reviews = await prisma.review.findMany({
     include: {
       entity: {
@@ -16,6 +25,8 @@ const ReviewsFeed = async (props: Props) => {
     },
     orderBy: { createdAt: "desc" },
   });
+
+
 
   return (
     <div className="">

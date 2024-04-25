@@ -7,10 +7,11 @@ import { useModal } from "@/hooks/modal-hook";
 import { cn } from "@/lib/utils";
 import { Company, Entity, Review } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
-import { Edit, Trash } from "lucide-react";
+import { Edit, Edit2, Trash } from "lucide-react";
 import Link from "next/link";
 import StatusToggleButton from "./status-toggle-button";
 import ReactStars from "react-stars";
+import ModalButton from "@/components/modal-button";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -78,18 +79,7 @@ export const reviewColumns: ColumnDef<
       </p>
     ),
   },
-  {
-    accessorKey: "id",
-    header: "Actions",
-    cell: ({ row }) => (
-      <div className="">
-        <StatusToggleButton
-          label={row.original.status}
-          id={row.getValue("id")}
-        />
-      </div>
-    ),
-  },
+ 
   {
     accessorKey: "service.name",
     header: "Service name",
@@ -103,4 +93,18 @@ export const reviewColumns: ColumnDef<
     accessorKey: "entity.company.name",
     header: "Company name",
   },
+  {
+    accessorKey: "id",
+    header: "Actions",
+    cell: ({ row }) => (
+      <div className="flex gap-1 items-center">
+        <StatusToggleButton
+          label={row.original.status}
+          id={row.getValue("id")}
+        />
+        <ModalButton modalType="review-modal" dataType={{review:row.original}}>Edit <Edit2 className="ml-3 " /></ModalButton>
+      </div>
+    ),
+  },
+
 ];

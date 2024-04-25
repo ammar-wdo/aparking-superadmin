@@ -32,11 +32,12 @@ import { Calendar } from "@/components/ui/calendar";
 type Props = {};
 
 const ReviewForm = (props: Props) => {
-  const { form, onSubmit, entities } = useReview();
+  const { form, onSubmit, entities,review} = useReview();
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+     {!review && <>
         <FormField
           control={form.control}
           name="entityId"
@@ -97,6 +98,7 @@ const ReviewForm = (props: Props) => {
             )}
           />
         )}
+     </> }   
              <FormField
             control={form.control}
             name="firstName"
@@ -265,9 +267,7 @@ const ReviewForm = (props: Props) => {
                         const dateWithoutOffset = new Date(selectedDate.getTime() - offsetInMilliseconds);
                         field.onChange(dateWithoutOffset);
                       }}
-                    disabled={(date) =>
-                      date < new Date(new Date().setHours(0,0,0,0)) 
-                    }
+                  
                     initialFocus
                   />
                 </PopoverContent>

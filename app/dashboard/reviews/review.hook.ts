@@ -27,9 +27,9 @@ export const useReview = ()=>{
           lastName:review?.lastName || '',
           email:review?.email || '',
           rate:String(review?.rate) || '0',
-          visibility:'ANOUNYMOS',
-          placeHolderDate:undefined,
-          status:'PENDING',
+          visibility:review?.visibility || 'ANOUNYMOS',
+          placeHolderDate:review?.placeHolderDate || undefined,
+          status:review?.status || 'PENDING',
           reviewContent:''
         },
       })
@@ -61,5 +61,5 @@ res = await addReview(values)
      }
       }
 
-      return {form, onSubmit,entities}
+      return {form, onSubmit,entities,review}
 }
