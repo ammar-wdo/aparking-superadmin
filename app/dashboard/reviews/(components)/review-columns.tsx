@@ -7,11 +7,12 @@ import { useModal } from "@/hooks/modal-hook";
 import { cn } from "@/lib/utils";
 import { Company, Entity, Review } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
-import { Edit, Edit2, Trash } from "lucide-react";
+import { Delete, Edit, Edit2, Trash } from "lucide-react";
 import Link from "next/link";
 import StatusToggleButton from "./status-toggle-button";
 import ReactStars from "react-stars";
 import ModalButton from "@/components/modal-button";
+import { deleteReview } from "@/actions/reviews-action";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -103,6 +104,7 @@ export const reviewColumns: ColumnDef<
           id={row.getValue("id")}
         />
         <ModalButton modalType="review-modal" dataType={{review:row.original}}>Edit <Edit2 className="ml-3 " /></ModalButton>
+        <ModalButton className="bg-rose-500 hover:bg-rose-500/90" modalType="delete-modal" dataType={{deleteFn:()=>deleteReview(row.original.id),stay:true}}>Delete <Delete className="ml-3 " /></ModalButton>
       </div>
     ),
   },

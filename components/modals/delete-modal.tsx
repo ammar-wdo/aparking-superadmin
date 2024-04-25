@@ -28,8 +28,26 @@ const DeleteModal = (props: Props) => {
 const router = useRouter()
 const  handleDelete = async()=>{
     try {
+      setIsLoading(true)
+      if(data.deleteFn){
+const res = await data.deleteFn()
+if(!res.success){
+  toast.error(res.error)
+}
+else{
+  toast.success(res.message)
+  if(!data.stay){
+    router.back()
+  }
+  
+  setClose()
+  router.refresh()
+  toast.success("Successfuly deleted")
+}
+return 
+      }
    
-        setIsLoading(true)
+       
 await axios.delete(data?.url as string)
 if(!data.stay){
   router.back()

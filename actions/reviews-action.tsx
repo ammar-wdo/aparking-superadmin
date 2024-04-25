@@ -42,6 +42,8 @@ if(!validData.success){
 
 
 }
+
+
 export const editReview = async (id:string,data:any)=>{
 
 try {
@@ -68,7 +70,7 @@ if(!validData.success){
         }
     })
 
-    return {success:true,message:'Successfully Created'}
+    return {success:true,message:'Successfully Updated'}
 
 
 
@@ -81,3 +83,41 @@ if(!validData.success){
 
 
 }
+
+
+
+export const deleteReview = async (id:string)=>{
+
+    try {
+        if(!id) return {success:false,error:'Id required'}
+        const session = getServerSession(authOptions)
+    
+        if(!session) return {success:false,error:'Unauthorized'}
+    
+    
+        
+      
+        
+    
+    
+    
+        await prisma.review.delete({
+            where:{
+                id
+            },
+          
+        })
+    
+        return {success:true,message:'Successfully deleted'}
+    
+    
+    
+    
+    
+    } catch (error) {
+        console.log(error)
+        return {success:false,error:'Internal Error'}
+    }
+    
+    
+    }

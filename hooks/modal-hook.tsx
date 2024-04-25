@@ -12,7 +12,8 @@ export type dataType ={
     categoryFaq?:CategoryFAQ,
     categoryFaqArray?:CategoryFAQ[],
     review?:Review,
-    entities?:{id:string,entityName:string,services:{id:string,name:string}[]}[]
+    entities?:{id:string,entityName:string,services:{id:string,name:string}[]}[],
+    deleteFn?:()=>Promise<{success:boolean,message?:string,error?:string}>
 }
 type Store = {
   open: boolean
