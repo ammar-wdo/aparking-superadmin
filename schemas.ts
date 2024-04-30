@@ -138,7 +138,12 @@ export const faqSchema = z.object({
 export const airportSchema = z.object({
   name: z.string().min(2,{message:'Name is required'}).max(50),
   images: z.array(z.string()).min(1, 'At least one image is required'),
+  blockOneImage:z.string().min(1,'required field'),
+  blockTwoImage:z.string().min(1,'required field'),
   content:z.string().default(''),
+  blockOneContent:z.string().min(1,'required field'),
+  blockTwoContent:z.string().min(1,'required field'),
+  faq:z.array(z.object({question:z.string().min(1),answer:z.string().min(1)})).min(1,'At least 1 FAQ'),
   slug:z.string().min(1,{message:'Slug is required'}).refine((value) => !/\s/.test(value), 
   'Slug should not contain spaces',
   ),
