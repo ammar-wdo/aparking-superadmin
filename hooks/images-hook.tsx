@@ -76,12 +76,13 @@ export const useImages = ({form}:Props)=>{
     const ImagesPlaceholder = () => {
       return (
         <div className="flex items-center gap-3 w-full ">
-        {!!form.watch("images")?.length && (
+        {(!!form.watch("images")?.length || imagesLoader) && (
           <div className="flex items-center gap-3 flex-wrap w-full">
-            {form.getValues("images")?.map((image:string) => (
+            {form.watch("images")?.map((image:string) => (
               <div
                 key={uuidv4()}
                 className="w-[100px] h-[100px] overflow-hidden  relative"
+               
               >
                 {deleteImagesLoader === image ? (
                   <div className="flex items-center justify-center w-full h-full ">
@@ -97,7 +98,7 @@ export const useImages = ({form}:Props)=>{
                 )}
   
                 <XIcon
-                  className="absolute top-1 right-1 cursor-pointer text-white bg-rose-400 p-1 rounded-md"
+                  className="absolute top-0 right-0 cursor-pointer text-white bg-rose-400  w-4 h-4 p-0.5 rounded-md"
                   onClick={() => {
                     deleteanImage(image);
                   }}
@@ -108,12 +109,13 @@ export const useImages = ({form}:Props)=>{
               {imagesLoader &&  <div
              
              className="w-[100px] h-[100px] overflow-hidden flex items-center justify-center  relative"
+            
            >  <Loader className="w-5 h-5 animate-spin" /></div>}
           </div>
         )}
         
      </div> );
-    };
+    }
 
 
 
