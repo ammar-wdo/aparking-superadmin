@@ -51,6 +51,14 @@ export const useAirport = ({ airport }: Props) => {
     queRef.current?.focus();
   };
 
+  const cancelEdit = ()=>{
+    if (!queRef.current || !ansRef.current) return null;
+
+    setEdit(undefined)
+    ansRef.current.value = "";
+    queRef.current.value = "";
+  }
+
   const addFaq = () => {
     if (!queRef.current || !ansRef.current) return null;
 
@@ -61,9 +69,11 @@ export const useAirport = ({ airport }: Props) => {
       const element = faqs[edit.index];
       element.question = queRef.current.value;
       element.answer = ansRef.current.value;
-
+      
+     faqs[edit.index] = element
       form.setValue("faq", faqs);
       setEdit(undefined);
+    
     } else {
       const faqs = form.getValues("faq");
       form.setValue("faq", [
@@ -166,5 +176,6 @@ export const useAirport = ({ airport }: Props) => {
     deleteFaq,
     edit,
     setEditFn,
+    cancelEdit
   };
 };

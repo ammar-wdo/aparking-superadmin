@@ -49,7 +49,7 @@ const AirportForm = ({ airport }: Props) => {
     queRef,
     addFaq,
     deleteFaq,
-    edit,setEditFn
+    edit,setEditFn,cancelEdit
   } = useAirport({ airport });
 
   const isLoading = form.formState.isSubmitting;
@@ -241,7 +241,7 @@ const AirportForm = ({ airport }: Props) => {
             </div>
           </div>
         </div>
-        <div className="mt-20 bg-background p-8 border rounded-md  hover:shadow-lg transition">
+        <div className="mt-20 bg-background p-8 border rounded-md  hover:shadow-lg transition ">
           <FormField
             control={form.control}
             name="faq"
@@ -249,21 +249,27 @@ const AirportForm = ({ airport }: Props) => {
               <FormItem className="  w-full ">
                 <FormLabel>Faq</FormLabel>
                 <FormControl>
-                  <div>
-                    <div className="flex  gap-1 items-start">
+                  <div className="grid grid-cols-1 2xl:grid-cols-2 gap-4 w-full">
+                    <div className="w-full">
+
+             
+                    <div className="flex  gap-1 items-start flex-col">
                       <Input placeholder="Question" ref={queRef} />
                       <Textarea placeholder="Answer" ref={ansRef} />
                     </div>
-                    <Button className={cn("mt-4",edit && 'bg-amber-400 hover:bg-amber-400/70')} type="button" onClick={addFaq} >
+                    <Button className={cn("mt-4 w-full p-4",edit && 'bg-amber-400 hover:bg-amber-400/70 ')} type="button" onClick={addFaq} >
                      {edit ? "Update FAQ" :  "Add FAQ"}
                     </Button>
-
+                    {edit &&  <Button variant={'secondary'} className={cn("mt-4 w-full p-4")} type="button" onClick={cancelEdit} >
+                     Cancel
+                    </Button>}
+                    </div>
                     {!!form.watch("faq").length && (
-                      <div className="mt-4 space-y-4 ">
+                      <div className="mt-4 space-y-4 2xl:mt-0">
                         {form.watch("faq").map((faq, i) => (
                           <div
                             key={i}
-                            className="border p-3 rounded-md relative overflow-hidden"
+                            className={cn("border p-3 rounded-md relative overflow-hidden",(edit && edit.index === i) && 'bg-muted border-blue-500')}
                           >
                             <p className="font-semibold text-lg">
                               {faq.question}
@@ -271,11 +277,11 @@ const AirportForm = ({ airport }: Props) => {
                             <p className="text-sm text-muted-foreground">
                               {faq.answer}
                             </p>
-                            <div className="top-0 right-0 absolute flex h-full">
-                            <span onClick={()=>setEditFn(faq.question,faq.answer,i)} className="bg-amber-400 cursor-pointer hover:bg-amber-400/70 transition w-12 h-full flex items-center justify-center ">
+                            <div className="flex  w-full mt-8 rounded-xl overflow-hidden">
+                            <span onClick={()=>setEditFn(faq.question,faq.answer,i)} className="bg-amber-400 p-4 cursor-pointer flex-1 hover:bg-amber-400/70 transition w-12 h-full flex items-center justify-center ">
                               <Edit className="text-white" size={13}/>
                             </span>
-                            <span onClick={()=>deleteFaq(i)} className="bg-rose-400 cursor-pointer hover:bg-rose-400/70 transition w-12 h-full flex items-center justify-center ">
+                            <span onClick={()=>deleteFaq(i)} className="bg-rose-400 cursor-pointer p-4 hover:bg-rose-400/70 flex-1 transition w-12 h-full flex items-center justify-center ">
                               <Trash className="text-white" size={13}/>
                             </span>
                               </div>
