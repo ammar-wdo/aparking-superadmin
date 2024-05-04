@@ -14,12 +14,12 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 
-import { About } from "@prisma/client"
+import { About, Term } from "@prisma/client"
 import { Loader } from "lucide-react"
 import { useTerm } from "../term.hook"
 
 type Props = {
-    term:About | null
+    term:Term | null
 }
 
 const TermForm = ({term}: Props) => {
