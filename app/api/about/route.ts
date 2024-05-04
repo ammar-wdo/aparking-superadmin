@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/options";
 import prisma from "@/lib/prisma";
+import { aboutSchema } from "@/schemas";
 
 export const POST = async(req:Request)=>{
 
@@ -11,14 +12,16 @@ export const POST = async(req:Request)=>{
 
         if(!session)  return NextResponse.json({error:'Unauthorized'},{status:401})
 
-        const {content} = await req.json()
+        const body = await req.json()
 
-        if(!content) return NextResponse.json({error:'content is required'},{status:400})
+        const validBody = aboutSchema.safeParse(body)
+
+        if(!validBody.success) return NextResponse.json({error:'content is required'},{status:400})
 
         await prisma.about.create({
             data:{
                 id:'about',
-                content
+                ...validBody.data
             }
         })
 
@@ -40,9 +43,10 @@ export const PATCH = async(req:Request)=>{
 
         if(!session)  return NextResponse.json({error:'Unauthorized'},{status:401})
 
-        const {content} = await req.json()
+        const body = await req.json()
+        const validBody = aboutSchema.safeParse(body)
 
-        if(!content) return NextResponse.json({error:'content is required'},{status:400})
+        if(!validBody.success) return NextResponse.json({error:'content is required'},{status:400})
 
         await prisma.about.update({
             where:{
@@ -50,7 +54,7 @@ export const PATCH = async(req:Request)=>{
             },
             data:{
                 
-                content
+                ...validBody.data
             }
         })
 

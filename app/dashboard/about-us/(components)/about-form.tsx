@@ -15,7 +15,10 @@ import {
 import { Input } from "@/components/ui/input"
 import { useAbout } from "../about.hook"
 import { About } from "@prisma/client"
-import { Loader } from "lucide-react"
+import { Edit, Loader, Trash } from "lucide-react"
+import { SingleImageDropzone } from "@/components/single-image-drop-zone"
+import { Textarea } from "@/components/ui/textarea"
+import { cn } from "@/lib/utils"
 
 type Props = {
     about:About | null
@@ -23,7 +26,7 @@ type Props = {
 
 const AboutForm = ({about}: Props) => {
 
-    const {form,onSubmit} = useAbout(about)
+    const {form,onSubmit,addFaq,ansRef,cancelEdit,deleteFaq,edit,queRef,setEditFn,ImagePlaceHolderTwo,fileTwo,setFileTwo,uploadImageTwo} = useAbout(about)
     const isLoading = form.formState.isSubmitting
 
   return (
@@ -43,6 +46,150 @@ const AboutForm = ({about}: Props) => {
           </FormItem>
         )}
       />
+       <div className="mt-20">
+          {" "}
+          <h3 className="rounded-md bg-white p-1 w-fit border">First Block</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1200px]  separate">
+          
+            <div className="md:col-span-2">
+              <FormField
+                control={form.control}
+                name="blockOneContent"
+                render={({ field }) => (
+                  <FormItem className="  w-full px-4  mt-8 separate">
+                    <FormLabel>First Blog Content</FormLabel>
+                    <FormControl>
+                      <Editor
+                        onChange={(string) => {
+                          form.setValue("blockOneContent", string);
+                        }}
+                        initialContent={form.getValues("blockOneContent")}
+                      />
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="mt-20">
+          {" "}
+          <h3 className="rounded-md bg-white p-1 w-fit border">Second Block</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1200px]  separate">
+            <FormField
+              control={form.control}
+              name="blockTwoImage"
+              render={({ field }) => (
+                <div className="flex gap-4 items-center">
+                  <FormItem>
+                    <FormLabel>Second Block Image*</FormLabel>
+                    <FormControl>
+                      <SingleImageDropzone
+                        width={200}
+                        height={200}
+                        value={fileTwo}
+                        onChange={(fileTwo) => {
+                          setFileTwo(fileTwo);
+                        }}
+                      />
+                    </FormControl>
+                    <Button
+                      disabled={!fileTwo || !!form.watch("blockTwoImage")}
+                      type="button"
+                      onClick={() => uploadImageTwo("blockTwoImage")}
+                    >
+                      Upload
+                    </Button>
+
+                    <FormMessage />
+                  </FormItem>
+
+                  {<ImagePlaceHolderTwo type="blockTwoImage" />}
+                </div>
+              )}
+            />
+            <div className="md:col-span-2">
+              <FormField
+                control={form.control}
+                name="blockTwoContent"
+                render={({ field }) => (
+                  <FormItem className="  w-full px-4  mt-8 separate">
+                    <FormLabel>Second Block Content</FormLabel>
+                    <FormControl className=" w-full">
+                      <Editor
+                        onChange={(string) => {
+                          form.setValue("blockTwoContent", string);
+                        }}
+                        initialContent={form.getValues("blockTwoContent")}
+                      />
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="mt-20 bg-background p-8 border rounded-md  hover:shadow-lg transition ">
+          <FormField
+            control={form.control}
+            name="faq"
+            render={({ field }) => (
+              <FormItem className="  w-full ">
+                <FormLabel>Faq</FormLabel>
+                <FormControl>
+                  <div className="grid grid-cols-1 2xl:grid-cols-2 gap-4 w-full">
+                    <div className="w-full">
+
+             
+                    <div className="flex  gap-1 items-start flex-col">
+                      <Input placeholder="Question" ref={queRef} />
+                      <Textarea placeholder="Answer" ref={ansRef} />
+                    </div>
+                    <Button className={cn("mt-4 w-full p-4",edit && 'bg-amber-400 hover:bg-amber-400/70 ')} type="button" onClick={addFaq} >
+                     {edit ? "Update FAQ" :  "Add FAQ"}
+                    </Button>
+                    {edit &&  <Button variant={'secondary'} className={cn("mt-4 w-full p-4")} type="button" onClick={cancelEdit} >
+                     Cancel
+                    </Button>}
+                    </div>
+                    {!!form.watch("faq").length && (
+                      <div className="mt-4 space-y-4 2xl:mt-0">
+                        {form.watch("faq").map((faq, i) => (
+                          <div
+                            key={i}
+                            className={cn("border p-3 rounded-md relative overflow-hidden",(edit && edit.index === i) && 'bg-muted border-blue-500')}
+                          >
+                            <p className="font-semibold text-lg">
+                              {faq.question}
+                            </p>
+                            <p className="text-sm text-muted-foreground">
+                              {faq.answer}
+                            </p>
+                            <div className="flex  w-full mt-8 rounded-xl overflow-hidden">
+                            <span onClick={()=>setEditFn(faq.question,faq.answer,i)} className="bg-amber-400 p-4 cursor-pointer flex-1 hover:bg-amber-400/70 transition w-12 h-full flex items-center justify-center ">
+                              <Edit className="text-white" size={13}/>
+                            </span>
+                            <span onClick={()=>deleteFaq(i)} className="bg-rose-400 cursor-pointer p-4 hover:bg-rose-400/70 flex-1 transition w-12 h-full flex items-center justify-center ">
+                              <Trash className="text-white" size={13}/>
+                            </span>
+                              </div>
+                           
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </FormControl>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
       <Button disabled={isLoading} type="submit">{about ? 'Update' : 'Create'} {isLoading && <Loader className="ml-3 h-4 w-4 animate-spin" />}</Button>
     </form>
   </Form>

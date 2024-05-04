@@ -202,3 +202,16 @@ export const reviewSchema = z.object({
 
 }).refine(val=>val.visibility === 'ANOUNYMOS' || !!val.firstName,{message:'Required Field',path:['firstName']})
 .refine(val=>val.visibility !=='FULLNAME' || !!val.lastName,{message:'Required Field',path:['lastName']})
+
+
+
+export  const aboutSchema = z.object({
+  content: z.string().min(2, {
+   
+  }),
+
+  blockTwoImage:z.string().min(1,'required field'),
+  blockOneContent:z.string().min(1,'required field'),
+  blockTwoContent:z.string().min(1,'required field'),
+  faq:z.array(z.object({question:z.string().min(1),answer:z.string().min(1)})).min(1,'At least 1 FAQ'),
+})
