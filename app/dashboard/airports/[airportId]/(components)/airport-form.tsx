@@ -158,6 +158,20 @@ const AirportForm = ({ airport }: Props) => {
                 </div>
               )}
             />
+               <FormField
+            control={form.control}
+            name="blockOneImageAlt"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>First Image Alt</FormLabel>
+                <FormControl>
+                  <Input placeholder="First Image Alt" {...field} />
+                </FormControl>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
             <div className="md:col-span-2">
               <FormField
                 control={form.control}
@@ -218,6 +232,20 @@ const AirportForm = ({ airport }: Props) => {
                 </div>
               )}
             />
+                <FormField
+            control={form.control}
+            name="blockTwoImageAlt"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Second Image Alt</FormLabel>
+                <FormControl>
+                  <Input placeholder="Second Image Alt" {...field} />
+                </FormControl>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
             <div className="md:col-span-2">
               <FormField
                 control={form.control}

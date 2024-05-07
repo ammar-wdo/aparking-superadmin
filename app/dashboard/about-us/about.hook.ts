@@ -22,7 +22,7 @@ export const useAbout = (about:About | null)=>{
           content: about?.content || '',
           blockOneContent: about?.blockOneContent || "",
           blockTwoContent: about?.blockTwoContent || "",
-       
+       blockTwoImageAlt:about?.blockTwoImageAlt || "",
           blockTwoImage: about?.blockTwoImage || "",
           faq:about?.faq as unknown as {question:string,answer:string}[] || []
         },

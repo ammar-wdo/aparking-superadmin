@@ -26,6 +26,8 @@ export const useAirport = ({ airport }: Props) => {
       content: airport?.content || "",
       slug: airport?.slug || "",
       blockOneContent: airport?.blockOneContent || "",
+      blockOneImageAlt:airport?.blockOneImageAlt || '',
+      blockTwoImageAlt:airport?.blockTwoImageAlt || '',
       blockTwoContent: airport?.blockTwoContent || "",
       blockOneImage: airport?.blockOneImage || "",
       blockTwoImage: airport?.blockTwoImage || "",
