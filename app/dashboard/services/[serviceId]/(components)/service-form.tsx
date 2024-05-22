@@ -337,6 +337,21 @@ const {setOpen} = useModal()
           )}
         />}
 
+{!!form.watch('isParkingproService') && <FormField
+          control={form.control}
+          name="parkingproCompanyId"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Parkingpro Company Id</FormLabel>
+              <FormControl>
+                <Input placeholder="Parkingpro Company Id" {...field} />
+              </FormControl>
+           
+              <FormMessage />
+            </FormItem>
+          )}
+        />}
+
         </div>
       </div>
       <div className="p-8 border separate ">

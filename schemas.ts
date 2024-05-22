@@ -43,7 +43,8 @@ export const serviceSchema = z
 
     entityId: z.string().min(1),
     isParkingproService:z.boolean(),
-    parkingproId:z.string().optional().or(z.literal(undefined))
+    parkingproId:z.string().optional().or(z.literal(undefined)),
+    parkingproCompanyId:z.string().optional().or(z.literal(undefined))
   })
   .refine((data) => data.timeToAirport, {
     message: "time to airport is required",
@@ -52,7 +53,7 @@ export const serviceSchema = z
   .refine((data) => data.distanceToAirport, {
     message: "distance to airport is required",
     path: ["distanceToAirport"],
-  }).refine(data=>!data.isParkingproService || data.parkingproId,{message:"Please enter parkingpro Id for this service",path:['parkingproId']})
+  }).refine(data=>!data.isParkingproService || !!(data.parkingproId && data.parkingproCompanyId),{message:"Parkingpro Id or Parkingpr Company Id is missing",path:['parkingproId']})
   
   ;
 

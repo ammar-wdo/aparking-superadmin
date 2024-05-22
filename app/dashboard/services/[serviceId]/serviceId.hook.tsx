@@ -87,7 +87,8 @@ export const useServiceId = ({ service }: Props) => {
 
       entityId: service?.entityId || "",
       isParkingproService:service?.isParkingproService,
-      parkingproId:service.parkingproId || ''
+      parkingproId:service.parkingproId || '',
+      parkingproCompanyId:service.parkingproCompanyId || ''
     },
   });
 
