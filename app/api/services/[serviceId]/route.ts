@@ -38,7 +38,8 @@ if(slugMessage) return NextResponse.json({message:slugMessage},{status:200})
         data:{
             ...rest,
             entityId,
-            parkingproId:rest?.isParkingproService ? rest.parkingproId : ''
+            parkingproId:rest?.isParkingproService ? rest.parkingproId : '',
+            parkingproCompanyId:rest?.isParkingproService ? rest.parkingproCompanyId : ''
         },include:{
             entity:{
                 select:{companyId:true}
