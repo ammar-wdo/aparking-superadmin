@@ -31,6 +31,8 @@ export const useAirport = ({ airport }: Props) => {
       blockTwoContent: airport?.blockTwoContent || "",
       blockOneImage: airport?.blockOneImage || "",
       blockTwoImage: airport?.blockTwoImage || "",
+      seoDescription:airport?.seoDescription ?? "",
+      seoTitle:airport?.seoTitle ?? "",
       faq:
         (airport?.faq as unknown as { question: string; answer: string }[]) ||
         [],

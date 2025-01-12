@@ -44,7 +44,9 @@ export const useEntity =({entity}:Props)=>{
           images:entity?.images || [],
           logo: entity?.logo || "",
           content:entity?.content || '',
-          slug:entity?.slug || ''
+          slug:entity?.slug || '',
+          seoTitle:entity?.seoTitle ??  "",
+          seoDescription:entity?.seoDescription ?? ""
 
 
         },
@@ -151,7 +153,7 @@ form.setValue('slug',slug)
           if(result.data.message){
 toast.error(result.data.message)
           }else{
-            toast.success("Successfully created")
+            toast.success(entity ? "Successfully Updated" :"Successfully created")
             router.push(`/dashboard/entities`)
             router.refresh()
           }

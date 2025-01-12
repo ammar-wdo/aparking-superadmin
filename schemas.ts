@@ -1,12 +1,15 @@
 import * as z from "zod";
 
 const emailSchema = z.string().email({message:'E-mail is required'});
+
 export const serviceSchema = z
   .object({
     timeToAirport: z.coerce.number().min(1).or(z.undefined()),
     distanceToAirport: z.coerce.number().min(1).or(z.undefined()),
     generalInformation: z.string().optional(),
     importantInfo: z.string().optional(),
+    seoTitle: z.string().optional(),
+    seoDescription: z.string().optional(),
  
     images: z.array(z.string()).min(1, 'At least one image is required'),
     facilities: z.array(z.string()).optional(),
@@ -71,6 +74,8 @@ export const entitySchema = z.object({
    'Slug should not contain spaces',
    
   ),
+  seoTitle: z.string().optional(),
+  seoDescription: z.string().optional(),
   entityAddress: z.string().min(1,{message:'Entity address is required'}),
   entityZipcode: z.string().min(1,{message:'Entity zipcode is required'}),
   entityPlace: z.string().min(1,{message:'Entity place is required'}),
@@ -142,6 +147,8 @@ export const airportSchema = z.object({
   blockOneImage:z.string().min(1,'required field'),
   blockTwoImage:z.string().min(1,'required field'),
   content:z.string().default(''),
+  seoTitle: z.string().optional(),
+  seoDescription: z.string().optional(),
   blockOneContent:z.string().min(1,'required field'),
   blockOneImageAlt:z.string().min(1,'required field'),
   blockTwoImageAlt:z.string().min(1,'required field'),
